@@ -1,0 +1,666 @@
+<!DOCTYPE html>
+<html lang="en" class="min-h-full lg:h-screen lg:overflow-hidden">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Erfan Hakimi — Portfolio</title>
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <style>
+    html, body {
+      font-family: 'Segoe UI', 'Segoe UI Light', 'Segoe UI Semibold', Verdana, Geneva, sans-serif;
+      color: #ffffff;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      text-shadow: 0 1px 3px rgba(0, 15, 40, 0.9), 0 0 8px rgba(0, 10, 30, 0.6);
+    }
+
+    @media (min-width: 1024px) {
+      html, body {
+        height: 100vh !important;
+        overflow: hidden !important;
+        text-shadow: 0 1px 3px rgba(0, 15, 40, 0.9), 0 0 8px rgba(0, 10, 30, 0.6);
+      }
+    }
+
+    h1, h2, h3 {
+      text-shadow: 0 2px 4px rgba(0, 10, 35, 0.95), 0 0 12px rgba(0, 100, 200, 0.5);
+    }
+
+    /* Frutiger Aero / Aqua Headings Light Weight */
+    .aero-heading-light {
+      font-family: 'Segoe UI Light', 'Segoe UI', Verdana, sans-serif;
+      font-weight: 300;
+      letter-spacing: -0.02em;
+    }
+
+    .aqua-glass-panel {
+      background: linear-gradient(180deg, 
+        rgba(0, 35, 75, 0.70) 0%,    /* Dark top shine (70% opacity) */
+        rgba(0, 20, 50, 0.80) 40%,   /* Darker middle tint (80% opacity) */
+        rgba(0, 10, 30, 0.88) 100%   /* Deep navy base (88% opacity) */
+      );
+      backdrop-filter: blur(20px) saturate(200%);
+      -webkit-backdrop-filter: blur(20px) saturate(200%);
+      border: 1.5px solid rgba(255, 255, 255, 0.5);
+      border-top: 2.5px solid rgba(255, 255, 255, 0.8);
+      border-left: 2px solid rgba(255, 255, 255, 0.7);
+      border-radius: 20px;
+      box-shadow: 
+        0 20px 70px rgba(0, 10, 30, 0.7),
+        0 0 30px rgba(0, 120, 220, 0.25),
+        inset 0 2px 2px rgba(255, 255, 255, 0.6),
+        inset 0 -2px 6px rgba(0, 10, 30, 0.6);
+      position: relative;
+    }
+
+    /* Curved Glass Reflection Overlay */
+    .aqua-glass-panel::before {
+      content: "";
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 46%;
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.55) 0%, rgba(255, 255, 255, 0.04) 85%, transparent 100%);
+      border-radius: 20px 20px 100% 100% / 20px 20px 25px 25px;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    /* Navigation Items */
+    .aqua-nav-btn {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 8px 12px;
+      border-radius: 12px;
+      font-size: 13.5px;
+      font-weight: 400;
+      color: #ffffff;
+      text-shadow: 0 1px 2px rgba(0, 20, 60, 0.8);
+      transition: all 0.2s cubic-bezier(0.1, 0.9, 0.2, 1);
+      cursor: pointer;
+      border: 1px solid transparent;
+    }
+
+    .aqua-nav-btn:hover {
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.45) 0%, rgba(180, 230, 255, 0.22) 100%);
+      border-color: rgba(255, 255, 255, 0.85);
+      box-shadow: inset 0 1px 0 #fff, 0 4px 12px rgba(0, 120, 220, 0.4);
+    }
+
+    .aqua-nav-btn.active {
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.85) 0%, rgba(120, 210, 255, 0.5) 100%);
+      border-color: #ffffff;
+      color: #002244;
+      font-weight: 600;
+      text-shadow: 0 1px 0 rgba(255, 255, 255, 0.8);
+      box-shadow: inset 0 1px 0 #fff, 0 6px 16px rgba(0, 150, 255, 0.6);
+    }
+
+    /* Inner Glass Cards */
+    .aqua-card-inner {
+      background: linear-gradient(180deg, rgba(0, 35, 75, 0.55) 0%, rgba(0, 20, 50, 0.70) 100%);
+      border: 1px solid rgba(255, 255, 255, 0.35);
+      border-top: 1px solid rgba(255, 255, 255, 0.75);
+      border-radius: 14px;
+      box-shadow: inset 0 1px 2px rgba(255, 255, 255, 0.5), 0 8px 20px rgba(0, 10, 30, 0.35);
+    }
+  </style>
+</head>
+<body class="min-h-screen overflow-y-auto lg:h-screen lg:overflow-hidden p-3 sm:p-5 relative flex flex-col justify-between">
+
+  <!-- LOOPING BACKGROUND VIDEO -->
+  <video autoplay loop muted playsinline class="fixed inset-0 w-full h-full object-cover -z-20">
+    <source src="background.mp4" type="video/mp4" />
+  </video>
+
+  <!-- Glass Tint Overlay -->
+  <div class="fixed inset-0 bg-sky-950/15 pointer-events-none -z-10"></div>
+
+  <div class="max-w-6xl mx-auto w-full min-h-full lg:h-full flex flex-col justify-between gap-3 z-10 relative min-h-0">
+
+    <!-- HEADER TITLE -->
+    <header class="text-center space-y-0.5 shrink-0 py-1 lg:py-0">
+      <h1 class="aero-heading-light text-2xl sm:text-4xl lg:text-4xl text-white drop-shadow-[0_2px_10px_rgba(0,30,80,0.8)]">
+        ERFAN HAKIMI
+      </h1>
+      <p class="text-[10px] sm:text-xs font-normal tracking-widest text-sky-100 uppercase drop-shadow">
+        Computer Science (Hons) Multimedia Student
+      </p>
+    </header>
+
+    <!-- MAIN INTERACTIVE SPLIT CONTAINER -->
+    <div class="flex-1 grid grid-cols-1 lg:grid-cols-12 gap-4 items-stretch lg:overflow-hidden min-h-0">
+      
+      <!-- LEFT GLASS SIDEBAR MENU -->
+      <aside class="lg:col-span-4 aqua-glass-panel p-3.5 flex flex-col justify-between h-auto lg:h-full gap-3 min-h-0">
+        <div class="space-y-2">
+          <div class="text-xs font-semibold text-sky-100 uppercase tracking-wider px-2 pb-1.5 border-b border-white/40 flex items-center justify-between">
+            <span>Navigation</span>
+            <span class="text-[10px] text-sky-200">[System Menu]</span>
+          </div>
+
+          <nav class="space-y-1">
+            <div onclick="openTab('home', this)" class="aqua-nav-btn active">
+              <img src="icons/home.png" class="w-6 h-6 drop-shadow-md" />
+              <span>Home & Bio</span>
+            </div>
+
+            <div onclick="openTab('experience', this)" class="aqua-nav-btn">
+              <img src="icons/experience.png" class="w-6 h-6 drop-shadow-md" />
+              <span>Working Experience</span>
+            </div>
+
+            <div onclick="openTab('projects', this)" class="aqua-nav-btn">
+              <img src="icons/project.png" class="w-6 h-6 drop-shadow-md" />
+              <span>Projects</span>
+            </div>
+
+            <div onclick="openTab('education', this)" class="aqua-nav-btn">
+              <img src="icons/education.png" class="w-6 h-6 drop-shadow-md" />
+              <span>Education</span>
+            </div>
+
+            <div onclick="openTab('skills', this)" class="aqua-nav-btn">
+              <img src="icons/skill.png" class="w-6 h-6 drop-shadow-md" />
+              <span>Capabilities</span>
+            </div>
+
+            <div onclick="openTab('certs', this)" class="aqua-nav-btn">
+              <img src="icons/credinal.png" class="w-6 h-6 drop-shadow-md" />
+              <span>Credentials</span>
+            </div>
+          </nav>
+        </div>
+
+        <!-- LINKEDIN, GITHUB, AND GMAIL REDIRECTS -->
+        <div class="pt-2 border-t border-white/40 flex gap-1.5 shrink-0">
+          <a href="https://linkedin.com" target="_blank" class="flex-1 py-1.5 px-2 rounded-xl bg-white/80 hover:bg-white text-slate-900 font-semibold text-[11px] shadow-md transition-all flex items-center justify-center gap-1">
+            <img src="https://img.icons8.com/color/48/linkedin.png" class="w-3.5 h-3.5" />
+            <span>LinkedIn</span>
+          </a>
+          <a href="https://github.com/erfanhkimi" target="_blank" class="flex-1 py-1.5 px-2 rounded-xl bg-white/80 hover:bg-white text-slate-900 font-semibold text-[11px] shadow-md transition-all flex items-center justify-center gap-1">
+            <img src="icons/github.png" class="w-3.5 h-3.5" />
+            <span>GitHub</span>
+          </a>
+          <a href="mailto:erfanhakimi04@gmail.com" class="flex-1 py-1.5 px-2 rounded-xl bg-white/80 hover:bg-white text-slate-900 font-semibold text-[11px] shadow-md transition-all flex items-center justify-center gap-1">
+            <img src="icons/gmail.webp" class="w-3.5 h-3.5" />
+            <span>Gmail</span>
+          </a>
+        </div>
+      </aside>
+
+      <!-- RIGHT DYNAMIC CONTENT DISPLAY -->
+      <main class="lg:col-span-8 aqua-glass-panel p-4 sm:p-5 flex flex-col justify-between min-h-[450px] lg:h-full lg:overflow-hidden min-h-0">
+
+        <!-- TAB 1: HOME -->
+        <div id="tab-home" class="tab-pane flex flex-col justify-between h-full space-y-2.5 min-h-0">
+          <div class="space-y-1.5 shrink-0">
+            <div class="border-b border-white/40 pb-1">
+              <span class="text-[10px] aero-heading-light text-sky-200 uppercase tracking-wide">Overview // Personal Index</span>
+              <h2 class="aero-heading-light text-xl sm:text-2xl text-white mt-0.5 drop-shadow">
+                Introduction
+              </h2>
+            </div>
+
+            <p class="text-[11px] sm:text-xs leading-relaxed text-sky-100/95 drop-shadow font-normal">
+              Computer Science (Multimedia Computing) student with hands-on experience in full-stack web development, Python automation, data analytics, and Unity C# game development. Experienced in building internal HR systems and technical support at FELDA. MBOT Certified Data Analyst seeking software engineering or data analytics opportunities.
+            </p>
+          </div>
+
+          <!-- DUAL IMAGE GRID SHOWCASE -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5 flex-1 overflow-hidden min-h-0">
+            <!-- Image 1 -->
+            <div class="aqua-card-inner p-1.5 flex flex-col justify-between overflow-hidden relative group h-full min-h-0">
+              <img 
+                src="icons/profile1.jpeg" 
+                alt="Profile Image 1" 
+                class="w-full h-full object-cover rounded-lg border border-white/40 shadow-md transition-transform duration-300 group-hover:scale-[1.01]"
+              />
+            </div>
+
+            <!-- Image 2 -->
+            <div class="aqua-card-inner p-1.5 flex flex-col justify-between overflow-hidden relative group h-full min-h-0">
+              <img 
+                src="icons/profile2.jpeg" 
+                alt="Workspace Image 2" 
+                class="w-full h-full object-cover rounded-lg border border-white/40 shadow-md transition-transform duration-300 group-hover:scale-[1.01]"
+              />
+            </div>
+          </div>
+        </div>
+
+        <!-- TAB 2: WORKING EXPERIENCE -->
+        <div id="tab-experience" class="tab-pane hidden flex flex-col justify-between h-full space-y-2.5 min-h-0">
+          <div class="space-y-2 flex-1 overflow-hidden min-h-0">
+            <div class="border-b border-white/40 pb-1 shrink-0">
+              <span class="text-[10px] aero-heading-light text-sky-200 uppercase tracking-wide">Career // Work History</span>
+              <h2 class="aero-heading-light text-xl sm:text-2xl text-white mt-0.5 drop-shadow">
+                Working Experience
+              </h2>
+            </div>
+
+            <div class="space-y-2 overflow-y-auto pr-1 h-[calc(100%-50px)] min-h-0">
+              <div class="aqua-card-inner p-3 space-y-1">
+                <div class="flex justify-between items-center">
+                  <h3 class="font-semibold text-white text-xs">IT Support Intern</h3>
+                  <span class="text-[10px] text-sky-300 font-medium">October 2024 - March 2025</span>
+                </div>
+                <p class="text-[10px] text-sky-200 font-medium">Human Resource Department of FELDA, Kuala Lumpur</p>
+                <p class="text-[11px] text-sky-100/90 leading-relaxed pt-0.5">
+                  ● Proposed an Exam Management System to improve and streamline HR examination processes<br>
+                  ● Assisted in system planning, documentation, and data management<br>
+                  ● Supported troubleshooting and basic technical issue resolution
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- TAB 3: PROJECTS -->
+        <div id="tab-projects" class="tab-pane hidden flex flex-col justify-between h-full space-y-2.5 min-h-0">
+          <div class="border-b border-white/40 pb-1 shrink-0">
+            <span class="text-[10px] aero-heading-light text-sky-200 uppercase tracking-wide">Projects // Interactive Showcase</span>
+            <h2 class="aero-heading-light text-xl text-white drop-shadow">
+              Selected Works
+            </h2>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-12 gap-2.5 flex-1 overflow-hidden items-stretch min-h-0">
+            <!-- Left Side Selector Menu -->
+            <div class="sm:col-span-5 space-y-1.5 overflow-y-auto pr-1 min-h-0">
+              <!-- Project 0: Data Viz Educational Game (With In Progress Highlight) -->
+              <div onclick="selectProject(0, this)" class="proj-menu-item aqua-card-inner p-2 cursor-pointer hover:bg-white/20 transition-all border-l-4 border-sky-300">
+                <div class="flex items-center justify-between gap-1">
+                  <div class="font-semibold text-white text-xs">Data Visualization Educational Game</div>
+                  <span class="text-[8px] px-1.5 py-0.5 rounded-full bg-amber-500 text-white font-bold shrink-0 animate-pulse border border-amber-300/80 shadow-[0_0_8px_rgba(245,158,11,0.8)]">In Progress</span>
+                </div>
+                <div class="text-[9px] text-sky-200 mt-0.5">C# · Unity</div>
+              </div>
+
+              <div onclick="selectProject(1, this)" class="proj-menu-item aqua-card-inner p-2 cursor-pointer hover:bg-white/20 transition-all border-l-4 border-transparent">
+                <div class="font-semibold text-white text-xs">Hooper Buddy: Basketball Drill Mobile App</div>
+                <div class="text-[9px] text-sky-200">Flutter · Dart · SQLite</div>
+              </div>
+
+              <div onclick="selectProject(2, this)" class="proj-menu-item aqua-card-inner p-2 cursor-pointer hover:bg-white/20 transition-all border-l-4 border-transparent">
+                <div class="font-semibold text-white text-xs">Color Telemetry & Analytics Studio</div>
+                <div class="text-[9px] text-sky-200">OpenCV · Streamlit</div>
+              </div>
+
+              <div onclick="selectProject(3, this)" class="proj-menu-item aqua-card-inner p-2 cursor-pointer hover:bg-white/20 transition-all border-l-4 border-transparent">
+                <div class="font-semibold text-white text-xs">Planora: Smart Study Planner</div>
+                <div class="text-[9px] text-sky-200">PHP · JavaScript · MySQL</div>
+              </div>
+
+              <div onclick="selectProject(4, this)" class="proj-menu-item aqua-card-inner p-2 cursor-pointer hover:bg-white/20 transition-all border-l-4 border-transparent">
+                <div class="font-semibold text-white text-xs">Office Chair Grand Prix: Unity Game</div>
+                <div class="text-[9px] text-sky-200">C# · Unity</div>
+              </div>
+            </div>
+
+            <!-- Right Side Fixed Showcase Box -->
+            <div class="sm:col-span-7 aqua-card-inner p-3 flex flex-col justify-between h-full overflow-hidden min-h-0">
+              <div class="space-y-2 flex-1 flex flex-col min-h-0 overflow-hidden">
+                <!-- Fixed aspect ratio container preventing squeezed images -->
+                <div class="w-full h-28 sm:h-32 rounded-lg border border-white/40 shadow-md shrink-0 overflow-hidden bg-slate-950/40 relative">
+                  <img 
+                    id="proj-detail-img" 
+                    src="icons/datavid.png" 
+                    alt="Project Preview" 
+                    class="w-full h-full object-cover object-center transition-all duration-300" 
+                  />
+                  <span id="proj-detail-badge" class="absolute top-2 right-2 text-[8px] px-2 py-0.5 rounded-full font-bold shadow-lg text-white border border-amber-300 bg-gradient-to-r from-amber-500 to-orange-500 animate-pulse shadow-[0_0_12px_rgba(245,158,11,0.9)]">
+                    🚧 In Progress
+                  </span>
+                </div>
+
+                <div class="flex items-center justify-between shrink-0 pt-0.5">
+                  <h3 id="proj-detail-title" class="font-semibold text-white text-xs">Data Visualization Educational Game</h3>
+                </div>
+
+                <!-- Scrollable description for long text -->
+                <p id="proj-detail-desc" class="text-[10px] text-sky-100 leading-relaxed overflow-y-auto pr-1 flex-1">
+                  An interactive 3D open-world educational game implementing C# scripting to teach data visualization principles.
+                </p>
+              </div>
+
+              <!-- Footer with Links and Tech Tags -->
+              <div class="pt-2 border-t border-white/20 shrink-0 space-y-1.5">
+                <div id="proj-detail-links" class="flex flex-wrap gap-1.5">
+                  <!-- Populated dynamically via JS -->
+                </div>
+                <div id="proj-detail-tags" class="flex flex-wrap gap-1">
+                  <!-- Populated dynamically via JS -->
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- TAB 4: EDUCATION -->
+        <div id="tab-education" class="tab-pane hidden flex flex-col justify-between h-full space-y-3 min-h-0">
+          <div class="space-y-2 shrink-0">
+            <div class="border-b border-white/40 pb-1">
+              <span class="text-[10px] aero-heading-light text-sky-200 uppercase tracking-wide">Education // Qualification</span>
+              <h2 class="aero-heading-light text-xl sm:text-2xl text-white mt-0.5 drop-shadow">
+                Academic Degree
+              </h2>
+            </div>
+
+            <div class="aqua-card-inner p-3.5 space-y-1.5">
+              <h3 class="text-sm font-semibold text-white">Bachelor Degree in Computer Science (Hons.) Multimedia Computing</h3>
+              <span class="text-[10px] text-sky-300 font-medium">April 2025 - Current</span>
+              <p class="text-xs text-sky-300 font-medium">UiTM Shah Alam, Selangor</p>
+            </div>
+
+            <div class="aqua-card-inner p-3.5 space-y-1.5">
+              <h3 class="text-sm font-semibold text-white">Diploma in Computer Science</h3>
+              <span class="text-[10px] text-sky-300 font-medium">October 2022 - March 2025</span>
+              <p class="text-xs text-sky-300 font-medium">UiTM Cawangan Terengganu, Kampus Kuala Terengganu (Chendering)</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- TAB 5: SKILLS -->
+        <div id="tab-skills" class="tab-pane hidden flex flex-col justify-between h-full space-y-2.5 min-h-0">
+          <div class="space-y-3 flex-1 overflow-y-auto pr-1 min-h-0">
+            
+            <!-- Programming Languages Section -->
+            <div>
+              <div class="border-b border-white/40 pb-1 mb-2">
+                <span class="text-[10px] aero-heading-light text-sky-200 uppercase tracking-wide">Capabilities // Tech Stack</span>
+                <h2 class="aero-heading-light text-lg sm:text-xl text-white mt-0.5 drop-shadow">
+                  Programming Languages
+                </h2>
+              </div>
+
+              <div class="grid grid-cols-2 sm:grid-cols-3 gap-2 text-xs">
+                <div class="aqua-card-inner p-2">
+                  <div class="font-semibold text-white text-xs">Dart</div>
+                  <div class="text-[9px] text-sky-200 mt-0.5">Mobile & Flutter</div>
+                </div>
+                <div class="aqua-card-inner p-2">
+                  <div class="font-semibold text-white text-xs">Python</div>
+                  <div class="text-[9px] text-sky-200 mt-0.5">Data & Automation</div>
+                </div>
+                <div class="aqua-card-inner p-2">
+                  <div class="font-semibold text-white text-xs">C#</div>
+                  <div class="text-[9px] text-sky-200 mt-0.5">Unity Game Dev</div>
+                </div>
+                <div class="aqua-card-inner p-2">
+                  <div class="font-semibold text-white text-xs">Java</div>
+                  <div class="text-[9px] text-sky-200 mt-0.5">OOP & Applications</div>
+                </div>
+                <div class="aqua-card-inner p-2">
+                  <div class="font-semibold text-white text-xs">PHP</div>
+                  <div class="text-[9px] text-sky-200 mt-0.5">Web Systems</div>
+                </div>
+                <div class="aqua-card-inner p-2">
+                  <div class="font-semibold text-white text-xs">SQL</div>
+                  <div class="text-[9px] text-sky-200 mt-0.5">Database Queries</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Tools & Technologies Section -->
+            <div>
+              <div class="border-b border-white/40 pb-1 mb-2">
+                <h2 class="aero-heading-light text-lg sm:text-xl text-white mt-0.5 drop-shadow">
+                  Tools & Technologies
+                </h2>
+              </div>
+
+              <div class="grid grid-cols-2 sm:grid-cols-3 gap-2 text-xs">
+                <div class="aqua-card-inner p-2">
+                  <div class="font-semibold text-white text-xs">Flutter</div>
+                  <div class="text-[9px] text-sky-200 mt-0.5">Cross-Platform UI</div>
+                </div>
+                <div class="aqua-card-inner p-2">
+                  <div class="font-semibold text-white text-xs">SQLite</div>
+                  <div class="text-[9px] text-sky-200 mt-0.5">Local Storage</div>
+                </div>
+                <div class="aqua-card-inner p-2">
+                  <div class="font-semibold text-white text-xs">Streamlit</div>
+                  <div class="text-[9px] text-sky-200 mt-0.5">Data Visuals</div>
+                </div>
+                <div class="aqua-card-inner p-2">
+                  <div class="font-semibold text-white text-xs">OpenCV</div>
+                  <div class="text-[9px] text-sky-200 mt-0.5">Computer Vision</div>
+                </div>
+                <div class="aqua-card-inner p-2">
+                  <div class="font-semibold text-white text-xs">MySQL</div>
+                  <div class="text-[9px] text-sky-200 mt-0.5">Relational DB</div>
+                </div>
+                <div class="aqua-card-inner p-2">
+                  <div class="font-semibold text-white text-xs">Git</div>
+                  <div class="text-[9px] text-sky-200 mt-0.5">Version Control</div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- TAB 6: CREDENTIALS (HOVER TO SHOW CERTIFICATE PREVIEW) -->
+        <div id="tab-certs" class="tab-pane hidden flex flex-col justify-between h-full space-y-3 min-h-0">
+          <div class="space-y-2 flex-1 flex flex-col min-h-0 overflow-hidden">
+            <div class="border-b border-white/40 pb-1 shrink-0">
+              <span class="text-[10px] aero-heading-light text-sky-200 uppercase tracking-wide">Credentials // Certifications</span>
+              <h2 class="aero-heading-light text-xl sm:text-2xl text-white mt-0.5 drop-shadow">
+                Verified Badges & Certificates
+              </h2>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-12 gap-3 flex-1 min-h-0 items-stretch overflow-hidden">
+              <!-- Certs Selector List -->
+              <div class="sm:col-span-6 space-y-2 overflow-y-auto pr-1">
+                <div onmouseenter="showCertPreview(0)" onclick="showCertPreview(0)" class="cert-item aqua-card-inner p-3 cursor-pointer hover:bg-white/20 transition-all border-l-4 border-sky-300">
+                  <div class="font-semibold text-white text-xs">AntsBees Certified Data Analyst (CDA)</div>
+                  <div class="text-sky-300 font-medium text-[9px]">MBOT Certified · Credsverse Verified</div>
+                  <div class="text-[9px] text-sky-200/80 mt-1 flex items-center gap-1">
+                    <span>🔍 Hover to preview certificate</span>
+                  </div>
+                </div>
+
+                <div onmouseenter="showCertPreview(1)" onclick="showCertPreview(1)" class="cert-item aqua-card-inner p-3 cursor-pointer hover:bg-white/20 transition-all border-l-4 border-transparent">
+                  <div class="font-semibold text-white text-xs">Machine Learning with R</div>
+                  <div class="text-sky-300 font-medium text-[9px]">CognitiveClassAI · Jun 2026</div>
+                  <div class="text-[9px] text-sky-200/80 mt-1 flex items-center gap-1">
+                    <span>🔍 Hover to preview certificate</span>
+                  </div>
+                </div>
+
+                <div onmouseenter="showCertPreview(2)" onclick="showCertPreview(2)" class="cert-item aqua-card-inner p-3 cursor-pointer hover:bg-white/20 transition-all border-l-4 border-transparent">
+                  <div class="font-semibold text-white text-xs">Build A Computer Vision App with Azure Cognitive Services</div>
+                  <div class="text-sky-300 font-medium text-[9px]">Coursera</div>
+                  <div class="text-[9px] text-sky-200/80 mt-1 flex items-center gap-1">
+                    <span>🔍 Hover to preview certificate</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Live Hover Preview Box -->
+              <div class="sm:col-span-6 aqua-card-inner p-2.5 flex flex-col justify-between h-full overflow-hidden relative">
+                <div class="text-[10px] text-sky-200 font-medium mb-1 border-b border-white/20 pb-1 flex justify-between items-center shrink-0">
+                  <span>Certificate Preview</span>
+                  <span id="cert-preview-status" class="text-[9px] text-emerald-300">✓ Verified</span>
+                </div>
+                
+                <a id="cert-preview-link" href="https://credsverse.com/credentials/026b3cb3-efc3-459d-8e25-b876daf0b0d8?preview=1" target="_blank" class="flex-1 block relative overflow-hidden rounded-lg border border-white/30 group bg-slate-950/50 min-h-0">
+                  <img 
+                    id="cert-preview-img" 
+                    src="https://cdn.certifier.io/d7067ab1-e44e-4296-9a69-f17cb9b06b5a/credentials/01m57rs749ft0js2eqrv27qdn9/designs/01m3mb262hb11nd4470b2aw5bz/YaY-sORPwE.png" 
+                    alt="Certificate Preview" 
+                    class="w-full h-full object-contain p-1 transition-transform duration-300 group-hover:scale-105" 
+                  />
+                  <div class="absolute inset-0 bg-sky-950/60 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center text-white font-bold text-xs backdrop-blur-xs">
+                    View Full Credential 🔗
+                  </div>
+                </a>
+                
+                <p id="cert-preview-title" class="text-[10px] text-center text-sky-100 font-semibold mt-1.5 shrink-0">
+                  AntsBees Certified Data Analyst (CDA)
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </main>
+
+    </div>
+
+  </div>
+
+  <script>
+    function openTab(tabId, clickedBtn) {
+      document.querySelectorAll('.aqua-nav-btn').forEach(btn => btn.classList.remove('active'));
+      clickedBtn.classList.add('active');
+
+      document.querySelectorAll('.tab-pane').forEach(pane => pane.classList.add('hidden'));
+      document.getElementById('tab-' + tabId).classList.remove('hidden');
+    }
+
+    // Projects Array with highlighted In Progress status
+    const projectList = [
+      {
+        title: "Data Visualization Educational Game",
+        desc: "An interactive 3D open-world educational game implementing C# scripting to teach data visualization principles.",
+        img: "icons/datavid.png",
+        tags: ["C#", "Unity"],
+        badge: "🚧 In Progress",
+        badgeColor: "bg-gradient-to-r from-amber-500 to-orange-500 text-white border-amber-300 shadow-[0_0_12px_rgba(245,158,11,0.9)] animate-pulse",
+        github: "",
+        live: "",
+        install: ""
+      },
+      {
+        title: "Hooper Buddy: Cross-Platform Basketball Drill Mobile App",
+        desc: "A cross-platform mobile basketball training app using Flutter and Dart featuring offline relational storage (sqflite) for workout logging and dynamic shooting analytics via fl_chart.",
+        img: "icons/hooperbuddy.jpeg",
+        tags: ["Flutter", "Dart", "SQLite"],
+        badge: "GitHub & App",
+        badgeColor: "bg-emerald-500/90 text-white border-white/40",
+        github: "https://github.com/erfanhkimi/hooper_buddy.git",
+        live: "",
+        install: "https://github.com/erfanhkimi/hooper_buddy/releases/tag/v1.0.0"
+      },
+      {
+        title: "Color Telemetry & Visual Analytics Studio",
+        desc: "An automated video analytics web platform using OpenCV downsampling and K-Means clustering to extract frame-by-frame color palettes, lighting trends, and time-series visual metrics.",
+        img: "icons/multi.png",
+        tags: ["OpenCV", "Streamlit"],
+        badge: "Live Web & GitHub",
+        badgeColor: "bg-sky-500/90 text-white border-white/40",
+        github: "https://github.com/erfanhkimi/color-telemetry-app.git",
+        live: "https://color-telemetry-app.streamlit.app/",
+        install: ""
+      },
+      {
+        title: "Planora: Smart Study Planner",
+        desc: "Web-based smart study scheduler designed to help students plan, organize, and track their study schedules efficiently. Generates a personalized study timetable based on user inputs.",
+        img: "icons/planora.png",
+        tags: ["PHP", "JavaScript", "MySQL"],
+        badge: "Localized Project",
+        badgeColor: "bg-indigo-500/90 text-white border-white/40",
+        github: "https://github.com/erfanhkimi/Planora-Smart-Study-Planner.git",
+        live: "",
+        install: ""
+      },
+      {
+        title: "Office Chair Grand Prix: Unity Racing Game",
+        desc: "A humorous casual racing game developed in Unity where players navigate office chairs through tracks filled with obstacles. Combines speed and precision to dodge hazards.",
+        img: "icons/Officechair.png",
+        tags: ["C#", "Unity"],
+        badge: "Unity Project",
+        badgeColor: "bg-slate-500/90 text-white border-white/40",
+        github: "",
+        live: "",
+        install: ""
+      }
+    ];
+
+    function selectProject(idx, clickedItem) {
+      document.querySelectorAll('.proj-menu-item').forEach(item => {
+        item.classList.remove('border-sky-300');
+        item.classList.add('border-transparent');
+      });
+      clickedItem.classList.remove('border-transparent');
+      clickedItem.classList.add('border-sky-300');
+
+      const p = projectList[idx];
+      document.getElementById('proj-detail-title').innerText = p.title;
+      document.getElementById('proj-detail-desc').innerText = p.desc;
+      document.getElementById('proj-detail-img').src = p.img;
+
+      // Status Badge Update
+      const badgeEl = document.getElementById('proj-detail-badge');
+      badgeEl.innerText = p.badge;
+      badgeEl.className = `absolute top-2 right-2 text-[8px] px-2 py-0.5 rounded-full font-bold shadow-md border ${p.badgeColor}`;
+
+      // Links update inside selectProject() function
+const linksContainer = document.getElementById('proj-detail-links');
+let linksHTML = '';
+
+if (p.github) {
+  linksHTML += `<a href="${p.github}" target="_blank" class="text-xs px-3 py-1.5 rounded-lg bg-slate-900/90 hover:bg-black text-white font-semibold border border-white/30 flex items-center gap-1.5 shadow-md transition-all"><span>📦 GitHub Repo</span></a>`;
+}
+if (p.live) {
+  linksHTML += `<a href="${p.live}" target="_blank" class="text-xs px-3 py-1.5 rounded-lg bg-sky-600/90 hover:bg-sky-500 text-white font-semibold border border-white/30 flex items-center gap-1.5 shadow-md transition-all"><span>🌐 Live Website</span></a>`;
+}
+if (p.install) {
+  linksHTML += `<a href="${p.install}" target="_blank" class="text-xs px-3 py-1.5 rounded-lg bg-emerald-600/90 hover:bg-emerald-500 text-white font-semibold border border-white/30 flex items-center gap-1.5 shadow-md transition-all"><span>⚡ Install App</span></a>`;
+}
+
+linksContainer.innerHTML = linksHTML;
+
+      // Tags update
+      const tagsContainer = document.getElementById('proj-detail-tags');
+      tagsContainer.innerHTML = p.tags.map(t => `<span class="text-[8px] px-1.5 py-0.5 rounded bg-white/20 text-white font-normal">${t}</span>`).join('');
+    }
+
+    // Certifications hover functionality
+    const certList = [
+      {
+        title: "AntsBees Certified Data Analyst (CDA)",
+        img: "https://cdn.certifier.io/d7067ab1-e44e-4296-9a69-f17cb9b06b5a/credentials/01m57rs749ft0js2eqrv27qdn9/designs/01m3mb262hb11nd4470b2aw5bz/YaY-sORPwE.png",
+        url: "https://credsverse.com/credentials/026b3cb3-efc3-459d-8e25-b876daf0b0d8?preview=1"
+      },
+      {
+        title: "Machine Learning with R",
+        img: "icons/mlcert.png",
+        url: "https://courses.cognitiveclass.ai/certificates/b6c1b38786f945f297dc9424de3dc648"
+      },
+      {
+        title: "Build A Computer Vision App with Azure Cognitive Services",
+        img: "icons/azurecert.png",
+        url: "https://www.coursera.org/account/accomplishments/verify/EJ5Q3TXTML7S"
+      }
+    ];
+
+    function showCertPreview(idx) {
+      const c = certList[idx];
+      document.getElementById('cert-preview-img').src = c.img;
+      document.getElementById('cert-preview-link').href = c.url;
+      document.getElementById('cert-preview-title').innerText = c.title;
+
+      document.querySelectorAll('.cert-item').forEach((item, i) => {
+        if (i === idx) {
+          item.classList.add('border-sky-300');
+          item.classList.remove('border-transparent');
+        } else {
+          item.classList.remove('border-sky-300');
+          item.classList.add('border-transparent');
+        }
+      });
+    }
+
+    // Initialize default project view
+    selectProject(0, document.querySelector('.proj-menu-item'));
+  </script>
+
+</body>
+</html>
