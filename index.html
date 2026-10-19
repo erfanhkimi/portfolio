@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Erfan Hakimi — Portfolio</title>
+  <title>Erfan Hakimi's Portfolio</title>
 
   <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
@@ -23,6 +23,24 @@
         overflow: hidden !important;
         text-shadow: 0 1px 3px rgba(0, 15, 40, 0.9), 0 0 8px rgba(0, 10, 30, 0.6);
       }
+    }
+
+    /* Custom Aqua Scrollbar Styling */
+    ::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: rgba(0, 15, 40, 0.3);
+      border-radius: 8px;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: rgba(255, 255, 255, 0.35);
+      border-radius: 8px;
+      border: 1px solid rgba(255, 255, 255, 0.5);
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: rgba(255, 255, 255, 0.65);
     }
 
     h1, h2, h3 {
@@ -124,10 +142,10 @@
     <!-- HEADER TITLE -->
     <header class="text-center space-y-0.5 shrink-0 py-1 lg:py-0">
       <h1 class="aero-heading-light text-2xl sm:text-4xl lg:text-4xl text-white drop-shadow-[0_2px_10px_rgba(0,30,80,0.8)]">
-        ERFAN HAKIMI
+        MUHAMMAD ERFAN HAKIMI BIN MOHD EZUWAN 
       </h1>
       <p class="text-[10px] sm:text-xs font-normal tracking-widest text-sky-100 uppercase drop-shadow">
-        Computer Science (Hons) Multimedia Student
+        Bachelor of Computer Science (Hons) Multimedia Student
       </p>
     </header>
 
@@ -172,23 +190,59 @@
               <img src="icons/credinal.png" class="w-6 h-6 drop-shadow-md" />
               <span>Credentials</span>
             </div>
+
+            <div onclick="openTab('gallery', this)" class="aqua-nav-btn">
+              <img src="icons/gallery.png" class="w-6 h-6 drop-shadow-md" />
+              <span>Activity Gallery</span>
+            </div>
+
+            <!-- CONTACT ME BUTTON -->
+            <div onclick="openContactModal()" class="aqua-nav-btn cursor-pointer">
+              <img src="icons/contact.png" class="w-6 h-6 drop-shadow-md" />
+              <span>Contact Me</span>
+            </div>
+
+            <!-- VIEW RESUME NAV BUTTON -->
+            <a href="resume.pdf" target="_blank" class="aqua-nav-btn !bg-gradient-to-r !from-sky-500/40 !to-blue-600/40 border-sky-200/60 hover:!from-sky-400/60 hover:!to-blue-500/60 mt-2 font-semibold shadow-[0_0_12px_rgba(0,180,255,0.3)]">
+              <img src="icons/resume.png" class="w-6 h-6 drop-shadow-md" />
+              <span>View Resume (PDF)</span>
+            </a>
           </nav>
         </div>
 
-        <!-- LINKEDIN, GITHUB, AND GMAIL REDIRECTS -->
-        <div class="pt-2 border-t border-white/40 flex gap-1.5 shrink-0">
-          <a href="https://linkedin.com" target="_blank" class="flex-1 py-1.5 px-2 rounded-xl bg-white/80 hover:bg-white text-slate-900 font-semibold text-[11px] shadow-md transition-all flex items-center justify-center gap-1">
-            <img src="https://img.icons8.com/color/48/linkedin.png" class="w-3.5 h-3.5" />
-            <span>LinkedIn</span>
-          </a>
-          <a href="https://github.com/erfanhkimi" target="_blank" class="flex-1 py-1.5 px-2 rounded-xl bg-white/80 hover:bg-white text-slate-900 font-semibold text-[11px] shadow-md transition-all flex items-center justify-center gap-1">
-            <img src="icons/github.png" class="w-3.5 h-3.5" />
-            <span>GitHub</span>
-          </a>
-          <a href="mailto:erfanhakimi04@gmail.com" class="flex-1 py-1.5 px-2 rounded-xl bg-white/80 hover:bg-white text-slate-900 font-semibold text-[11px] shadow-md transition-all flex items-center justify-center gap-1">
-            <img src="icons/gmail.webp" class="w-3.5 h-3.5" />
-            <span>Gmail</span>
-          </a>
+        <!-- SIDEBAR FOOTER: SLOGAN, SOCIAL LINKS & TRADEMARK -->
+        <div class="pt-2.5 border-t border-white/40 space-y-2 shrink-0">
+          <div class="text-center space-y-0.5">
+            <p class="text-[11px] font-semibold text-white drop-shadow flex items-center justify-center gap-1">
+              <span>Let's Build Something Great Together</span>
+            </p>
+            <p class="text-[9.5px] text-sky-200/90 font-normal">
+              Open for IT Internship Opportunities
+            </p>
+          </div>
+
+          <!-- Social Link Buttons -->
+          <div class="flex gap-1.5">
+            <a href="https://linkedin.com" target="_blank" class="flex-1 py-1.5 px-2 rounded-xl bg-white/80 hover:bg-white text-slate-900 font-semibold text-[11px] shadow-md transition-all flex items-center justify-center gap-1">
+              <img src="https://img.icons8.com/color/48/linkedin.png" class="w-3.5 h-3.5" />
+              <span>LinkedIn</span>
+            </a>
+            <a href="https://github.com/erfanhkimi" target="_blank" class="flex-1 py-1.5 px-2 rounded-xl bg-white/80 hover:bg-white text-slate-900 font-semibold text-[11px] shadow-md transition-all flex items-center justify-center gap-1">
+              <img src="icons/github.png" class="w-3.5 h-3.5" />
+              <span>GitHub</span>
+            </a>
+            <a href="mailto:erfanhakimi04@gmail.com" class="flex-1 py-1.5 px-2 rounded-xl bg-white/80 hover:bg-white text-slate-900 font-semibold text-[11px] shadow-md transition-all flex items-center justify-center gap-1">
+              <img src="icons/gmail.webp" class="w-3.5 h-3.5" />
+              <span>Gmail</span>
+            </a>
+          </div>
+
+          <!-- Trademark & Copyright Line -->
+          <div class="text-center pt-1 border-t border-white/10">
+            <p class="text-[8.5px] text-sky-200/70 tracking-widest uppercase font-medium">
+              © 2026 Erfan Hakimi ™ · All Rights Reserved
+            </p>
+          </div>
         </div>
       </aside>
 
@@ -206,7 +260,7 @@
             </div>
 
             <p class="text-[11px] sm:text-xs leading-relaxed text-sky-100/95 drop-shadow font-normal">
-              Computer Science (Multimedia Computing) student with hands-on experience in full-stack web development, Python automation, data analytics, and Unity C# game development. Experienced in building internal HR systems and technical support at FELDA. MBOT Certified Data Analyst seeking software engineering or data analytics opportunities.
+              Computer Science (Multimedia Computing) student from Shah Alam with hands-on experience in full-stack web development, Python automation, data analytics, and Unity C# game development. Experienced in building internal HR systems and technical support at FELDA. MBOT Certified Data Analyst seeking software engineering, data analytics or any IT internship opportunities.
             </p>
           </div>
 
@@ -224,7 +278,7 @@
             <!-- Image 2 -->
             <div class="aqua-card-inner p-1.5 flex flex-col justify-between overflow-hidden relative group h-full min-h-0">
               <img 
-                src="icons/profile2.jpeg" 
+                src="icons/profile3.jpeg" 
                 alt="Workspace Image 2" 
                 class="w-full h-full object-cover rounded-lg border border-white/40 shadow-md transition-transform duration-300 group-hover:scale-[1.01]"
               />
@@ -243,16 +297,16 @@
             </div>
 
             <div class="space-y-2 overflow-y-auto pr-1 h-[calc(100%-50px)] min-h-0">
-              <div class="aqua-card-inner p-3 space-y-1">
+              <div class="aqua-card-inner p-3.5 space-y-1.5">
                 <div class="flex justify-between items-center">
-                  <h3 class="font-semibold text-white text-xs">IT Support Intern</h3>
+                  <h3 class="font-semibold text-white text-xs sm:text-sm">IT Support Intern</h3>
                   <span class="text-[10px] text-sky-300 font-medium">October 2024 - March 2025</span>
                 </div>
-                <p class="text-[10px] text-sky-200 font-medium">Human Resource Department of FELDA, Kuala Lumpur</p>
-                <p class="text-[11px] text-sky-100/90 leading-relaxed pt-0.5">
-                  ● Proposed an Exam Management System to improve and streamline HR examination processes<br>
-                  ● Assisted in system planning, documentation, and data management<br>
-                  ● Supported troubleshooting and basic technical issue resolution
+                <p class="text-[11px] text-sky-200 font-medium">Human Resource Department of FELDA, Kuala Lumpur</p>
+                <p class="text-[11px] sm:text-xs text-sky-100/90 leading-relaxed pt-1 space-y-1">
+                  ● Proposed and developed an Exam Management System to streamline HR examination workflows replacing manual processes and accelerating candidate evaluation turnaround times. <br><br>
+                  ● Structured HR datasets and candidate records using SQL and Microsoft Excel ensuring high data accuracy, integrity, and compliance with organizational standards<br><br>
+                  ● Delivered IT support across administrative hardware and software applications, diagnosing network/system glitches and logging bug reports to maintain daily operational uptime. 
                 </p>
               </div>
             </div>
@@ -269,48 +323,61 @@
           </div>
 
           <div class="grid grid-cols-1 sm:grid-cols-12 gap-2.5 flex-1 overflow-hidden items-stretch min-h-0">
-            <!-- Left Side Selector Menu -->
-            <div class="sm:col-span-5 space-y-1.5 overflow-y-auto pr-1 min-h-0">
-              <!-- Project 0: Data Viz Educational Game (With In Progress Highlight) -->
-              <div onclick="selectProject(0, this)" class="proj-menu-item aqua-card-inner p-2 cursor-pointer hover:bg-white/20 transition-all border-l-4 border-sky-300">
-                <div class="flex items-center justify-between gap-1">
-                  <div class="font-semibold text-white text-xs">Data Visualization Educational Game</div>
-                  <span class="text-[8px] px-1.5 py-0.5 rounded-full bg-amber-500 text-white font-bold shrink-0 animate-pulse border border-amber-300/80 shadow-[0_0_8px_rgba(245,158,11,0.8)]">In Progress</span>
+            
+            <!-- Left Side Selector Menu Box -->
+            <div class="sm:col-span-4 aqua-card-inner p-2.5 flex flex-col h-full overflow-hidden min-h-0 bg-slate-950/40 border border-white/30 rounded-xl shadow-inner">
+              <div class="text-[10px] font-semibold text-sky-200 uppercase tracking-wider pb-1.5 mb-2 border-b border-white/20 flex items-center justify-between shrink-0">
+                <span>Project List</span>
+                <span class="text-[9px] text-sky-300/80">Scroll ↕</span>
+              </div>
+
+              <div class="space-y-2 overflow-y-auto flex-1 pr-1 min-h-0">
+                <div onclick="selectProject(0, this)" class="proj-menu-item aqua-card-inner p-2.5 cursor-pointer hover:bg-white/20 transition-all border-l-4 border-sky-300">
+                  <div class="flex items-center justify-between gap-1">
+                    <div class="font-semibold text-white text-xs">Data Visualization Educational Game</div>
+                    <span class="text-[8px] px-1.5 py-0.5 rounded-full bg-amber-500 text-white font-bold shrink-0 animate-pulse border border-amber-300/80 shadow-[0_0_8px_rgba(245,158,11,0.8)]">In Progress</span>
+                  </div>
+                  <div class="text-[9.5px] text-sky-200 mt-1">C# · Unity</div>
                 </div>
-                <div class="text-[9px] text-sky-200 mt-0.5">C# · Unity</div>
-              </div>
 
-              <div onclick="selectProject(1, this)" class="proj-menu-item aqua-card-inner p-2 cursor-pointer hover:bg-white/20 transition-all border-l-4 border-transparent">
-                <div class="font-semibold text-white text-xs">Hooper Buddy: Basketball Drill Mobile App</div>
-                <div class="text-[9px] text-sky-200">Flutter · Dart · SQLite</div>
-              </div>
+                <div onclick="selectProject(1, this)" class="proj-menu-item aqua-card-inner p-2.5 cursor-pointer hover:bg-white/20 transition-all border-l-4 border-transparent">
+                  <div class="font-semibold text-white text-xs">Hooper Buddy: Basketball Drill App</div>
+                  <div class="text-[9.5px] text-sky-200 mt-1">Flutter · Dart · SQLite</div>
+                </div>
 
-              <div onclick="selectProject(2, this)" class="proj-menu-item aqua-card-inner p-2 cursor-pointer hover:bg-white/20 transition-all border-l-4 border-transparent">
-                <div class="font-semibold text-white text-xs">Color Telemetry & Analytics Studio</div>
-                <div class="text-[9px] text-sky-200">OpenCV · Streamlit</div>
-              </div>
+                <div onclick="selectProject(2, this)" class="proj-menu-item aqua-card-inner p-2.5 cursor-pointer hover:bg-white/20 transition-all border-l-4 border-transparent">
+                  <div class="font-semibold text-white text-xs">Color Telemetry & Analytics Studio</div>
+                  <div class="text-[9.5px] text-sky-200 mt-1">OpenCV · Streamlit</div>
+                </div>
 
-              <div onclick="selectProject(3, this)" class="proj-menu-item aqua-card-inner p-2 cursor-pointer hover:bg-white/20 transition-all border-l-4 border-transparent">
-                <div class="font-semibold text-white text-xs">Planora: Smart Study Planner</div>
-                <div class="text-[9px] text-sky-200">PHP · JavaScript · MySQL</div>
-              </div>
+                <div onclick="selectProject(3, this)" class="proj-menu-item aqua-card-inner p-2.5 cursor-pointer hover:bg-white/20 transition-all border-l-4 border-transparent">
+                  <div class="font-semibold text-white text-xs">Planora: Smart Study Planner</div>
+                  <div class="text-[9.5px] text-sky-200 mt-1">PHP · JavaScript · MySQL</div>
+                </div>
 
-              <div onclick="selectProject(4, this)" class="proj-menu-item aqua-card-inner p-2 cursor-pointer hover:bg-white/20 transition-all border-l-4 border-transparent">
-                <div class="font-semibold text-white text-xs">Office Chair Grand Prix: Unity Game</div>
-                <div class="text-[9px] text-sky-200">C# · Unity</div>
+                <div onclick="selectProject(4, this)" class="proj-menu-item aqua-card-inner p-2.5 cursor-pointer hover:bg-white/20 transition-all border-l-4 border-transparent">
+                  <div class="font-semibold text-white text-xs">Office Chair Grand Prix: Unity Game</div>
+                  <div class="text-[9.5px] text-sky-200 mt-1">C# · Unity</div>
+                </div>
+
+                <div onclick="selectProject(5, this)" class="proj-menu-item aqua-card-inner p-2.5 cursor-pointer hover:bg-white/20 transition-all border-l-4 border-transparent">
+                  <div class="font-semibold text-white text-xs">FELDA HR Exam Management System</div>
+                  <div class="text-[9.5px] text-sky-200 mt-1">PHP · HTML · CSS · MySQL</div>
+                </div>
               </div>
             </div>
 
-            <!-- Right Side Fixed Showcase Box -->
-            <div class="sm:col-span-7 aqua-card-inner p-3 flex flex-col justify-between h-full overflow-hidden min-h-0">
+            <!-- Right Side Showcase Box -->
+            <div class="sm:col-span-8 aqua-card-inner p-3.5 flex flex-col justify-between h-full overflow-hidden min-h-0">
               <div class="space-y-2 flex-1 flex flex-col min-h-0 overflow-hidden">
-                <!-- Fixed aspect ratio container preventing squeezed images -->
-                <div class="w-full h-28 sm:h-32 rounded-lg border border-white/40 shadow-md shrink-0 overflow-hidden bg-slate-950/40 relative">
+                
+                <!-- Showcase Image Frame -->
+                <div class="w-full h-36 sm:h-44 rounded-lg border border-white/40 shadow-md shrink-0 overflow-hidden bg-slate-950/60 relative p-1 flex items-center justify-center">
                   <img 
                     id="proj-detail-img" 
                     src="icons/datavid.png" 
                     alt="Project Preview" 
-                    class="w-full h-full object-cover object-center transition-all duration-300" 
+                    class="w-full h-full object-contain object-center rounded transition-all duration-300" 
                   />
                   <span id="proj-detail-badge" class="absolute top-2 right-2 text-[8px] px-2 py-0.5 rounded-full font-bold shadow-lg text-white border border-amber-300 bg-gradient-to-r from-amber-500 to-orange-500 animate-pulse shadow-[0_0_12px_rgba(245,158,11,0.9)]">
                     🚧 In Progress
@@ -318,17 +385,19 @@
                 </div>
 
                 <div class="flex items-center justify-between shrink-0 pt-0.5">
-                  <h3 id="proj-detail-title" class="font-semibold text-white text-xs">Data Visualization Educational Game</h3>
+                  <h3 id="proj-detail-title" class="font-semibold text-white text-xs sm:text-sm">Data Visualization Educational Game</h3>
                 </div>
 
-                <!-- Scrollable description for long text -->
-                <p id="proj-detail-desc" class="text-[10px] text-sky-100 leading-relaxed overflow-y-auto pr-1 flex-1">
-                  An interactive 3D open-world educational game implementing C# scripting to teach data visualization principles.
-                </p>
+                <!-- Scrollable Description Box -->
+                <div class="aqua-card-inner p-3 flex-1 overflow-y-auto min-h-[90px] border border-white/30 bg-slate-950/40 rounded-xl shadow-inner">
+                  <p id="proj-detail-desc" class="text-[11.5px] sm:text-xs text-sky-100 leading-relaxed">
+                    An interactive 3D open-world educational game implementing C# scripting to teach data visualization principles.
+                  </p>
+                </div>
               </div>
 
               <!-- Footer with Links and Tech Tags -->
-              <div class="pt-2 border-t border-white/20 shrink-0 space-y-1.5">
+              <div class="pt-2 border-t border-white/20 shrink-0 space-y-1.5 mt-2">
                 <div id="proj-detail-links" class="flex flex-wrap gap-1.5">
                   <!-- Populated dynamically via JS -->
                 </div>
@@ -337,6 +406,7 @@
                 </div>
               </div>
             </div>
+
           </div>
         </div>
 
@@ -509,10 +579,166 @@
           </div>
         </div>
 
+        <!-- TAB 7: ACTIVITY GALLERY -->
+        <div id="tab-gallery" class="tab-pane hidden flex flex-col justify-between h-full space-y-2.5 min-h-0">
+          <div class="space-y-1.5 shrink-0">
+            <div class="border-b border-white/40 pb-1 flex items-center justify-between">
+              <div>
+                <span class="text-[10px] aero-heading-light text-sky-200 uppercase tracking-wide">Highlights // Visual Record</span>
+                <h2 class="aero-heading-light text-xl sm:text-2xl text-white mt-0.5 drop-shadow">
+                  Activity Gallery
+                </h2>
+              </div>
+              <span class="text-[9px] px-2 py-0.5 rounded-full bg-sky-500/30 border border-sky-300/50 text-sky-100">Click photo to expand 🔍</span>
+            </div>
+            <p class="text-[11px] text-sky-100/90 leading-relaxed">
+              Hands-on technical work, internal system demonstrations at FELDA, university project presentations, and training workshops.
+            </p>
+          </div>
+
+          <!-- PHOTO GRID SHOWCASE -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2.5 flex-1 overflow-y-auto pr-1 min-h-0">
+            
+            <!-- Gallery Item 1 -->
+            <div onclick="openLightbox('icons/systemdev.jpg', 'FELDA HR Exam System Development', 'Developing the web-based Exam Management System proposal to FELDA HR Department stakeholders.')" class="aqua-card-inner p-2 flex flex-col justify-between cursor-pointer hover:border-sky-300 transition-all group">
+              <div class="w-full h-28 rounded-lg overflow-hidden relative bg-slate-950/60 border border-white/20">
+                <img src="icons/systemdev.jpg" alt="FELDA HR Exam System Development" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105" />
+                <span class="absolute top-1.5 right-1.5 text-[8px] px-1.5 py-0.5 rounded bg-sky-600/90 text-white font-bold border border-sky-300">FELDA Internship</span>
+              </div>
+              <div class="mt-1.5 space-y-0.5">
+                <div class="font-semibold text-white text-[11px] truncate">FELDA HR Exam System Development</div>
+                <p class="text-[9.5px] text-sky-200 line-clamp-1">System proposal & workflow demo</p>
+              </div>
+            </div>
+
+            <!-- Gallery Item 2 -->
+            <div onclick="openLightbox('icons/meeting.jpg', 'Timekeeper of annual meetings', 'Assist in organizing and managing annual meetings during internship.')" class="aqua-card-inner p-2 flex flex-col justify-between cursor-pointer hover:border-sky-300 transition-all group">
+              <div class="w-full h-28 rounded-lg overflow-hidden relative bg-slate-950/60 border border-white/20">
+                <img src="icons/meeting.jpg" alt="Timekeeper of annual meetings" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105" />
+                <span class="absolute top-1.5 right-1.5 text-[8px] px-1.5 py-0.5 rounded bg-sky-600/90 text-white font-bold border border-sky-300">FELDA Internship</span>
+              </div>
+              <div class="mt-1.5 space-y-0.5">
+                <div class="font-semibold text-white text-[11px] truncate">Timekeeper of annual meetings</div>
+                <p class="text-[9.5px] text-sky-200 line-clamp-1">Assisting in organizing and managing annual meetings</p>
+              </div>
+            </div>
+
+            <!-- Gallery Item 3 -->
+            <div onclick="openLightbox('icons/profile2.jpeg', 'Group presentation leader', 'Leading a group presentation on the development of a Web3GL game.')" class="aqua-card-inner p-2 flex flex-col justify-between cursor-pointer hover:border-sky-300 transition-all group">
+              <div class="w-full h-28 rounded-lg overflow-hidden relative bg-slate-950/60 border border-white/20">
+                <img src="icons/profile2.jpeg" alt="Group presentation leader" class="w-full h-full object-contain p-1 transition-transform duration-300 group-hover:scale-105" />
+                <span class="absolute top-1.5 right-1.5 text-[8px] px-1.5 py-0.5 rounded bg-amber-500/90 text-white font-bold border border-amber-300">UiTM Project</span>
+              </div>
+              <div class="mt-1.5 space-y-0.5">
+                <div class="font-semibold text-white text-[11px] truncate">Lead in presentations</div>
+                <p class="text-[9.5px] text-sky-200 line-clamp-1">Representative of group in projects</p>
+              </div>
+            </div>
+
+            <!-- Gallery Item 4 -->
+            <div onclick="openLightbox('icons/buddy.jpeg', 'Hooper Buddy App Development', 'Building cross-platform shooting analytics and offline relational SQLite database logging in Flutter.')" class="aqua-card-inner p-2 flex flex-col justify-between cursor-pointer hover:border-sky-300 transition-all group">
+              <div class="w-full h-28 rounded-lg overflow-hidden relative bg-slate-950/60 border border-white/20">
+                <img src="icons/buddy.jpeg" alt="Hooper Buddy Mobile App" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105" />
+                <span class="absolute top-1.5 right-1.5 text-[8px] px-1.5 py-0.5 rounded bg-emerald-600/90 text-white font-bold border border-emerald-300">Mobile Dev</span>
+              </div>
+              <div class="mt-1.5 space-y-0.5">
+                <div class="font-semibold text-white text-[11px] truncate">Hooper Buddy Training App</div>
+                <p class="text-[9.5px] text-sky-200 line-clamp-1">Flutter & Dart UI testing</p>
+              </div>
+            </div>
+
+            <!-- Gallery Item 5 -->
+            <div onclick="openLightbox('icons/mm.png', 'Color Telemetry Analytics Studio', 'Video frame downsampling and real-time color palette extraction built with OpenCV and Streamlit.')" class="aqua-card-inner p-2 flex flex-col justify-between cursor-pointer hover:border-sky-300 transition-all group">
+              <div class="w-full h-28 rounded-lg overflow-hidden relative bg-slate-950/60 border border-white/20">
+                <img src="icons/mm.png" alt="Color Telemetry OpenCV App" class="w-full h-full object-contain p-1 transition-transform duration-300 group-hover:scale-105" />
+                <span class="absolute top-1.5 right-1.5 text-[8px] px-1.5 py-0.5 rounded bg-indigo-600/90 text-white font-bold border border-indigo-300">Data Analytics</span>
+              </div>
+              <div class="mt-1.5 space-y-0.5">
+                <div class="font-semibold text-white text-[11px] truncate">Color Telemetry Studio</div>
+                <p class="text-[9.5px] text-sky-200 line-clamp-1">OpenCV K-Means Clustering</p>
+              </div>
+            </div>
+
+            <!-- Gallery Item 6 -->
+            <div onclick="openLightbox('icons/cda.png', 'MBOT Certified Data Analyst Class', 'Sneak peek of CDA class that i joined during semester break.')" class="aqua-card-inner p-2 flex flex-col justify-between cursor-pointer hover:border-sky-300 transition-all group">
+              <div class="w-full h-28 rounded-lg overflow-hidden relative bg-slate-950/60 border border-white/20">
+                <img src="icons/cda.png" alt="MBOT Certified Data Analyst Class="w-full h-full object-contain p-1 transition-transform duration-300 group-hover:scale-105" />
+                <span class="absolute top-1.5 right-1.5 text-[8px] px-1.5 py-0.5 rounded bg-purple-600/90 text-white font-bold border border-purple-300">Credential</span>
+              </div>
+              <div class="mt-1.5 space-y-0.5">
+                <div class="font-semibold text-white text-[11px] truncate">MBOT Certified Data Analyst Class</div>
+                <p class="text-[9.5px] text-sky-200 line-clamp-1">Snapshot of dashboard creation during class</p>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
       </main>
 
     </div>
 
+  </div>
+
+  <!-- LIGHTBOX PREVIEW MODAL -->
+  <div id="lightbox-modal" class="fixed inset-0 bg-slate-950/80 backdrop-blur-md z-50 hidden flex items-center justify-center p-4">
+    <div class="aqua-glass-panel max-w-xl w-full p-4 space-y-3 relative overflow-hidden border border-white/40 shadow-2xl">
+      <div class="flex items-center justify-between border-b border-white/30 pb-2">
+        <h3 id="lightbox-title" class="font-semibold text-white text-sm">Image Preview</h3>
+        <button onclick="closeLightbox()" class="text-sky-200 hover:text-white font-bold text-lg px-2 rounded-lg bg-white/10 hover:bg-white/20 transition-all">✕</button>
+      </div>
+
+      <div class="w-full h-64 sm:h-80 rounded-lg overflow-hidden bg-slate-950/70 border border-white/20 flex items-center justify-center p-1">
+        <img id="lightbox-img" src="" alt="Enlarged view" class="w-full h-full object-contain rounded" />
+      </div>
+
+      <p id="lightbox-desc" class="text-xs text-sky-100 leading-relaxed border-t border-white/20 pt-2">
+        Detailed description goes here.
+      </p>
+    </div>
+  </div>
+
+  <!-- INTERACTIVE CONTACT FORM MODAL -->
+  <div id="contact-modal" class="fixed inset-0 bg-slate-950/80 backdrop-blur-md z-50 hidden flex items-center justify-center p-4">
+    <div class="aqua-glass-panel max-w-lg w-full p-5 space-y-4 relative overflow-hidden border border-white/40 shadow-2xl">
+      <div class="flex items-center justify-between border-b border-white/30 pb-2">
+        <div class="flex items-center gap-2">
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-sky-200" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+          </svg>
+          <h3 class="font-semibold text-white text-base">Get In Touch</h3>
+        </div>
+        <button onclick="closeContactModal()" class="text-sky-200 hover:text-white font-bold text-lg px-2 rounded-lg bg-white/10 hover:bg-white/20 transition-all">✕</button>
+      </div>
+
+      <p class="text-xs text-sky-100/90 leading-relaxed">
+        Have an IT internship opportunity, project inquiry, or technical question? Drop me a direct message!
+      </p>
+
+      <form id="contact-form" onsubmit="handleContactSubmit(event)" class="space-y-3">
+        <div>
+          <label class="block text-[10px] uppercase font-semibold tracking-wider text-sky-200 mb-1">Your Name</label>
+          <input type="text" required placeholder="John Doe" class="w-full px-3 py-2 rounded-xl bg-slate-950/50 border border-white/30 text-xs text-white placeholder-sky-200/50 focus:outline-none focus:border-sky-300 focus:ring-1 focus:ring-sky-300 transition-all" />
+        </div>
+
+        <div>
+          <label class="block text-[10px] uppercase font-semibold tracking-wider text-sky-200 mb-1">Your Email</label>
+          <input type="email" required placeholder="john@example.com" class="w-full px-3 py-2 rounded-xl bg-slate-950/50 border border-white/30 text-xs text-white placeholder-sky-200/50 focus:outline-none focus:border-sky-300 focus:ring-1 focus:ring-sky-300 transition-all" />
+        </div>
+
+        <div>
+          <label class="block text-[10px] uppercase font-semibold tracking-wider text-sky-200 mb-1">Message</label>
+          <textarea rows="3" required placeholder="Hi Erfan, I'd like to discuss..." class="w-full px-3 py-2 rounded-xl bg-slate-950/50 border border-white/30 text-xs text-white placeholder-sky-200/50 focus:outline-none focus:border-sky-300 focus:ring-1 focus:ring-sky-300 transition-all resize-none"></textarea>
+        </div>
+
+        <div class="pt-1 flex items-center justify-between gap-2">
+          <span id="contact-status" class="text-[10px] text-emerald-300 hidden font-medium">✓ Message sent successfully!</span>
+          <button type="submit" class="ml-auto px-4 py-2 rounded-xl bg-gradient-to-r from-sky-500 to-blue-600 hover:from-sky-400 hover:to-blue-500 text-white font-semibold text-xs border border-white/40 shadow-md transition-all flex items-center gap-1.5">
+            <span>Send Message </span>
+          </button>
+        </div>
+      </form>
+    </div>
   </div>
 
   <script>
@@ -542,7 +768,7 @@
         desc: "A cross-platform mobile basketball training app using Flutter and Dart featuring offline relational storage (sqflite) for workout logging and dynamic shooting analytics via fl_chart.",
         img: "icons/hooperbuddy.jpeg",
         tags: ["Flutter", "Dart", "SQLite"],
-        badge: "GitHub & App",
+        badge: "Mobile App",
         badgeColor: "bg-emerald-500/90 text-white border-white/40",
         github: "https://github.com/erfanhkimi/hooper_buddy.git",
         live: "",
@@ -553,7 +779,7 @@
         desc: "An automated video analytics web platform using OpenCV downsampling and K-Means clustering to extract frame-by-frame color palettes, lighting trends, and time-series visual metrics.",
         img: "icons/multi.png",
         tags: ["OpenCV", "Streamlit"],
-        badge: "Live Web & GitHub",
+        badge: "Web System",
         badgeColor: "bg-sky-500/90 text-white border-white/40",
         github: "https://github.com/erfanhkimi/color-telemetry-app.git",
         live: "https://color-telemetry-app.streamlit.app/",
@@ -564,7 +790,7 @@
         desc: "Web-based smart study scheduler designed to help students plan, organize, and track their study schedules efficiently. Generates a personalized study timetable based on user inputs.",
         img: "icons/planora.png",
         tags: ["PHP", "JavaScript", "MySQL"],
-        badge: "Localized Project",
+        badge: "Web System",
         badgeColor: "bg-indigo-500/90 text-white border-white/40",
         github: "https://github.com/erfanhkimi/Planora-Smart-Study-Planner.git",
         live: "",
@@ -580,7 +806,18 @@
         github: "",
         live: "",
         install: ""
-      }
+      },
+      {
+        title: "FELDA HR Exam Management System",
+        desc: "Developed an internal web-based exam management system for FELDA's HR department to streamline the process of creating, scheduling, and evaluating employee exams.",
+        img: "icons/exammgt.png",
+        tags: ["PHP", "HTML","CSS", "MySQL"],
+        badge: "Web System",
+        badgeColor: "bg-slate-500/90 text-white border-white/40",
+        github: "",
+        live: "",
+        install: ""
+      },
     ];
 
     function selectProject(idx, clickedItem) {
@@ -601,21 +838,21 @@
       badgeEl.innerText = p.badge;
       badgeEl.className = `absolute top-2 right-2 text-[8px] px-2 py-0.5 rounded-full font-bold shadow-md border ${p.badgeColor}`;
 
-      // Links update inside selectProject() function
-const linksContainer = document.getElementById('proj-detail-links');
-let linksHTML = '';
+      // Links update
+      const linksContainer = document.getElementById('proj-detail-links');
+      let linksHTML = '';
 
-if (p.github) {
-  linksHTML += `<a href="${p.github}" target="_blank" class="text-xs px-3 py-1.5 rounded-lg bg-slate-900/90 hover:bg-black text-white font-semibold border border-white/30 flex items-center gap-1.5 shadow-md transition-all"><span>📦 GitHub Repo</span></a>`;
-}
-if (p.live) {
-  linksHTML += `<a href="${p.live}" target="_blank" class="text-xs px-3 py-1.5 rounded-lg bg-sky-600/90 hover:bg-sky-500 text-white font-semibold border border-white/30 flex items-center gap-1.5 shadow-md transition-all"><span>🌐 Live Website</span></a>`;
-}
-if (p.install) {
-  linksHTML += `<a href="${p.install}" target="_blank" class="text-xs px-3 py-1.5 rounded-lg bg-emerald-600/90 hover:bg-emerald-500 text-white font-semibold border border-white/30 flex items-center gap-1.5 shadow-md transition-all"><span>⚡ Install App</span></a>`;
-}
+      if (p.github) {
+        linksHTML += `<a href="${p.github}" target="_blank" class="text-xs px-3 py-1.5 rounded-lg bg-slate-900/90 hover:bg-black text-white font-semibold border border-white/30 flex items-center gap-1.5 shadow-md transition-all"><span>📦 GitHub Repo</span></a>`;
+      }
+      if (p.live) {
+        linksHTML += `<a href="${p.live}" target="_blank" class="text-xs px-3 py-1.5 rounded-lg bg-sky-600/90 hover:bg-sky-500 text-white font-semibold border border-white/30 flex items-center gap-1.5 shadow-md transition-all"><span>🌐 Live Website</span></a>`;
+      }
+      if (p.install) {
+        linksHTML += `<a href="${p.install}" target="_blank" class="text-xs px-3 py-1.5 rounded-lg bg-emerald-600/90 hover:bg-emerald-500 text-white font-semibold border border-white/30 flex items-center gap-1.5 shadow-md transition-all"><span>⚡ Install App</span></a>`;
+      }
 
-linksContainer.innerHTML = linksHTML;
+      linksContainer.innerHTML = linksHTML;
 
       // Tags update
       const tagsContainer = document.getElementById('proj-detail-tags');
@@ -657,6 +894,47 @@ linksContainer.innerHTML = linksHTML;
         }
       });
     }
+
+    // Lightbox modal functionality
+    function openLightbox(imgSrc, title, desc) {
+      document.getElementById('lightbox-img').src = imgSrc;
+      document.getElementById('lightbox-title').innerText = title;
+      document.getElementById('lightbox-desc').innerText = desc;
+      document.getElementById('lightbox-modal').classList.remove('hidden');
+    }
+
+    function closeLightbox() {
+      document.getElementById('lightbox-modal').classList.add('hidden');
+    }
+
+    // Contact modal functionality
+    function openContactModal() {
+      document.getElementById('contact-modal').classList.remove('hidden');
+    }
+
+    function closeContactModal() {
+      document.getElementById('contact-modal').classList.add('hidden');
+    }
+
+    function handleContactSubmit(e) {
+      e.preventDefault();
+      const status = document.getElementById('contact-status');
+      status.classList.remove('hidden');
+      setTimeout(() => {
+        status.classList.add('hidden');
+        e.target.reset();
+        closeContactModal();
+      }, 1800);
+    }
+
+    // Close modals on clicking backdrop
+    document.getElementById('lightbox-modal').addEventListener('click', function(e) {
+      if (e.target === this) closeLightbox();
+    });
+
+    document.getElementById('contact-modal').addEventListener('click', function(e) {
+      if (e.target === this) closeContactModal();
+    });
 
     // Initialize default project view
     selectProject(0, document.querySelector('.proj-menu-item'));
