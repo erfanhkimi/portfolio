@@ -274,41 +274,104 @@
       <!-- RIGHT EXPANDED MAIN DISPLAY (SPAN 9) -->
       <main class="lg:col-span-9 aqua-glass-panel p-4 sm:p-5 flex flex-col justify-between min-h-[450px] lg:h-full lg:overflow-hidden min-h-0">
 
-        <!-- TAB 1: HOME -->
-        <div id="tab-home" class="tab-pane flex flex-col justify-between h-full space-y-2.5 min-h-0">
-          <div class="space-y-1.5 shrink-0">
-            <div class="border-b border-white/40 pb-1">
-              <span class="text-[10px] aero-heading-light text-sky-200 uppercase tracking-wide">Overview // Personal Index</span>
-              <h2 class="aero-heading-light text-xl sm:text-2xl text-white mt-0.5 drop-shadow">
-                Introduction
+        <!-- TAB 1: HOME & BIO (UPDATED WITH DIVERSE INTERESTS, LARGER FONTS & SMALLER IMAGES) -->
+        <div id="tab-home" class="tab-pane flex flex-col h-full space-y-4 overflow-y-auto pr-1 min-h-0">
+          
+          <!-- Introduction Header & Expanded Bio -->
+          <div class="space-y-2 shrink-0">
+            <div class="border-b border-white/40 pb-1.5">
+              <span class="text-xs aero-heading-light text-sky-200 uppercase tracking-wider font-medium">Overview // Personal Index</span>
+              <h2 class="aero-heading-light text-2xl sm:text-3xl text-white mt-0.5 drop-shadow">
+                About Me
               </h2>
             </div>
 
-            <p class="text-[11px] sm:text-xs leading-relaxed text-sky-100/95 drop-shadow font-normal">
-              Computer Science (Multimedia Computing) student from Shah Alam with hands-on experience in full-stack web development, Python automation, data analytics, and Unity C# game development. Experienced in building internal HR systems and technical support at FELDA. MBOT Certified Data Analyst seeking software engineering, data analytics or any IT internship opportunities.
+            <p class="text-sm sm:text-base leading-relaxed text-sky-50 drop-shadow font-normal">
+              Computer Science (Multimedia Computing) student from Shah Alam with hands-on experience in full-stack web development, Python automation, data analytics, and Unity C# game development. Experienced in building internal HR systems and providing technical IT support at FELDA. MBOT Certified Data Analyst actively seeking software engineering, data analytics, or IT internship opportunities.
             </p>
           </div>
 
-          <!-- DUAL IMAGE GRID SHOWCASE -->
-          <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5 flex-1 overflow-hidden min-h-0">
-            <!-- Image 1 -->
-            <div class="aqua-card-inner p-1.5 flex flex-col justify-between overflow-hidden relative group h-full min-h-0">
-              <img 
-                src="icons/profile1.jpeg" 
-                alt="Profile Image 1" 
-                class="w-full h-full object-cover rounded-lg border border-white/40 shadow-md transition-transform duration-300 group-hover:scale-[1.01]"
-              />
+          <!-- DIVERSE INTERESTS & CORE FOCUS GRID -->
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-3 shrink-0">
+            
+            <!-- Personal Interests & Hobbies Card -->
+            <div class="aqua-card-inner p-3.5 space-y-2">
+              <div class="flex items-center gap-2 border-b border-white/20 pb-1.5">
+                <span class="text-base"></span>
+                <h3 class="text-sm sm:text-base font-semibold text-white">Interests & Hobbies</h3>
+              </div>
+              <ul class="text-xs sm:text-sm text-sky-100 space-y-2 leading-relaxed">
+                <li class="flex items-start gap-2">
+                  <span class="text-sky-300 font-bold">•</span>
+                  <span><strong>Basketball & Sports Analytics:</strong> Interested in tracking performance telemetry, shooting analytics and sports metrics.</span>
+                </li>
+                <li class="flex items-start gap-2">
+                  <span class="text-sky-300 font-bold">•</span>
+                  <span><strong>Game Design & Interactive 3D:</strong> Passionate about developing gameplay mechanics and 3D scenes using Unity and C#.</span>
+                </li>
+                <li class="flex items-start gap-2">
+                  <span class="text-sky-300 font-bold">•</span>
+                  <span><strong>Browser Extension Dev:</strong> Building minimalist Manifest V3 productivity tools like local bookmarkers and storage purgers.</span>
+                </li>
+                <li class="flex items-start gap-2">
+                  <span class="text-sky-300 font-bold">•</span>
+                  <span><strong>UI/UX & Retro Aesthetics:</strong> Experimenting with glassmorphism, Frutiger Aero design and modern dark-mode interfaces.</span>
+                </li>
+              </ul>
             </div>
 
-            <!-- Image 2 -->
-            <div class="aqua-card-inner p-1.5 flex flex-col justify-between overflow-hidden relative group h-full min-h-0">
-              <img 
-                src="icons/profile3.jpeg" 
-                alt="Workspace Image 2" 
-                class="w-full h-full object-cover rounded-lg border border-white/40 shadow-md transition-transform duration-300 group-hover:scale-[1.01]"
-              />
+            <!-- Key Strengths & Core Values Card -->
+            <div class="aqua-card-inner p-3.5 space-y-2">
+              <div class="flex items-center gap-2 border-b border-white/20 pb-1.5">
+                <span class="text-base"></span>
+                <h3 class="text-sm sm:text-base font-semibold text-white">Core Focus & Strengths</h3>
+              </div>
+              <ul class="text-xs sm:text-sm text-sky-100 space-y-2 leading-relaxed">
+                <li class="flex items-start gap-2">
+                  <span class="text-sky-300 font-bold">•</span>
+                  <span><strong>Rapid Skill Adaptation:</strong> Flexible developer capable of picking up new frameworks, APIs, and stacks quickly.</span>
+                </li>
+                <li class="flex items-start gap-2">
+                  <span class="text-sky-300 font-bold">•</span>
+                  <span><strong>Data-Driven Problem Solving:</strong>  Experienced using SQL, Python and analytics tools to clean datasets and determine decision making.</span>
+                </li>
+                <li class="flex items-start gap-2">
+                  <span class="text-sky-300 font-bold">•</span>
+                  <span><strong>End-to-End Prototyping:</strong> Ability to build solutions from initial concept to deployment across web, mobile, and desktop.</span>
+                </li>
+                <li class="flex items-start gap-2">
+                  <span class="text-sky-300 font-bold">•</span>
+                  <span><strong>Technical Communication:</strong> Proven experience leading team project presentations and documenting system workflows.</span>
+                </li>
+              </ul>
+            </div>
+
+          </div>
+
+          <!-- COMPACT SCALED-DOWN PROFILE IMAGE SHOWCASE -->
+          <div class="space-y-1.5 shrink-0 pt-1">
+            <h3 class="text-xs sm:text-sm font-semibold text-sky-200 uppercase tracking-wider">Photo Showcase</h3>
+            <div class="grid grid-cols-2 gap-3 max-w-xl">
+              <!-- Image 1 -->
+              <div class="aqua-card-inner p-1.5 overflow-hidden rounded-xl h-36 sm:h-44 border border-white/40 shadow-md">
+                <img 
+                  src="icons/profile1.jpeg" 
+                  alt="Profile Image 1" 
+                  class="w-full h-full object-cover rounded-lg transition-transform duration-300 hover:scale-[1.03]"
+                />
+              </div>
+
+              <!-- Image 2 -->
+              <div class="aqua-card-inner p-1.5 overflow-hidden rounded-xl h-36 sm:h-44 border border-white/40 shadow-md">
+                <img 
+                  src="icons/profile3.jpeg" 
+                  alt="Workspace Image 2" 
+                  class="w-full h-full object-cover rounded-lg transition-transform duration-300 hover:scale-[1.03]"
+                />
+              </div>
             </div>
           </div>
+
         </div>
 
         <!-- TAB 2: WORKING EXPERIENCE -->
