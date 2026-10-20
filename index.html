@@ -86,35 +86,41 @@
       z-index: 1;
     }
 
-    /* Navigation Items */
+    /* Navigation Items with Smooth Hover Dynamics */
     .aqua-nav-btn {
       display: flex;
       align-items: center;
       gap: 12px;
-      padding: 8px 12px;
+      padding: 9px 13px;
       border-radius: 12px;
       font-size: 13.5px;
       font-weight: 400;
       color: #ffffff;
       text-shadow: 0 1px 2px rgba(0, 20, 60, 0.8);
-      transition: all 0.2s cubic-bezier(0.1, 0.9, 0.2, 1);
+      transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), 
+                  background 0.3s cubic-bezier(0.16, 1, 0.3, 1), 
+                  border-color 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+                  box-shadow 0.3s cubic-bezier(0.16, 1, 0.3, 1);
       cursor: pointer;
       border: 1px solid transparent;
+      white-space: nowrap;
     }
 
     .aqua-nav-btn:hover {
-      background: linear-gradient(180deg, rgba(255, 255, 255, 0.45) 0%, rgba(180, 230, 255, 0.22) 100%);
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.45) 0%, rgba(180, 230, 255, 0.25) 100%);
       border-color: rgba(255, 255, 255, 0.85);
-      box-shadow: inset 0 1px 0 #fff, 0 4px 12px rgba(0, 120, 220, 0.4);
+      transform: translateX(5px);
+      box-shadow: inset 0 1px 0 #fff, 0 6px 18px rgba(0, 140, 255, 0.45);
     }
 
     .aqua-nav-btn.active {
-      background: linear-gradient(180deg, rgba(255, 255, 255, 0.85) 0%, rgba(120, 210, 255, 0.5) 100%);
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.9) 0%, rgba(120, 210, 255, 0.6) 100%);
       border-color: #ffffff;
       color: #002244;
       font-weight: 600;
       text-shadow: 0 1px 0 rgba(255, 255, 255, 0.8);
-      box-shadow: inset 0 1px 0 #fff, 0 6px 16px rgba(0, 150, 255, 0.6);
+      transform: translateX(4px);
+      box-shadow: inset 0 1px 0 #fff, 0 6px 20px rgba(0, 150, 255, 0.65);
     }
 
     /* Inner Glass Cards */
@@ -127,7 +133,7 @@
     }
   </style>
 </head>
-<body class="min-h-screen overflow-y-auto lg:h-screen lg:overflow-hidden p-3 sm:p-5 relative flex flex-col justify-between">
+<body class="min-h-screen overflow-y-auto lg:h-screen lg:overflow-hidden p-2 sm:p-3 lg:p-3.5 relative flex flex-col justify-between">
 
   <!-- LOOPING BACKGROUND VIDEO -->
   <video autoplay loop muted playsinline class="fixed inset-0 w-full h-full object-cover -z-20">
@@ -137,10 +143,11 @@
   <!-- Glass Tint Overlay -->
   <div class="fixed inset-0 bg-sky-950/15 pointer-events-none -z-10"></div>
 
-  <div class="max-w-6xl mx-auto w-full min-h-full lg:h-full flex flex-col justify-between gap-3 z-10 relative min-h-0">
+  <!-- FULL SCREEN CONTAINER WRAPPER -->
+  <div class="max-w-[98%] xl:max-w-[1550px] mx-auto w-full min-h-full lg:h-full flex flex-col justify-between gap-2.5 z-10 relative min-h-0">
 
     <!-- HEADER TITLE -->
-    <header class="text-center space-y-0.5 shrink-0 py-1 lg:py-0">
+    <header class="text-center space-y-0.5 shrink-0 py-0.5 lg:py-0">
       <h1 class="aero-heading-light text-2xl sm:text-4xl lg:text-4xl text-white drop-shadow-[0_2px_10px_rgba(0,30,80,0.8)]">
         MUHAMMAD ERFAN HAKIMI BIN MOHD EZUWAN 
       </h1>
@@ -150,104 +157,122 @@
     </header>
 
     <!-- MAIN INTERACTIVE SPLIT CONTAINER -->
-    <div class="flex-1 grid grid-cols-1 lg:grid-cols-12 gap-4 items-stretch lg:overflow-hidden min-h-0">
+    <div class="flex-1 grid grid-cols-1 lg:grid-cols-12 gap-3.5 items-stretch lg:overflow-hidden min-h-0">
       
-      <!-- LEFT GLASS SIDEBAR MENU -->
-      <aside class="lg:col-span-4 aqua-glass-panel p-3.5 flex flex-col justify-between h-auto lg:h-full gap-3 min-h-0">
-        <div class="space-y-2">
-          <div class="text-xs font-semibold text-sky-100 uppercase tracking-wider px-2 pb-1.5 border-b border-white/40 flex items-center justify-between">
-            <span>Navigation</span>
-            <span class="text-[10px] text-sky-200">[System Menu]</span>
-          </div>
-
-          <nav class="space-y-1">
-            <div onclick="openTab('home', this)" class="aqua-nav-btn active">
-              <img src="icons/home.png" class="w-6 h-6 drop-shadow-md" />
-              <span>Home & Bio</span>
+      <!-- LEFT GLASS SIDEBAR MENU (WITH MOBILE DROPDOWN COMPACT VIEW) -->
+      <aside class="lg:col-span-3 aqua-glass-panel p-2.5 lg:p-3.5 flex flex-col justify-between h-auto lg:h-full gap-2.5 lg:gap-3 min-h-0 shrink-0">
+        
+        <!-- MOBILE NAVIGATION DROPDOWN BUTTON (VISIBLE ONLY BELOW LG) -->
+        <div class="lg:hidden flex items-center justify-between">
+          <button onclick="toggleMobileMenu()" class="w-full aqua-card-inner p-2.5 flex items-center justify-between text-xs font-semibold text-white shadow-md active:scale-[0.99] transition-transform">
+            <div class="flex items-center gap-2.5">
+              <img id="mobile-current-icon" src="icons/home.png" class="w-5 h-5 drop-shadow-md" />
+              <span id="mobile-current-title" class="text-sky-100 font-semibold">Home & Bio</span>
             </div>
-
-            <div onclick="openTab('experience', this)" class="aqua-nav-btn">
-              <img src="icons/experience.png" class="w-6 h-6 drop-shadow-md" />
-              <span>Working Experience</span>
+            <div class="flex items-center gap-1.5 text-sky-200 text-[10px]">
+              <span class="uppercase tracking-wider">Menu</span>
+              <span id="mobile-dropdown-arrow" class="transition-transform duration-300 inline-block">▼</span>
             </div>
-
-            <div onclick="openTab('projects', this)" class="aqua-nav-btn">
-              <img src="icons/project.png" class="w-6 h-6 drop-shadow-md" />
-              <span>Projects</span>
-            </div>
-
-            <div onclick="openTab('education', this)" class="aqua-nav-btn">
-              <img src="icons/education.png" class="w-6 h-6 drop-shadow-md" />
-              <span>Education</span>
-            </div>
-
-            <div onclick="openTab('skills', this)" class="aqua-nav-btn">
-              <img src="icons/skill.png" class="w-6 h-6 drop-shadow-md" />
-              <span>Capabilities</span>
-            </div>
-
-            <div onclick="openTab('certs', this)" class="aqua-nav-btn">
-              <img src="icons/credinal.png" class="w-6 h-6 drop-shadow-md" />
-              <span>Credentials</span>
-            </div>
-
-            <div onclick="openTab('gallery', this)" class="aqua-nav-btn">
-              <img src="icons/gallery.png" class="w-6 h-6 drop-shadow-md" />
-              <span>Activity Gallery</span>
-            </div>
-
-            <!-- CONTACT ME BUTTON -->
-            <div onclick="openContactModal()" class="aqua-nav-btn cursor-pointer">
-              <img src="icons/contact.png" class="w-6 h-6 drop-shadow-md" />
-              <span>Contact Me</span>
-            </div>
-
-            <!-- VIEW RESUME NAV BUTTON -->
-            <a href="resume.pdf" target="_blank" class="aqua-nav-btn !bg-gradient-to-r !from-sky-500/40 !to-blue-600/40 border-sky-200/60 hover:!from-sky-400/60 hover:!to-blue-500/60 mt-2 font-semibold shadow-[0_0_12px_rgba(0,180,255,0.3)]">
-              <img src="icons/resume.png" class="w-6 h-6 drop-shadow-md" />
-              <span>View Resume (PDF)</span>
-            </a>
-          </nav>
+          </button>
         </div>
 
-        <!-- SIDEBAR FOOTER: SLOGAN, SOCIAL LINKS & TRADEMARK -->
-        <div class="pt-2.5 border-t border-white/40 space-y-2 shrink-0">
-          <div class="text-center space-y-0.5">
-            <p class="text-[11px] font-semibold text-white drop-shadow flex items-center justify-center gap-1">
-              <span>Let's Build Something Great Together</span>
-            </p>
-            <p class="text-[9.5px] text-sky-200/90 font-normal">
-              Open for IT Internship Opportunities
-            </p>
+        <!-- COLLAPSIBLE NAV MENU CONTAINER (HIDDEN ON MOBILE BY DEFAULT, FLEX ON LG) -->
+        <div id="nav-menu-container" class="hidden lg:flex flex-col justify-between flex-1 gap-3 space-y-2 lg:space-y-0 pt-2 lg:pt-0">
+          <div class="space-y-2">
+            <div class="text-xs font-semibold text-sky-100 uppercase tracking-wider px-2 pb-1.5 border-b border-white/40 flex items-center justify-between">
+              <span>Navigation</span>
+              <span class="text-[10px] text-sky-200">[System Menu]</span>
+            </div>
+
+            <nav class="space-y-1">
+              <div onclick="openTab('home', this)" class="aqua-nav-btn active" data-title="Home & Bio" data-icon="icons/home.png">
+                <img src="icons/home.png" class="w-6 h-6 drop-shadow-md" />
+                <span>Home & Bio</span>
+              </div>
+
+              <div onclick="openTab('experience', this)" class="aqua-nav-btn" data-title="Working Experience" data-icon="icons/experience.png">
+                <img src="icons/experience.png" class="w-6 h-6 drop-shadow-md" />
+                <span>Working Experience</span>
+              </div>
+
+              <div onclick="openTab('projects', this)" class="aqua-nav-btn" data-title="Projects" data-icon="icons/project.png">
+                <img src="icons/project.png" class="w-6 h-6 drop-shadow-md" />
+                <span>Projects</span>
+              </div>
+
+              <div onclick="openTab('education', this)" class="aqua-nav-btn" data-title="Education" data-icon="icons/education.png">
+                <img src="icons/education.png" class="w-6 h-6 drop-shadow-md" />
+                <span>Education</span>
+              </div>
+
+              <div onclick="openTab('skills', this)" class="aqua-nav-btn" data-title="Capabilities" data-icon="icons/skill.png">
+                <img src="icons/skill.png" class="w-6 h-6 drop-shadow-md" />
+                <span>Capabilities</span>
+              </div>
+
+              <div onclick="openTab('certs', this)" class="aqua-nav-btn" data-title="Credentials" data-icon="icons/credinal.png">
+                <img src="icons/credinal.png" class="w-6 h-6 drop-shadow-md" />
+                <span>Credentials</span>
+              </div>
+
+              <div onclick="openTab('gallery', this)" class="aqua-nav-btn" data-title="Activity Gallery" data-icon="icons/gallery.png">
+                <img src="icons/gallery.png" class="w-6 h-6 drop-shadow-md" />
+                <span>Activity Gallery</span>
+              </div>
+
+              <!-- CONTACT ME BUTTON -->
+              <div onclick="openContactModal()" class="aqua-nav-btn cursor-pointer">
+                <img src="icons/contact.png" class="w-6 h-6 drop-shadow-md" />
+                <span>Contact Me</span>
+              </div>
+
+              <!-- VIEW RESUME NAV BUTTON -->
+              <a href="resume.pdf" target="_blank" class="aqua-nav-btn !bg-gradient-to-r !from-sky-500/40 !to-blue-600/40 border-sky-200/60 hover:!from-sky-400/60 hover:!to-blue-500/60 mt-2 font-semibold shadow-[0_0_12px_rgba(0,180,255,0.3)]">
+                <img src="icons/resume.png" class="w-6 h-6 drop-shadow-md" />
+                <span>View Resume (PDF)</span>
+              </a>
+            </nav>
           </div>
 
-          <!-- Social Link Buttons -->
-          <div class="flex gap-1.5">
-            <a href="https://www.linkedin.com/in/erfanhakimi/" target="_blank" class="flex-1 py-1.5 px-2 rounded-xl bg-white/80 hover:bg-white text-slate-900 font-semibold text-[11px] shadow-md transition-all flex items-center justify-center gap-1">
-              <img src="https://img.icons8.com/color/48/linkedin.png" class="w-3.5 h-3.5" />
-              <span>LinkedIn</span>
-            </a>
-            <a href="https://github.com/erfanhkimi" target="_blank" class="flex-1 py-1.5 px-2 rounded-xl bg-white/80 hover:bg-white text-slate-900 font-semibold text-[11px] shadow-md transition-all flex items-center justify-center gap-1">
-              <img src="icons/github.png" class="w-3.5 h-3.5" />
-              <span>GitHub</span>
-            </a>
-            <a href="mailto:erfanhakimi04@gmail.com" class="flex-1 py-1.5 px-2 rounded-xl bg-white/80 hover:bg-white text-slate-900 font-semibold text-[11px] shadow-md transition-all flex items-center justify-center gap-1">
-              <img src="icons/gmail.webp" class="w-3.5 h-3.5" />
-              <span>Gmail</span>
-            </a>
-          </div>
+          <!-- SIDEBAR FOOTER: SLOGAN, SOCIAL LINKS & TRADEMARK -->
+          <div class="pt-2.5 border-t border-white/40 space-y-2 shrink-0">
+            <div class="text-center space-y-0.5">
+              <p class="text-[11px] font-semibold text-white drop-shadow flex items-center justify-center gap-1">
+                <span>Let's Build Something Great Together</span>
+              </p>
+              <p class="text-[9.5px] text-sky-200/90 font-normal">
+                Open for IT Internship Opportunities
+              </p>
+            </div>
 
-          <!-- Trademark & Copyright Line -->
-          <div class="text-center pt-1 border-t border-white/10">
-            <p class="text-[8.5px] text-sky-200/70 tracking-widest uppercase font-medium">
-              © 2026 Erfan Hakimi ™ · All Rights Reserved
-            </p>
+            <!-- Social Link Buttons -->
+            <div class="flex gap-1.5">
+              <a href="https://www.linkedin.com/in/erfanhakimi/" target="_blank" class="flex-1 py-1.5 px-2 rounded-xl bg-white/80 hover:bg-white text-slate-900 font-semibold text-[11px] shadow-md transition-all flex items-center justify-center gap-1">
+                <img src="https://img.icons8.com/color/48/linkedin.png" class="w-3.5 h-3.5" />
+                <span>LinkedIn</span>
+              </a>
+              <a href="https://github.com/erfanhkimi" target="_blank" class="flex-1 py-1.5 px-2 rounded-xl bg-white/80 hover:bg-white text-slate-900 font-semibold text-[11px] shadow-md transition-all flex items-center justify-center gap-1">
+                <img src="icons/github.png" class="w-3.5 h-3.5" />
+                <span>GitHub</span>
+              </a>
+              <a href="mailto:erfanhakimi04@gmail.com" class="flex-1 py-1.5 px-2 rounded-xl bg-white/80 hover:bg-white text-slate-900 font-semibold text-[11px] shadow-md transition-all flex items-center justify-center gap-1">
+                <img src="icons/gmail.webp" class="w-3.5 h-3.5" />
+                <span>Gmail</span>
+              </a>
+            </div>
+
+            <!-- Trademark & Copyright Line -->
+            <div class="text-center pt-1 border-t border-white/10">
+              <p class="text-[8.5px] text-sky-200/70 tracking-widest uppercase font-medium">
+                © 2026 Erfan Hakimi ™ · All Rights Reserved
+              </p>
+            </div>
           </div>
         </div>
       </aside>
 
-      <!-- RIGHT DYNAMIC CONTENT DISPLAY -->
-      <main class="lg:col-span-8 aqua-glass-panel p-4 sm:p-5 flex flex-col justify-between min-h-[450px] lg:h-full lg:overflow-hidden min-h-0">
+      <!-- RIGHT EXPANDED MAIN DISPLAY (SPAN 9) -->
+      <main class="lg:col-span-9 aqua-glass-panel p-4 sm:p-5 flex flex-col justify-between min-h-[450px] lg:h-full lg:overflow-hidden min-h-0">
 
         <!-- TAB 1: HOME -->
         <div id="tab-home" class="tab-pane flex flex-col justify-between h-full space-y-2.5 min-h-0">
@@ -313,7 +338,7 @@
           </div>
         </div>
 
-        <!-- TAB 3: PROJECTS -->
+        <!-- TAB 3: PROJECTS (SCROLLABLE SHOWCASE BOX WITH BIGGER PREVIEW) -->
         <div id="tab-projects" class="tab-pane hidden flex flex-col justify-between h-full space-y-2.5 min-h-0">
           <div class="border-b border-white/40 pb-1 shrink-0">
             <span class="text-[10px] aero-heading-light text-sky-200 uppercase tracking-wide">Projects // Interactive Showcase</span>
@@ -322,10 +347,10 @@
             </h2>
           </div>
 
-          <div class="grid grid-cols-1 sm:grid-cols-12 gap-2.5 flex-1 overflow-hidden items-stretch min-h-0">
+          <div class="grid grid-cols-1 sm:grid-cols-12 gap-3 flex-1 overflow-hidden items-stretch min-h-0">
             
             <!-- Left Side Selector Menu Box -->
-            <div class="sm:col-span-4 aqua-card-inner p-2.5 flex flex-col h-full overflow-hidden min-h-0 bg-slate-950/40 border border-white/30 rounded-xl shadow-inner">
+            <div class="sm:col-span-4 lg:col-span-3 aqua-card-inner p-2.5 flex flex-col h-full overflow-hidden min-h-0 bg-slate-950/40 border border-white/30 rounded-xl shadow-inner">
               <div class="text-[10px] font-semibold text-sky-200 uppercase tracking-wider pb-1.5 mb-2 border-b border-white/20 flex items-center justify-between shrink-0">
                 <span>Project List</span>
                 <span class="text-[9px] text-sky-300/80">Scroll ↕</span>
@@ -385,29 +410,29 @@
               </div>
             </div>
 
-            <!-- Right Side Showcase Box -->
-            <div class="sm:col-span-8 aqua-card-inner p-3.5 flex flex-col justify-between h-full overflow-hidden min-h-0">
-              <div class="space-y-2 flex-1 flex flex-col min-h-0 overflow-hidden">
+            <!-- Right Side Showcase Box (SCROLLABLE CONTAINER WITH BIG PREVIEW) -->
+            <div class="sm:col-span-8 lg:col-span-9 aqua-card-inner p-3.5 flex flex-col justify-between h-full overflow-y-auto min-h-0 pr-2">
+              <div class="space-y-3 flex-1 flex flex-col">
                 
-                <!-- Showcase Image Frame -->
-                <div class="w-full h-36 sm:h-44 rounded-lg border border-white/40 shadow-md shrink-0 overflow-hidden bg-slate-950/60 relative p-1 flex items-center justify-center">
+                <!-- ENLARGED Showcase Image Frame -->
+                <div class="w-full h-56 sm:h-72 lg:h-[310px] rounded-lg border border-white/40 shadow-xl shrink-0 overflow-hidden bg-slate-950/70 relative p-2 flex items-center justify-center">
                   <img 
                     id="proj-detail-img" 
                     src="icons/datavid.png" 
                     alt="Project Preview" 
                     class="w-full h-full object-contain object-center rounded transition-all duration-300" 
                   />
-                  <span id="proj-detail-badge" class="absolute top-2 right-2 text-[8px] px-2 py-0.5 rounded-full font-bold shadow-lg text-white border border-amber-300 bg-gradient-to-r from-amber-500 to-orange-500 animate-pulse shadow-[0_0_12px_rgba(245,158,11,0.9)]">
+                  <span id="proj-detail-badge" class="absolute top-3 right-3 text-[9px] px-2.5 py-1 rounded-full font-bold shadow-lg text-white border border-amber-300 bg-gradient-to-r from-amber-500 to-orange-500 animate-pulse shadow-[0_0_12px_rgba(245,158,11,0.9)]">
                     🚧 In Progress
                   </span>
                 </div>
 
                 <div class="flex items-center justify-between shrink-0 pt-0.5">
-                  <h3 id="proj-detail-title" class="font-semibold text-white text-xs sm:text-sm">Data Visualization Educational Game</h3>
+                  <h3 id="proj-detail-title" class="font-semibold text-white text-sm sm:text-base">Data Visualization Educational Game</h3>
                 </div>
 
                 <!-- Scrollable Description Box -->
-                <div class="aqua-card-inner p-3 flex-1 overflow-y-auto min-h-[90px] border border-white/30 bg-slate-950/40 rounded-xl shadow-inner">
+                <div class="aqua-card-inner p-3 border border-white/30 bg-slate-950/40 rounded-xl shadow-inner">
                   <p id="proj-detail-desc" class="text-[11.5px] sm:text-xs text-sky-100 leading-relaxed">
                     An interactive 3D open-world educational game implementing C# scripting to teach data visualization principles.
                   </p>
@@ -415,7 +440,7 @@
               </div>
 
               <!-- Footer with Links and Tech Tags -->
-              <div class="pt-2 border-t border-white/20 shrink-0 space-y-1.5 mt-2">
+              <div class="pt-2.5 border-t border-white/20 shrink-0 space-y-1.5 mt-3">
                 <div id="proj-detail-links" class="flex flex-wrap gap-1.5">
                   <!-- Populated dynamically via JS -->
                 </div>
@@ -465,7 +490,7 @@
                 </h2>
               </div>
 
-              <div class="grid grid-cols-2 sm:grid-cols-3 gap-2 text-xs">
+              <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-2 text-xs">
                 <div class="aqua-card-inner p-2">
                   <div class="font-semibold text-white text-xs">Dart</div>
                   <div class="text-[9px] text-sky-200 mt-0.5">Mobile & Flutter</div>
@@ -501,7 +526,7 @@
                 </h2>
               </div>
 
-              <div class="grid grid-cols-2 sm:grid-cols-3 gap-2 text-xs">
+              <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-2 text-xs">
                 <div class="aqua-card-inner p-2">
                   <div class="font-semibold text-white text-xs">Flutter</div>
                   <div class="text-[9px] text-sky-200 mt-0.5">Cross-Platform UI</div>
@@ -616,7 +641,7 @@
 
           <!-- DEDICATED SCROLLABLE WRAPPER FOR PHOTO & VIDEO GRID -->
           <div class="flex-1 overflow-y-auto pr-1 min-h-0">
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2.5 pb-2">
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-2.5 pb-2">
               
               <!-- Gallery Item: Selective Storage Purger Demo Video -->
               <div onclick="openLightbox('purger.mp4', 'Selective LocalStorage Purger Demo', 'Demonstration of key filtering, wildcard searching, and surgical localStorage wiping in Chrome Manifest V3.', true)" class="aqua-card-inner p-2 flex flex-col justify-between cursor-pointer hover:border-sky-300 transition-all group">
@@ -789,12 +814,46 @@
   </div>
 
   <script>
+    // Tab open function updated to dynamically sync mobile dropdown button header & auto-collapse
     function openTab(tabId, clickedBtn) {
       document.querySelectorAll('.aqua-nav-btn').forEach(btn => btn.classList.remove('active'));
       clickedBtn.classList.add('active');
 
       document.querySelectorAll('.tab-pane').forEach(pane => pane.classList.add('hidden'));
       document.getElementById('tab-' + tabId).classList.remove('hidden');
+
+      // Update mobile header selection indicator
+      const title = clickedBtn.getAttribute('data-title');
+      const icon = clickedBtn.getAttribute('data-icon');
+      if (title && icon) {
+        document.getElementById('mobile-current-title').innerText = title;
+        document.getElementById('mobile-current-icon').src = icon;
+      }
+
+      // Auto-collapse mobile nav menu after selection if open on mobile screens
+      if (window.innerWidth < 1024) {
+        const menu = document.getElementById('nav-menu-container');
+        const arrow = document.getElementById('mobile-dropdown-arrow');
+        menu.classList.add('hidden');
+        menu.classList.remove('flex');
+        arrow.style.transform = 'rotate(0deg)';
+      }
+    }
+
+    // Toggle mobile navigation menu visibility
+    function toggleMobileMenu() {
+      const menu = document.getElementById('nav-menu-container');
+      const arrow = document.getElementById('mobile-dropdown-arrow');
+
+      if (menu.classList.contains('hidden')) {
+        menu.classList.remove('hidden');
+        menu.classList.add('flex');
+        arrow.style.transform = 'rotate(180deg)';
+      } else {
+        menu.classList.add('hidden');
+        menu.classList.remove('flex');
+        arrow.style.transform = 'rotate(0deg)';
+      }
     }
 
     // Projects Array ordered with Selective Storage Purger and VibeVault directly under Data Viz Game
@@ -905,7 +964,7 @@
       // Status Badge Update
       const badgeEl = document.getElementById('proj-detail-badge');
       badgeEl.innerText = p.badge;
-      badgeEl.className = `absolute top-2 right-2 text-[8px] px-2 py-0.5 rounded-full font-bold shadow-md border ${p.badgeColor}`;
+      badgeEl.className = `absolute top-3 right-3 text-[9px] px-2.5 py-1 rounded-full font-bold shadow-md border ${p.badgeColor}`;
 
       // Links update
       const linksContainer = document.getElementById('proj-detail-links');
@@ -996,6 +1055,9 @@
     // Contact modal functionality
     function openContactModal() {
       document.getElementById('contact-modal').classList.remove('hidden');
+      if (window.innerWidth < 1024) {
+        toggleMobileMenu();
+      }
     }
 
     function closeContactModal() {
