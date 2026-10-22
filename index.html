@@ -47,6 +47,8 @@
       text-shadow: 0 2px 4px rgba(0, 10, 35, 0.95), 0 0 12px rgba(0, 100, 200, 0.5);
     }
 
+    
+
     /* Frutiger Aero / Aqua Headings Light Weight */
     .aero-heading-light {
       font-family: 'Segoe UI Light', 'Segoe UI', Verdana, sans-serif;
@@ -85,6 +87,32 @@
       pointer-events: none;
       z-index: 1;
     }
+
+    /* Project type filter chips */
+    .filter-chip {
+      font-size: 10px; line-height: 1; padding: 5px 10px; border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, 0.35); background: rgba(255, 255, 255, 0.08);
+      color: #ffffff; cursor: pointer; white-space: nowrap;
+      transition: background 0.25s ease, border-color 0.25s ease, transform 0.25s ease;
+    }
+    .filter-chip:hover { background: rgba(255, 255, 255, 0.22); border-color: rgba(255, 255, 255, 0.8); }
+    .filter-chip.active {
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.9) 0%, rgba(120, 210, 255, 0.6) 100%);
+      border-color: #ffffff; color: #002244; font-weight: 600; text-shadow: none;
+    }
+
+    /* Welcome message shown on the first click */
+    #welcome-toast {
+      position: fixed; left: 50%; bottom: 28px; z-index: 60;
+      width: min(92vw, 27rem);
+      transform: translate(-50%, 24px); opacity: 0; pointer-events: none;
+      transition: opacity 0.5s ease, transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    #welcome-toast.show { opacity: 1; transform: translate(-50%, 0); pointer-events: auto; cursor: pointer; }
+    @media (prefers-reduced-motion: reduce) { #welcome-toast { transition: opacity 0.2s ease; } }
+
+    /* Content box stays hidden until a nav item is clicked */
+    .panel-closed { display: none !important; }
 
     /* Navigation Items with Smooth Hover Dynamics */
     .aqua-nav-btn {
@@ -160,7 +188,7 @@
         MUHAMMAD ERFAN HAKIMI BIN MOHD EZUWAN 
       </h1>
       <p class="text-[10px] sm:text-xs font-normal tracking-widest text-sky-100 uppercase drop-shadow">
-        Bachelor of Computer Science (Hons) Multimedia Student
+        Bachelor of Computer Science (Hons) Multimedia Computing Student
       </p>
     </header>
 
@@ -175,7 +203,7 @@
           <button onclick="toggleMobileMenu()" class="w-full aqua-card-inner p-2.5 flex items-center justify-between text-xs font-semibold text-white shadow-md active:scale-[0.99] transition-transform">
             <div class="flex items-center gap-2.5">
               <img id="mobile-current-icon" src="icons/home.png" class="w-5 h-5 drop-shadow-md" />
-              <span id="mobile-current-title" class="text-sky-100 font-semibold">Home & Bio</span>
+              <span id="mobile-current-title" class="text-sky-100 font-semibold">Select a section</span>
             </div>
             <div class="flex items-center gap-1.5 text-sky-200 text-[10px]">
               <span class="uppercase tracking-wider">Menu</span>
@@ -193,7 +221,7 @@
             </div>
 
             <nav class="space-y-1">
-              <div onclick="openTab('home', this)" class="aqua-nav-btn active" data-title="Home & Bio" data-icon="icons/home.png">
+              <div onclick="openTab('home', this)" class="aqua-nav-btn" data-title="Home & Bio" data-icon="icons/home.png">
                 <img src="icons/home.png" class="w-6 h-6 drop-shadow-md" />
                 <span>Home & Bio</span>
               </div>
@@ -280,7 +308,7 @@
       </aside>
 
       <!-- RIGHT EXPANDED MAIN DISPLAY (SPAN 9) -->
-      <main class="lg:col-span-9 aqua-glass-panel p-4 sm:p-5 flex flex-col justify-between min-h-[450px] lg:h-full lg:overflow-hidden min-h-0">
+      <main id="main-panel" class="panel-closed lg:col-span-9 aqua-glass-panel p-4 sm:p-5 flex flex-col justify-between min-h-[450px] lg:h-full lg:overflow-hidden min-h-0">
 
         <!-- TAB 1: HOME & BIO (UPDATED WITH DIVERSE INTERESTS, LARGER FONTS & SMALLER IMAGES) -->
         <div id="tab-home" class="tab-pane flex flex-col h-full space-y-4 overflow-y-auto pr-1 min-h-0">
@@ -427,61 +455,71 @@
                 <span class="text-[9px] text-sky-300/80">Scroll ↕</span>
               </div>
 
-              <div class="space-y-2 overflow-y-auto flex-1 pr-1 min-h-0">
+              <!-- Project type filters -->
+              <div id="proj-filters" class="flex flex-wrap gap-1 mb-1.5 shrink-0" role="group" aria-label="Filter projects by type">
+                <button type="button" class="filter-chip active" aria-pressed="true" onclick="filterProjects('All', this)">All</button>
+                <button type="button" class="filter-chip" aria-pressed="false" onclick="filterProjects('ML', this)">ML</button>
+                <button type="button" class="filter-chip" aria-pressed="false" onclick="filterProjects('Web App', this)">Web App</button>
+                <button type="button" class="filter-chip" aria-pressed="false" onclick="filterProjects('Mobile App', this)">Mobile App</button>
+                <button type="button" class="filter-chip" aria-pressed="false" onclick="filterProjects('Game', this)">Game</button>
+                <button type="button" class="filter-chip" aria-pressed="false" onclick="filterProjects('Extension', this)">Extension</button>
+              </div>
+              <p id="proj-count" class="text-[9px] text-sky-300/80 mb-1.5 shrink-0">9 projects</p>
+
+              <div id="proj-list" class="space-y-2 overflow-y-auto flex-1 pr-1 min-h-0">
+                <!-- Index 8: Klang Valley Property Price Estimator -->
+                <div data-idx="8" data-cats="ML,Web App" onclick="selectProject(8, this)" class="proj-menu-item aqua-card-inner p-2.5 cursor-pointer hover:bg-white/20 transition-all border-l-4 border-sky-300">
+                  <div class="font-semibold text-white text-xs">Klang Valley Property Price Estimator</div>
+                  <div class="text-[9.5px] text-sky-200 mt-1">Python · scikit-learn · FastAPI</div>
+                </div>
 
                 <!-- Index 0 -->
-                <div onclick="selectProject(0, this)" class="proj-menu-item aqua-card-inner p-2.5 cursor-pointer hover:bg-white/20 transition-all border-l-4 border-transparent">
+                <div data-idx="0" data-cats="Game" onclick="selectProject(0, this)" class="proj-menu-item aqua-card-inner p-2.5 cursor-pointer hover:bg-white/20 transition-all border-l-4 border-transparent">
                   <div class="flex items-center justify-between gap-1">
                     <div class="font-semibold text-white text-xs">Data Visualization Educational Game</div>
-                    <span class="text-[8px] px-1.5 py-0.5 rounded-full bg-amber-500 text-white font-bold shrink-0 animate-pulse border border-amber-300/80 shadow-[0_0_8px_rgba(245,158,11,0.8)]">In Progress</span>
+                    <span class="text-[8px] px-1.5 py-0.5 rounded-full bg-amber-500 text-white font-bold shrink-0 animate-pulse border border-amber-300/80 shadow-[0_0_8px_rgba(245,158,11,0.8)]">Final Year Project</span>
                   </div>
                   <div class="text-[9.5px] text-sky-200 mt-1">C# · Unity</div>
                 </div>
 
-                <!-- Index 8: Malaysia Property Price Estimator -->
-                <div onclick="selectProject(8, this)" class="proj-menu-item aqua-card-inner p-2.5 cursor-pointer hover:bg-white/20 transition-all border-l-4 border-sky-300">
-                  <div class="font-semibold text-white text-xs">Malaysia Property Price Estimator</div>
-                  <div class="text-[9.5px] text-sky-200 mt-1">Python · scikit-learn · FastAPI</div>
-                </div>
-
                 <!-- Index 1: Selective Storage Purger -->
-                <div onclick="selectProject(1, this)" class="proj-menu-item aqua-card-inner p-2.5 cursor-pointer hover:bg-white/20 transition-all border-l-4 border-transparent">
+                <div data-idx="1" data-cats="Extension" onclick="selectProject(1, this)" class="proj-menu-item aqua-card-inner p-2.5 cursor-pointer hover:bg-white/20 transition-all border-l-4 border-transparent">
                   <div class="font-semibold text-white text-xs">Selective Storage Purger</div>
                   <div class="text-[9.5px] text-sky-200 mt-1">JavaScript · Manifest V3</div>
                 </div>
 
                 <!-- Index 2: VibeVault -->
-                <div onclick="selectProject(2, this)" class="proj-menu-item aqua-card-inner p-2.5 cursor-pointer hover:bg-white/20 transition-all border-l-4 border-transparent">
+                <div data-idx="2" data-cats="Extension" onclick="selectProject(2, this)" class="proj-menu-item aqua-card-inner p-2.5 cursor-pointer hover:bg-white/20 transition-all border-l-4 border-transparent">
                   <div class="font-semibold text-white text-xs">VibeVault: Context Bookmarker</div>
                   <div class="text-[9.5px] text-sky-200 mt-1">JavaScript · HTML/CSS · Manifest V3</div>
                 </div>
 
                 <!-- Index 3 -->
-                <div onclick="selectProject(3, this)" class="proj-menu-item aqua-card-inner p-2.5 cursor-pointer hover:bg-white/20 transition-all border-l-4 border-transparent">
+                <div data-idx="3" data-cats="Mobile App" onclick="selectProject(3, this)" class="proj-menu-item aqua-card-inner p-2.5 cursor-pointer hover:bg-white/20 transition-all border-l-4 border-transparent">
                   <div class="font-semibold text-white text-xs">Hooper Buddy: Basketball Drill App</div>
                   <div class="text-[9.5px] text-sky-200 mt-1">Flutter · Dart · SQLite</div>
                 </div>
 
                 <!-- Index 4 -->
-                <div onclick="selectProject(4, this)" class="proj-menu-item aqua-card-inner p-2.5 cursor-pointer hover:bg-white/20 transition-all border-l-4 border-transparent">
+                <div data-idx="4" data-cats="ML,Web App" onclick="selectProject(4, this)" class="proj-menu-item aqua-card-inner p-2.5 cursor-pointer hover:bg-white/20 transition-all border-l-4 border-transparent">
                   <div class="font-semibold text-white text-xs">Color Telemetry & Analytics Studio</div>
                   <div class="text-[9.5px] text-sky-200 mt-1">OpenCV · Streamlit</div>
                 </div>
 
                 <!-- Index 5 -->
-                <div onclick="selectProject(5, this)" class="proj-menu-item aqua-card-inner p-2.5 cursor-pointer hover:bg-white/20 transition-all border-l-4 border-transparent">
+                <div data-idx="5" data-cats="Web App" onclick="selectProject(5, this)" class="proj-menu-item aqua-card-inner p-2.5 cursor-pointer hover:bg-white/20 transition-all border-l-4 border-transparent">
                   <div class="font-semibold text-white text-xs">Planora: Smart Study Planner</div>
                   <div class="text-[9.5px] text-sky-200 mt-1">PHP · JavaScript · MySQL</div>
                 </div>
 
                 <!-- Index 6 -->
-                <div onclick="selectProject(6, this)" class="proj-menu-item aqua-card-inner p-2.5 cursor-pointer hover:bg-white/20 transition-all border-l-4 border-transparent">
+                <div data-idx="6" data-cats="Game" onclick="selectProject(6, this)" class="proj-menu-item aqua-card-inner p-2.5 cursor-pointer hover:bg-white/20 transition-all border-l-4 border-transparent">
                   <div class="font-semibold text-white text-xs">Office Chair Grand Prix: Unity Game</div>
                   <div class="text-[9.5px] text-sky-200 mt-1">C# · Unity</div>
                 </div>
 
                 <!-- Index 7 -->
-                <div onclick="selectProject(7, this)" class="proj-menu-item aqua-card-inner p-2.5 cursor-pointer hover:bg-white/20 transition-all border-l-4 border-transparent">
+                <div data-idx="7" data-cats="Web App" onclick="selectProject(7, this)" class="proj-menu-item aqua-card-inner p-2.5 cursor-pointer hover:bg-white/20 transition-all border-l-4 border-transparent">
                   <div class="font-semibold text-white text-xs">FELDA HR Exam Management System</div>
                   <div class="text-[9.5px] text-sky-200 mt-1">PHP · HTML · CSS · MySQL</div>
                 </div>
@@ -826,7 +864,7 @@
                 </div>
                 <div class="mt-1.5 space-y-0.5">
                   <div class="font-semibold text-white text-[11px] truncate">New highlight coming soon</div>
-                  <p class="text-[9.5px] text-sky-200 line-clamp-1"></p>
+                  <p class="text-[9.5px] text-sky-200 line-clamp-1">Add a photo or video here</p>
                 </div>
               </div>
 
@@ -902,14 +940,43 @@
     </div>
   </div>
 
+  <!-- WELCOME MESSAGE (appears on the first click) -->
+  <div id="welcome-toast" class="aqua-glass-panel px-5 py-4 text-center" role="status" aria-live="polite">
+    <p class="aero-heading-light text-xl text-white relative z-10">Welcome to my portfolio 👋</p>
+    <p class="text-xs text-sky-100 mt-1 leading-relaxed relative z-10">
+      I’m Erfan, a Multimedia Computing student. Pick a section from the menu to start exploring.
+    </p>
+  </div>
+
+  <!-- SOUND ON/OFF TOGGLE -->
+  <button id="sound-toggle" type="button" class="fixed bottom-4 right-4 z-40 w-10 h-10 rounded-full aqua-card-inner text-base flex items-center justify-center hover:bg-white/20 transition-all" aria-label="Mute sounds">🔊</button>
+
   <script>
     // Tab open function updated to dynamically sync mobile dropdown button header & auto-collapse
     function openTab(tabId, clickedBtn) {
+      const panel = document.getElementById('main-panel');
+
+      // Clicking the already-open section again closes the box
+      if (clickedBtn.classList.contains('active') && !panel.classList.contains('panel-closed')) {
+        clickedBtn.classList.remove('active');
+        panel.classList.add('panel-closed');
+        document.getElementById('mobile-current-title').innerText = 'Select a section';
+        document.getElementById('mobile-current-icon').src = 'icons/home.png';
+        if (window.innerWidth < 1024) {
+          const menu = document.getElementById('nav-menu-container');
+          menu.classList.add('hidden');
+          menu.classList.remove('flex');
+          document.getElementById('mobile-dropdown-arrow').style.transform = 'rotate(0deg)';
+        }
+        return;
+      }
+
       document.querySelectorAll('.aqua-nav-btn').forEach(btn => btn.classList.remove('active'));
       clickedBtn.classList.add('active');
 
       document.querySelectorAll('.tab-pane').forEach(pane => pane.classList.add('hidden'));
       document.getElementById('tab-' + tabId).classList.remove('hidden');
+      document.getElementById('main-panel').classList.remove('panel-closed');
 
       // Update mobile header selection indicator
       const title = clickedBtn.getAttribute('data-title');
@@ -1043,10 +1110,36 @@
         badge: "ML Web App",
         badgeColor: "bg-teal-500/90 text-white border-white/40",
         github: "https://github.com/erfanhkimi/klang-valley-property-price-estimator-2025-data",
-        live: "https://klang-valley-property-price-estimator.onrender.com/", // paste your Render URL between the quotes
+        live: "", // paste your Render URL between the quotes
         install: ""
       }
     ];
+
+    // Filter the project list by type (a project can belong to more than one type)
+    function filterProjects(cat, btn) {
+      document.querySelectorAll('.filter-chip').forEach(b => {
+        const on = b === btn;
+        b.classList.toggle('active', on);
+        b.setAttribute('aria-pressed', on ? 'true' : 'false');
+      });
+
+      const items = Array.from(document.querySelectorAll('.proj-menu-item'));
+      items.forEach(item => {
+        const cats = (item.dataset.cats || '').split(',');
+        item.classList.toggle('hidden', cat !== 'All' && !cats.includes(cat));
+      });
+
+      const visible = items.filter(item => !item.classList.contains('hidden'));
+      document.getElementById('proj-count').textContent =
+        visible.length + (visible.length === 1 ? ' project' : ' projects') + (cat === 'All' ? '' : ' · ' + cat);
+      document.getElementById('proj-list').scrollTop = 0;
+
+      // If the open project was filtered out, show the first one that is still visible
+      const selected = items.find(item => item.classList.contains('border-sky-300'));
+      if ((!selected || selected.classList.contains('hidden')) && visible.length) {
+        selectProject(Number(visible[0].dataset.idx), visible[0]);
+      }
+    }
 
     function selectProject(idx, clickedItem) {
       document.querySelectorAll('.proj-menu-item').forEach(item => {
@@ -1210,6 +1303,112 @@
     document.getElementById('contact-modal').addEventListener('click', function(e) {
       if (e.target === this) closeContactModal();
     });
+
+    // ===== Sound effects (generated with the Web Audio API, no audio files needed) =====
+    let audioCtx = null;
+    let audioUnlocked = false;   // browsers only allow sound after a click or key press
+    let soundOn = true;
+    try { soundOn = localStorage.getItem('portfolioSound') !== 'off'; } catch (e) {}
+    const canHover = window.matchMedia('(hover: hover)').matches;
+    const SOUND_TARGETS = '.aqua-nav-btn, .proj-menu-item, .cert-item, .cursor-pointer, button, a[href]';
+
+    function getCtx() {
+      if (!audioUnlocked) return null;
+      if (!audioCtx) {
+        const AC = window.AudioContext || window.webkitAudioContext;
+        if (!AC) return null;
+        audioCtx = new AC();
+      }
+      if (audioCtx.state === 'suspended') audioCtx.resume();
+      return audioCtx;
+    }
+
+    // One soft, glassy "bloop": a sine wave that glides from f1 to f2 and fades out
+    function bloop(c, t0, f1, f2, dur, vol) {
+      const osc = c.createOscillator();
+      const gain = c.createGain();
+      osc.type = 'sine';
+      osc.frequency.setValueAtTime(f1, t0);
+      osc.frequency.exponentialRampToValueAtTime(f2, t0 + dur * 0.7);
+      gain.gain.setValueAtTime(0.0001, t0);
+      gain.gain.exponentialRampToValueAtTime(vol, t0 + 0.01);
+      gain.gain.exponentialRampToValueAtTime(0.0001, t0 + dur);
+      osc.connect(gain);
+      gain.connect(c.destination);
+      osc.start(t0);
+      osc.stop(t0 + dur + 0.02);
+    }
+
+    let lastHoverSound = 0;
+    function playHover() {
+      if (!soundOn) return;
+      const now = performance.now();
+      if (now - lastHoverSound < 90) return;
+      lastHoverSound = now;
+      const c = getCtx();
+      if (!c) return;
+      bloop(c, c.currentTime, 700, 1000, 0.07, 0.035);
+    }
+
+    function playClick() {
+      if (!soundOn) return;
+      const c = getCtx();
+      if (!c) return;
+      const t = c.currentTime;
+      bloop(c, t, 520, 880, 0.12, 0.08);
+      bloop(c, t + 0.06, 880, 1320, 0.16, 0.05);
+    }
+
+    function playWelcome() {
+      if (!soundOn) return;
+      const c = getCtx();
+      if (!c) return;
+      const t = c.currentTime;
+      [523, 659, 784, 1047].forEach((f, i) => bloop(c, t + i * 0.11, f, f * 1.02, 0.35, 0.06));
+    }
+
+    // Hover and click sounds on anything interactive (event delegation)
+    let lastTarget = null;
+    let welcomeAt = -1000;
+    document.addEventListener('mouseover', e => {
+      if (!canHover) return;
+      const t = e.target.closest(SOUND_TARGETS);
+      if (t !== lastTarget) {
+        lastTarget = t;
+        if (t) playHover();
+      }
+    });
+    document.addEventListener('click', e => {
+      if (performance.now() - welcomeAt < 600) return;   // let the welcome chime finish
+      if (e.target.closest(SOUND_TARGETS)) playClick();
+    });
+
+    // Welcome message on the very first click
+    function hideWelcome() {
+      document.getElementById('welcome-toast').classList.remove('show');
+    }
+    function showWelcome() {
+      document.getElementById('welcome-toast').classList.add('show');
+      welcomeAt = performance.now();
+      playWelcome();
+      setTimeout(hideWelcome, 7000);
+    }
+    document.getElementById('welcome-toast').addEventListener('click', hideWelcome);
+    document.addEventListener('pointerdown', () => { audioUnlocked = true; showWelcome(); }, { once: true });
+    document.addEventListener('keydown', () => { audioUnlocked = true; }, { once: true });
+
+    // Sound on/off button (remembers the choice)
+    const soundBtn = document.getElementById('sound-toggle');
+    function renderSoundBtn() {
+      soundBtn.textContent = soundOn ? '🔊' : '🔇';
+      soundBtn.setAttribute('aria-label', soundOn ? 'Mute sounds' : 'Unmute sounds');
+    }
+    soundBtn.addEventListener('click', () => {
+      soundOn = !soundOn;
+      try { localStorage.setItem('portfolioSound', soundOn ? 'on' : 'off'); } catch (e) {}
+      renderSoundBtn();
+    });
+    renderSoundBtn();
 
     // Initialize default project view
     selectProject(8, document.querySelector('.proj-menu-item'));
