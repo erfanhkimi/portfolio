@@ -198,11 +198,6 @@
                 <span>Home & Bio</span>
               </div>
 
-              <div onclick="openTab('experience', this)" class="aqua-nav-btn" data-title="Working Experience" data-icon="icons/experience.png">
-                <img src="icons/experience.png" class="w-6 h-6 drop-shadow-md" />
-                <span>Working Experience</span>
-              </div>
-
               <div onclick="openTab('projects', this)" class="aqua-nav-btn" data-title="Projects" data-icon="icons/project.png">
                 <img src="icons/project.png" class="w-6 h-6 drop-shadow-md" />
                 <span>Projects</span>
@@ -211,6 +206,11 @@
               <div onclick="openTab('education', this)" class="aqua-nav-btn" data-title="Education" data-icon="icons/education.png">
                 <img src="icons/education.png" class="w-6 h-6 drop-shadow-md" />
                 <span>Education</span>
+              </div>
+
+              <div onclick="openTab('experience', this)" class="aqua-nav-btn" data-title="Working Experience" data-icon="icons/experience.png">
+                <img src="icons/experience.png" class="w-6 h-6 drop-shadow-md" />
+                <span>Working Experience</span>
               </div>
 
               <div onclick="openTab('skills', this)" class="aqua-nav-btn" data-title="Capabilities" data-icon="icons/skill.png">
@@ -428,13 +428,20 @@
               </div>
 
               <div class="space-y-2 overflow-y-auto flex-1 pr-1 min-h-0">
+
                 <!-- Index 0 -->
-                <div onclick="selectProject(0, this)" class="proj-menu-item aqua-card-inner p-2.5 cursor-pointer hover:bg-white/20 transition-all border-l-4 border-sky-300">
+                <div onclick="selectProject(0, this)" class="proj-menu-item aqua-card-inner p-2.5 cursor-pointer hover:bg-white/20 transition-all border-l-4 border-transparent">
                   <div class="flex items-center justify-between gap-1">
                     <div class="font-semibold text-white text-xs">Data Visualization Educational Game</div>
                     <span class="text-[8px] px-1.5 py-0.5 rounded-full bg-amber-500 text-white font-bold shrink-0 animate-pulse border border-amber-300/80 shadow-[0_0_8px_rgba(245,158,11,0.8)]">In Progress</span>
                   </div>
                   <div class="text-[9.5px] text-sky-200 mt-1">C# · Unity</div>
+                </div>
+
+                <!-- Index 8: Malaysia Property Price Estimator -->
+                <div onclick="selectProject(8, this)" class="proj-menu-item aqua-card-inner p-2.5 cursor-pointer hover:bg-white/20 transition-all border-l-4 border-sky-300">
+                  <div class="font-semibold text-white text-xs">Malaysia Property Price Estimator</div>
+                  <div class="text-[9.5px] text-sky-200 mt-1">Python · scikit-learn · FastAPI</div>
                 </div>
 
                 <!-- Index 1: Selective Storage Purger -->
@@ -812,6 +819,17 @@
                 </div>
               </div>
 
+              <!-- Gallery Item: Empty placeholder (fill in later) -->
+              <div class="aqua-card-inner p-2 flex flex-col justify-between opacity-80">
+                <div class="w-full h-28 rounded-lg bg-slate-950/40 border border-dashed border-white/30 flex items-center justify-center text-sky-200/60 text-[10px]">
+                  Empty slot
+                </div>
+                <div class="mt-1.5 space-y-0.5">
+                  <div class="font-semibold text-white text-[11px] truncate">New highlight coming soon</div>
+                  <p class="text-[9.5px] text-sky-200 line-clamp-1"></p>
+                </div>
+              </div>
+
             </div>
           </div>
         </div>
@@ -1016,6 +1034,17 @@
         github: "",
         live: "",
         install: ""
+      },
+      {
+        title: "Klang Valley Property Price Estimator",
+        desc: "A supervised machine-learning web app that estimates property price per sq ft from township, tenure and property type using 2025 Malaysian transaction data. Compares a linear regression baseline against a random forest, served through a FastAPI REST API and deployed on Render.",
+        img: "icons/klangvalley.png",
+        tags: ["Python", "scikit-learn", "FastAPI", "pandas"],
+        badge: "ML Web App",
+        badgeColor: "bg-teal-500/90 text-white border-white/40",
+        github: "https://github.com/erfanhkimi/klang-valley-property-price-estimator-2025-data",
+        live: "https://klang-valley-property-price-estimator.onrender.com/", // paste your Render URL between the quotes
+        install: ""
       }
     ];
 
@@ -1183,7 +1212,7 @@
     });
 
     // Initialize default project view
-    selectProject(0, document.querySelector('.proj-menu-item'));
+    selectProject(8, document.querySelector('.proj-menu-item'));
   </script>
 
 </body>
