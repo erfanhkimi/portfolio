@@ -159,6 +159,52 @@
       border-radius: 14px;
       box-shadow: inset 0 1px 2px rgba(255, 255, 255, 0.5), 0 8px 20px rgba(0, 10, 30, 0.35);
     }
+
+    /* Mobile: nav is a sideways-scrolling bar that stays at the top */
+    .nav-scroll { scrollbar-width: none; -webkit-overflow-scrolling: touch; scroll-snap-type: x proximity; }
+    .nav-scroll::-webkit-scrollbar { display: none; }
+    @media (max-width: 1023px) {
+      aside.aqua-glass-panel { position: sticky; top: 8px; z-index: 30; }
+      .nav-scroll .aqua-nav-btn { flex: none; scroll-snap-align: center; }
+      .nav-scroll .aqua-nav-btn:hover, .nav-scroll .aqua-nav-btn.active { transform: none; }
+      #main-panel { min-height: 0 !important; }
+    }
+    /* Short tabs shrink to their content instead of leaving empty space */
+    @media (min-width: 1024px) {
+      #main-panel.fit-content { height: auto !important; max-height: 100%; align-self: start; overflow-y: auto !important; }
+    }
+    #main-panel.fit-content .tab-pane { height: auto !important; }
+    #main-panel.fit-content [class*="h-[calc"] { height: auto !important; }
+
+    /* Capability level: signal bars + status */
+    .sig { display: inline-flex; align-items: flex-end; gap: 2px; height: 16px; }
+    .sig i { display: block; width: 4px; border-radius: 2px; background: rgba(255,255,255,0.25); }
+    .sig i:nth-child(1) { height: 6px; } .sig i:nth-child(2) { height: 11px; } .sig i:nth-child(3) { height: 16px; }
+    .sig.lv1 i:nth-child(-n+1) { background: #fcd34d; box-shadow: 0 0 6px rgba(252,211,77,.8); }
+    .sig.lv2 i:nth-child(-n+2) { background: #7dd3fc; box-shadow: 0 0 6px rgba(125,211,252,.8); }
+    .sig.lv3 i { background: #6ee7b7; box-shadow: 0 0 6px rgba(110,231,183,.8); }
+    .skill-level-row { display: flex; align-items: center; gap: 8px; margin-top: 8px; }
+    .skill-level { font-size: 10px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; }
+    .lvl-beg { color: #fcd34d; } .lvl-int { color: #7dd3fc; } .lvl-adv { color: #6ee7b7; }
+
+    /* "Open for internship" bar under the name */
+    .open-bar {
+      position: relative; display: inline-flex; align-items: center; gap: 10px; margin-top: 6px;
+      padding: 6px 18px; border-radius: 999px; font-size: 13px; font-weight: 600; letter-spacing: .04em; color: #fff;
+      background: linear-gradient(180deg, rgba(0, 35, 75, 0.70) 0%, rgba(0, 20, 50, 0.85) 100%);
+      backdrop-filter: blur(14px) saturate(200%); -webkit-backdrop-filter: blur(14px) saturate(200%);
+      border: 1.5px solid rgba(255, 255, 255, 0.55); border-top: 2px solid rgba(255, 255, 255, 0.85);
+      box-shadow: 0 6px 20px rgba(0, 10, 30, 0.55), 0 0 18px rgba(0, 160, 255, 0.35), inset 0 1px 1px rgba(255, 255, 255, 0.6);
+      overflow: hidden;
+    }
+    .open-bar::before { content: ""; position: absolute; top: 0; left: 0; right: 0; height: 50%; pointer-events: none;
+      background: linear-gradient(180deg, rgba(255,255,255,.35), rgba(255,255,255,0)); border-radius: 999px 999px 60% 60%; }
+    .open-bar > * { position: relative; }
+    .open-dot { width: 10px; height: 10px; border-radius: 50%; flex: none; background: radial-gradient(circle at 35% 30%, #d9ffe6, #34d399 60%, #059669);
+      box-shadow: 0 0 10px #34d399, 0 0 2px #fff; animation: openPulse 2s ease-in-out infinite; }
+    @keyframes openPulse { 0%,100% { box-shadow: 0 0 6px #34d399, 0 0 2px #fff; } 50% { box-shadow: 0 0 16px #6ee7b7, 0 0 3px #fff; } }
+    @media (prefers-reduced-motion: reduce) { .open-dot { animation: none; } }
+    @media (max-width: 400px) { .open-bar { font-size: 12px; padding: 5px 14px; } }
   </style>
 </head>
 <body class="min-h-screen overflow-y-auto lg:h-screen lg:overflow-hidden p-2 sm:p-3 lg:p-3.5 relative flex flex-col justify-between">
@@ -190,6 +236,7 @@
       <p class="text-[10px] sm:text-xs font-normal tracking-widest text-sky-100 uppercase drop-shadow">
         Bachelor of Computer Science (Hons) Multimedia Computing Student
       </p>
+      <div class="open-bar" role="status"><span class="open-dot" aria-hidden="true"></span><span>Open for IT Internship Opportunities</span></div>
     </header>
 
     <!-- MAIN INTERACTIVE SPLIT CONTAINER -->
@@ -198,30 +245,16 @@
       <!-- LEFT GLASS SIDEBAR MENU (WITH MOBILE DROPDOWN COMPACT VIEW) -->
       <aside class="lg:col-span-3 aqua-glass-panel p-2.5 lg:p-3.5 flex flex-col justify-between h-auto lg:h-full gap-2.5 lg:gap-3 min-h-0 shrink-0">
         
-        <!-- MOBILE NAVIGATION DROPDOWN BUTTON (VISIBLE ONLY BELOW LG) -->
-        <div class="lg:hidden flex items-center justify-between">
-          <button onclick="toggleMobileMenu()" class="w-full aqua-card-inner p-2.5 flex items-center justify-between text-xs font-semibold text-white shadow-md active:scale-[0.99] transition-transform">
-            <div class="flex items-center gap-2.5">
-              <img id="mobile-current-icon" src="icons/home.png" class="w-5 h-5 drop-shadow-md" />
-              <span id="mobile-current-title" class="text-sky-100 font-semibold">Select a section</span>
-            </div>
-            <div class="flex items-center gap-1.5 text-sky-200 text-[10px]">
-              <span class="uppercase tracking-wider">Menu</span>
-              <span id="mobile-dropdown-arrow" class="transition-transform duration-300 inline-block">▼</span>
-            </div>
-          </button>
-        </div>
-
         <!-- COLLAPSIBLE NAV MENU CONTAINER (HIDDEN ON MOBILE BY DEFAULT, FLEX ON LG) -->
-        <div id="nav-menu-container" class="hidden lg:flex flex-col justify-between flex-1 gap-3 space-y-2 lg:space-y-0 pt-2 lg:pt-0">
+        <div id="nav-menu-container" class="flex flex-col lg:justify-between flex-1 gap-3 lg:space-y-0">
           <div class="space-y-2">
-            <div class="text-xs font-semibold text-sky-100 uppercase tracking-wider px-2 pb-1.5 border-b border-white/40 flex items-center justify-between">
+            <div class="text-xs font-semibold text-sky-100 uppercase tracking-wider px-2 pb-1.5 border-b border-white/40 hidden lg:flex items-center justify-between">
               <span>Navigation</span>
               <span class="text-[10px] text-sky-200">[System Menu]</span>
             </div>
 
-            <nav class="space-y-1">
-              <div onclick="openTab('home', this)" class="aqua-nav-btn" data-title="Home & Bio" data-icon="icons/home.png">
+            <nav class="nav-scroll flex lg:block gap-1.5 lg:gap-0 lg:space-y-1 overflow-x-auto lg:overflow-visible">
+              <div onclick="openTab('home', this)" class="aqua-nav-btn active" data-title="Home & Bio" data-icon="icons/home.png">
                 <img src="icons/home.png" class="w-6 h-6 drop-shadow-md" />
                 <span>Home & Bio</span>
               </div>
@@ -263,7 +296,7 @@
               </div>
 
               <!-- VIEW RESUME NAV BUTTON -->
-              <a href="resume.pdf" target="_blank" class="aqua-nav-btn !bg-gradient-to-r !from-sky-500/40 !to-blue-600/40 border-sky-200/60 hover:!from-sky-400/60 hover:!to-blue-500/60 mt-2 font-semibold shadow-[0_0_12px_rgba(0,180,255,0.3)]">
+              <a href="resume.pdf" target="_blank" class="aqua-nav-btn !bg-gradient-to-r !from-sky-500/40 !to-blue-600/40 border-sky-200/60 hover:!from-sky-400/60 hover:!to-blue-500/60 lg:mt-2 font-semibold shadow-[0_0_12px_rgba(0,180,255,0.3)]">
                 <img src="icons/resume.png" class="w-6 h-6 drop-shadow-md" />
                 <span>View Resume (PDF)</span>
               </a>
@@ -271,7 +304,7 @@
           </div>
 
           <!-- SIDEBAR FOOTER: SLOGAN, SOCIAL LINKS & TRADEMARK -->
-          <div class="pt-2.5 border-t border-white/40 space-y-2 shrink-0">
+          <div class="hidden lg:block pt-2.5 border-t border-white/40 space-y-2 shrink-0">
             <div class="text-center space-y-0.5">
               <p class="text-[11px] font-semibold text-white drop-shadow flex items-center justify-center gap-1">
                 <span>Let's Build Something Great Together</span>
@@ -308,7 +341,7 @@
       </aside>
 
       <!-- RIGHT EXPANDED MAIN DISPLAY (SPAN 9) -->
-      <main id="main-panel" class="panel-closed lg:col-span-9 aqua-glass-panel p-4 sm:p-5 flex flex-col justify-between min-h-[450px] lg:h-full lg:overflow-hidden min-h-0">
+      <main id="main-panel" class="lg:col-span-9 aqua-glass-panel p-4 sm:p-5 flex flex-col justify-between min-h-[450px] lg:h-full lg:overflow-hidden min-h-0">
 
         <!-- TAB 1: HOME & BIO (UPDATED WITH DIVERSE INTERESTS, LARGER FONTS & SMALLER IMAGES) -->
         <div id="tab-home" class="tab-pane flex flex-col h-full space-y-4 overflow-y-auto pr-1 min-h-0">
@@ -323,7 +356,7 @@
             </div>
 
             <p class="text-sm sm:text-base leading-relaxed text-sky-50 drop-shadow font-normal">
-              Computer Science (Multimedia Computing) student from Shah Alam with hands-on experience in full-stack web development, Python automation, data analytics, and Unity C# game development. Experienced in building internal HR systems and providing technical IT support at FELDA. MBOT Certified Data Analyst actively seeking software engineering, data analytics, or IT internship opportunities.
+              Multimedia Computing student at UiTM Shah Alam who turns ideas into working software, from an internal exam management system built for FELDA's HR department to a machine-learning property price estimator deployed live on the web. I work across full-stack web (PHP, JavaScript, MySQL), Python and data analytics, Flutter mobile apps and Unity game development, and I'm an MBOT Certified Data Analyst. I'm looking for a software engineering, data analytics or IT internship where I can ship real features, learn fast and contribute from day one.
             </p>
           </div>
 
@@ -339,19 +372,19 @@
               <ul class="text-xs sm:text-sm text-sky-100 space-y-2 leading-relaxed">
                 <li class="flex items-start gap-2">
                   <span class="text-sky-300 font-bold">•</span>
-                  <span><strong>Basketball & Sports Analytics:</strong> Interested in tracking performance telemetry, shooting analytics and sports metrics.</span>
+                  <span><strong>Basketball & Sports Analytics:</strong> Turning shooting stats and training data into insights, the idea behind my Hooper Buddy app.</span>
                 </li>
                 <li class="flex items-start gap-2">
                   <span class="text-sky-300 font-bold">•</span>
-                  <span><strong>Game Design & Interactive 3D:</strong> Passionate about developing gameplay mechanics and 3D scenes using Unity and C#.</span>
+                  <span><strong>Game Design & Interactive 3D:</strong> Building gameplay mechanics and 3D worlds in Unity and C#, including my final year educational game.</span>
                 </li>
                 <li class="flex items-start gap-2">
                   <span class="text-sky-300 font-bold">•</span>
-                  <span><strong>Browser Extension Dev:</strong> Building minimalist Manifest V3 productivity tools like local bookmarkers and storage purgers.</span>
+                  <span><strong>Browser Extension Building:</strong> Shipping small, fast Manifest V3 tools like VibeVault and Selective Storage Purger to fix everyday workflow pain points.</span>
                 </li>
                 <li class="flex items-start gap-2">
                   <span class="text-sky-300 font-bold">•</span>
-                  <span><strong>UI/UX & Retro Aesthetics:</strong> Experimenting with glassmorphism, Frutiger Aero design and modern dark-mode interfaces.</span>
+                  <span><strong>UI/UX & Frutiger Aero Design:</strong> Designing glassy, readable, mobile-friendly interfaces, like this portfolio.</span>
                 </li>
               </ul>
             </div>
@@ -365,19 +398,19 @@
               <ul class="text-xs sm:text-sm text-sky-100 space-y-2 leading-relaxed">
                 <li class="flex items-start gap-2">
                   <span class="text-sky-300 font-bold">•</span>
-                  <span><strong>Rapid Skill Adaptation:</strong> Flexible developer capable of picking up new frameworks, APIs, and stacks quickly.</span>
+                  <span><strong>End-to-End Builder:</strong> Takes ideas from concept to deployment across web, mobile and desktop.</span>
                 </li>
                 <li class="flex items-start gap-2">
                   <span class="text-sky-300 font-bold">•</span>
-                  <span><strong>Data-Driven Problem Solving:</strong>  Experienced using SQL, Python and analytics tools to clean datasets and determine decision making.</span>
+                  <span><strong>Data-Driven Problem Solver:</strong> Cleans and analyses data with SQL, Python and analytics tools to support better decisions. MBOT Certified Data Analyst.</span>
                 </li>
                 <li class="flex items-start gap-2">
                   <span class="text-sky-300 font-bold">•</span>
-                  <span><strong>End-to-End Prototyping:</strong> Ability to build solutions from initial concept to deployment across web, mobile, and desktop.</span>
+                  <span><strong>Fast Learner:</strong> Picks up new stacks quickly, from Flutter to FastAPI to OpenCV, each learned for a real project.</span>
                 </li>
                 <li class="flex items-start gap-2">
                   <span class="text-sky-300 font-bold">•</span>
-                  <span><strong>Technical Communication:</strong> Proven experience leading team project presentations and documenting system workflows.</span>
+                  <span><strong>Clear Communicator:</strong> Leads team presentations and documents system workflows so others can follow them.</span>
                 </li>
               </ul>
             </div>
@@ -387,9 +420,9 @@
           <!-- COMPACT SCALED-DOWN PROFILE IMAGE SHOWCASE -->
           <div class="space-y-1.5 shrink-0 pt-1">
             <h3 class="text-xs sm:text-sm font-semibold text-sky-200 uppercase tracking-wider">Photo Showcase</h3>
-            <div class="grid grid-cols-2 gap-3 max-w-xl">
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-4xl">
               <!-- Image 1 -->
-              <div class="aqua-card-inner p-1.5 overflow-hidden rounded-xl h-36 sm:h-44 border border-white/40 shadow-md">
+              <div class="aqua-card-inner p-1.5 overflow-hidden rounded-xl h-64 sm:h-72 lg:h-80 border border-white/40 shadow-md">
                 <img 
                   src="icons/profile1.jpeg" 
                   alt="Profile Image 1" 
@@ -398,7 +431,7 @@
               </div>
 
               <!-- Image 2 -->
-              <div class="aqua-card-inner p-1.5 overflow-hidden rounded-xl h-36 sm:h-44 border border-white/40 shadow-md">
+              <div class="aqua-card-inner p-1.5 overflow-hidden rounded-xl h-64 sm:h-72 lg:h-80 border border-white/40 shadow-md">
                 <img 
                   src="icons/profile3.jpeg" 
                   alt="Workspace Image 2" 
@@ -593,7 +626,7 @@
           </div>
         </div>
 
-        <!-- TAB 5: SKILLS -->
+        <!-- TAB 5: SKILLS (on each skill card set data-level to beginner | intermediate | advanced) -->
         <div id="tab-skills" class="tab-pane hidden flex flex-col justify-between h-full space-y-2.5 min-h-0">
           <div class="space-y-3 flex-1 overflow-y-auto pr-1 min-h-0">
             
@@ -607,29 +640,45 @@
               </div>
 
               <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-2 text-xs">
-                <div class="aqua-card-inner p-2">
+                <div class="aqua-card-inner p-2 skill-card" data-level="intermediate">
                   <div class="font-semibold text-white text-xs">Dart</div>
                   <div class="text-[9px] text-sky-200 mt-0.5">Mobile & Flutter</div>
                 </div>
-                <div class="aqua-card-inner p-2">
+                <div class="aqua-card-inner p-2 skill-card" data-level="advanced">
                   <div class="font-semibold text-white text-xs">Python</div>
                   <div class="text-[9px] text-sky-200 mt-0.5">Data & Automation</div>
                 </div>
-                <div class="aqua-card-inner p-2">
+                <div class="aqua-card-inner p-2 skill-card" data-level="advanced">
                   <div class="font-semibold text-white text-xs">C#</div>
                   <div class="text-[9px] text-sky-200 mt-0.5">Unity Game Dev</div>
                 </div>
-                <div class="aqua-card-inner p-2">
+                <div class="aqua-card-inner p-2 skill-card" data-level="beginner">
+                  <div class="font-semibold text-white text-xs">C++</div>
+                  <div class="text-[9px] text-sky-200 mt-0.5">Systems & Performance</div>
+                </div>
+                <div class="aqua-card-inner p-2 skill-card" data-level="intermediate">
+                  <div class="font-semibold text-white text-xs">JavaScript</div>
+                  <div class="text-[9px] text-sky-200 mt-0.5">Web Interactivity</div>
+                </div>
+                <div class="aqua-card-inner p-2 skill-card" data-level="intermediate">
                   <div class="font-semibold text-white text-xs">Java</div>
                   <div class="text-[9px] text-sky-200 mt-0.5">OOP & Applications</div>
                 </div>
-                <div class="aqua-card-inner p-2">
+                <div class="aqua-card-inner p-2 skill-card" data-level="intermediate">
+                  <div class="font-semibold text-white text-xs">JavaScript</div>
+                  <div class="text-[9px] text-sky-200 mt-0.5">Web Development</div>
+                </div>
+                <div class="aqua-card-inner p-2 skill-card" data-level="intermediate">
                   <div class="font-semibold text-white text-xs">PHP</div>
                   <div class="text-[9px] text-sky-200 mt-0.5">Web Systems</div>
                 </div>
-                <div class="aqua-card-inner p-2">
+                <div class="aqua-card-inner p-2 skill-card" data-level="intermediate">
                   <div class="font-semibold text-white text-xs">SQL</div>
                   <div class="text-[9px] text-sky-200 mt-0.5">Database Queries</div>
+                </div>
+                <div class="aqua-card-inner p-2 skill-card" data-level="advanced">
+                  <div class="font-semibold text-white text-xs">HTML/CSS</div>
+                  <div class="text-[9px] text-sky-200 mt-0.5">Web Development And Styling</div>
                 </div>
               </div>
             </div>
@@ -643,29 +692,45 @@
               </div>
 
               <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-2 text-xs">
-                <div class="aqua-card-inner p-2">
+                <div class="aqua-card-inner p-2 skill-card" data-level="advanced">
+                  <div class="font-semibold text-white text-xs">Unity</div>
+                  <div class="text-[9px] text-sky-200 mt-0.5">Game Engine</div>
+                </div>
+                <div class="aqua-card-inner p-2 skill-card" data-level="intermediate">
                   <div class="font-semibold text-white text-xs">Flutter</div>
                   <div class="text-[9px] text-sky-200 mt-0.5">Cross-Platform UI</div>
                 </div>
-                <div class="aqua-card-inner p-2">
+                <div class="aqua-card-inner p-2 skill-card" data-level="intermediate">
                   <div class="font-semibold text-white text-xs">SQLite</div>
                   <div class="text-[9px] text-sky-200 mt-0.5">Local Storage</div>
                 </div>
-                <div class="aqua-card-inner p-2">
+                <div class="aqua-card-inner p-2 skill-card" data-level="intermediate">
                   <div class="font-semibold text-white text-xs">Streamlit</div>
                   <div class="text-[9px] text-sky-200 mt-0.5">Data Visuals</div>
                 </div>
-                <div class="aqua-card-inner p-2">
+                <div class="aqua-card-inner p-2 skill-card" data-level="intermediate">
+                  <div class="font-semibold text-white text-xs">Excel</div>
+                  <div class="text-[9px] text-sky-200 mt-0.5">Data Cleaning</div>
+                </div>
+                <div class="aqua-card-inner p-2 skill-card" data-level="advanced">
+                  <div class="font-semibold text-white text-xs">scikit-learn</div>
+                  <div class="text-[9px] text-sky-200 mt-0.5">Machine Learning</div>
+                </div>
+                <div class="aqua-card-inner p-2 skill-card" data-level="beginner">
                   <div class="font-semibold text-white text-xs">OpenCV</div>
                   <div class="text-[9px] text-sky-200 mt-0.5">Computer Vision</div>
                 </div>
-                <div class="aqua-card-inner p-2">
+                <div class="aqua-card-inner p-2 skill-card" data-level="intermediate">
                   <div class="font-semibold text-white text-xs">MySQL</div>
                   <div class="text-[9px] text-sky-200 mt-0.5">Relational DB</div>
                 </div>
-                <div class="aqua-card-inner p-2">
+                <div class="aqua-card-inner p-2 skill-card" data-level="intermediate">
                   <div class="font-semibold text-white text-xs">Git</div>
                   <div class="text-[9px] text-sky-200 mt-0.5">Version Control</div>
+                </div>
+                <div class="aqua-card-inner p-2 skill-card" data-level="intermediate">
+                  <div class="font-semibold text-white text-xs">Tailwind CSS</div>
+                  <div class="text-[9px] text-sky-200 mt-0.5">CSS Framework</div>
                 </div>
               </div>
             </div>
@@ -873,6 +938,40 @@
         </div>
 
       </main>
+      <div class="lg:hidden aqua-glass-panel p-3"><div class="space-y-2 shrink-0">
+            <div class="text-center space-y-0.5">
+              <p class="text-[11px] font-semibold text-white drop-shadow flex items-center justify-center gap-1">
+                <span>Let's Build Something Great Together</span>
+              </p>
+              <p class="text-[9.5px] text-sky-200/90 font-normal">
+                Open for IT Internship Opportunities
+              </p>
+            </div>
+
+            <!-- Social Link Buttons -->
+            <div class="flex gap-1.5">
+              <a href="https://www.linkedin.com/in/erfanhakimi/" target="_blank" class="flex-1 py-1.5 px-2 rounded-xl bg-white/80 hover:bg-white text-slate-900 font-semibold text-[11px] shadow-md transition-all flex items-center justify-center gap-1">
+                <img src="https://img.icons8.com/color/48/linkedin.png" class="w-3.5 h-3.5" />
+                <span>LinkedIn</span>
+              </a>
+              <a href="https://github.com/erfanhkimi" target="_blank" class="flex-1 py-1.5 px-2 rounded-xl bg-white/80 hover:bg-white text-slate-900 font-semibold text-[11px] shadow-md transition-all flex items-center justify-center gap-1">
+                <img src="icons/github.png" class="w-3.5 h-3.5" />
+                <span>GitHub</span>
+              </a>
+              <a href="mailto:erfanhakimi04@gmail.com" class="flex-1 py-1.5 px-2 rounded-xl bg-white/80 hover:bg-white text-slate-900 font-semibold text-[11px] shadow-md transition-all flex items-center justify-center gap-1">
+                <img src="icons/gmail.webp" class="w-3.5 h-3.5" />
+                <span>Gmail</span>
+              </a>
+            </div>
+
+            <!-- Trademark & Copyright Line -->
+            <div class="text-center pt-1 border-t border-white/10">
+              <p class="text-[8.5px] text-sky-200/70 tracking-widest uppercase font-medium">
+                © 2026 Erfan Hakimi ™ · All Rights Reserved
+              </p>
+            </div>
+          </div></div>
+
 
     </div>
 
@@ -911,7 +1010,7 @@
       </div>
 
       <p class="text-xs text-sky-100/90 leading-relaxed">
-        Have an IT internship opportunity, project inquiry, or technical question? Drop me a direct message!
+        Have an internship opportunity, project inquiry, or technical question? Drop me a direct message!
       </p>
 
       <form id="contact-form" onsubmit="handleContactSubmit(event)" class="space-y-3">
@@ -952,22 +1051,13 @@
   <button id="sound-toggle" type="button" class="fixed bottom-4 right-4 z-40 w-10 h-10 rounded-full aqua-card-inner text-base flex items-center justify-center hover:bg-white/20 transition-all" aria-label="Mute sounds">🔊</button>
 
   <script>
-    // Tab open function updated to dynamically sync mobile dropdown button header & auto-collapse
+    // Open a section (clicking the open section again closes the box)
     function openTab(tabId, clickedBtn) {
       const panel = document.getElementById('main-panel');
 
-      // Clicking the already-open section again closes the box
       if (clickedBtn.classList.contains('active') && !panel.classList.contains('panel-closed')) {
         clickedBtn.classList.remove('active');
         panel.classList.add('panel-closed');
-        document.getElementById('mobile-current-title').innerText = 'Select a section';
-        document.getElementById('mobile-current-icon').src = 'icons/home.png';
-        if (window.innerWidth < 1024) {
-          const menu = document.getElementById('nav-menu-container');
-          menu.classList.add('hidden');
-          menu.classList.remove('flex');
-          document.getElementById('mobile-dropdown-arrow').style.transform = 'rotate(0deg)';
-        }
         return;
       }
 
@@ -976,41 +1066,24 @@
 
       document.querySelectorAll('.tab-pane').forEach(pane => pane.classList.add('hidden'));
       document.getElementById('tab-' + tabId).classList.remove('hidden');
-      document.getElementById('main-panel').classList.remove('panel-closed');
+      panel.classList.remove('panel-closed');
 
-      // Update mobile header selection indicator
-      const title = clickedBtn.getAttribute('data-title');
-      const icon = clickedBtn.getAttribute('data-icon');
-      if (title && icon) {
-        document.getElementById('mobile-current-title').innerText = title;
-        document.getElementById('mobile-current-icon').src = icon;
-      }
+      // Short sections shrink to fit their content (no empty space)
+      panel.classList.toggle('fit-content', ['education', 'experience', 'skills'].includes(tabId));
 
-      // Auto-collapse mobile nav menu after selection if open on mobile screens
+      // Mobile: keep the chosen pill centred in the sideways nav
       if (window.innerWidth < 1024) {
-        const menu = document.getElementById('nav-menu-container');
-        const arrow = document.getElementById('mobile-dropdown-arrow');
-        menu.classList.add('hidden');
-        menu.classList.remove('flex');
-        arrow.style.transform = 'rotate(0deg)';
+        clickedBtn.scrollIntoView({ inline: 'center', block: 'nearest', behavior: 'smooth' });
       }
     }
 
-    // Toggle mobile navigation menu visibility
-    function toggleMobileMenu() {
-      const menu = document.getElementById('nav-menu-container');
-      const arrow = document.getElementById('mobile-dropdown-arrow');
-
-      if (menu.classList.contains('hidden')) {
-        menu.classList.remove('hidden');
-        menu.classList.add('flex');
-        arrow.style.transform = 'rotate(180deg)';
-      } else {
-        menu.classList.add('hidden');
-        menu.classList.remove('flex');
-        arrow.style.transform = 'rotate(0deg)';
-      }
-    }
+    // Capability levels -> signal bars + status label
+    const SKILL_LEVELS = { beginner: [1, 'Beginner', 'lvl-beg'], intermediate: [2, 'Intermediate', 'lvl-int'], advanced: [3, 'Advanced', 'lvl-adv'] };
+    document.querySelectorAll('.skill-card').forEach(card => {
+      const [n, label, cls] = SKILL_LEVELS[card.dataset.level] || SKILL_LEVELS.beginner;
+      card.insertAdjacentHTML('beforeend',
+        `<div class="skill-level-row"><span class="sig lv${n}" role="img" aria-label="${label}"><i></i><i></i><i></i></span><span class="skill-level ${cls}">${label}</span></div>`);
+    });
 
     // Projects Array ordered with Selective Storage Purger and VibeVault directly under Data Viz Game
     const projectList = [
@@ -1248,9 +1321,6 @@
     // Contact modal functionality
     function openContactModal() {
       document.getElementById('contact-modal').classList.remove('hidden');
-      if (window.innerWidth < 1024) {
-        toggleMobileMenu();
-      }
     }
 
     function closeContactModal() {
