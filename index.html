@@ -205,6 +205,14 @@
     @keyframes openPulse { 0%,100% { box-shadow: 0 0 6px #34d399, 0 0 2px #fff; } 50% { box-shadow: 0 0 16px #6ee7b7, 0 0 3px #fff; } }
     @media (prefers-reduced-motion: reduce) { .open-dot { animation: none; } }
     @media (max-width: 400px) { .open-bar { font-size: 12px; padding: 5px 14px; } }
+
+    /* About Me profile picture (top right) */
+    .profile-pic { float: right; margin: 2px 0 10px 22px; shape-outside: circle(50%); width: 124px; height: 124px; border-radius: 50%; overflow: hidden; padding: 3px;
+      background: linear-gradient(180deg, rgba(255,255,255,.95), rgba(120,210,255,.55));
+      box-shadow: 0 0 0 1px rgba(255,255,255,.8), 0 8px 22px rgba(0,10,30,.55), 0 0 22px rgba(0,160,255,.45); }
+    .profile-pic img { width: 100%; height: 100%; object-fit: cover; object-position: center top; border-radius: 50%; display: block; }
+    @media (min-width: 640px) { .profile-pic { width: 180px; height: 180px; } }
+    @media (min-width: 1024px) { .profile-pic { width: 220px; height: 220px; } }
   </style>
 </head>
 <body class="min-h-screen overflow-y-auto lg:h-screen lg:overflow-hidden p-2 sm:p-3 lg:p-3.5 relative flex flex-col justify-between">
@@ -264,14 +272,9 @@
                 <span>Projects</span>
               </div>
 
-              <div onclick="openTab('education', this)" class="aqua-nav-btn" data-title="Education" data-icon="icons/education.png">
-                <img src="icons/education.png" class="w-6 h-6 drop-shadow-md" />
-                <span>Education</span>
-              </div>
-
-              <div onclick="openTab('experience', this)" class="aqua-nav-btn" data-title="Working Experience" data-icon="icons/experience.png">
+              <div onclick="openTab('experience', this)" class="aqua-nav-btn" data-title="Experience &amp; Education" data-icon="icons/experience.png">
                 <img src="icons/experience.png" class="w-6 h-6 drop-shadow-md" />
-                <span>Working Experience</span>
+                <span>Experience &amp; Education</span>
               </div>
 
               <div onclick="openTab('skills', this)" class="aqua-nav-btn" data-title="Capabilities" data-icon="icons/skill.png">
@@ -341,135 +344,142 @@
       </aside>
 
       <!-- RIGHT EXPANDED MAIN DISPLAY (SPAN 9) -->
-      <main id="main-panel" class="lg:col-span-9 aqua-glass-panel p-4 sm:p-5 flex flex-col justify-between min-h-[450px] lg:h-full lg:overflow-hidden min-h-0">
+      <main id="main-panel" class="lg:col-span-9 aqua-glass-panel p-4 sm:p-5 flex flex-col justify-between min-h-[450px] lg:h-full lg:overflow-hidden min-h-0 fit-content">
 
         <!-- TAB 1: HOME & BIO (UPDATED WITH DIVERSE INTERESTS, LARGER FONTS & SMALLER IMAGES) -->
-        <div id="tab-home" class="tab-pane flex flex-col h-full space-y-4 overflow-y-auto pr-1 min-h-0">
-          
-          <!-- Introduction Header & Expanded Bio -->
-          <div class="space-y-2 shrink-0">
-            <div class="border-b border-white/40 pb-1.5">
+        <div id="tab-home" class="tab-pane flex flex-col h-full space-y-5 overflow-y-auto pr-1 min-h-0">
+
+          <!-- Header -->
+          <div class="flex items-center justify-between gap-4 border-b border-white/30 pb-4 shrink-0">
+            <div>
               <span class="text-xs aero-heading-light text-sky-200 uppercase tracking-wider font-medium">Overview // Personal Index</span>
               <h2 class="aero-heading-light text-2xl sm:text-3xl text-white mt-0.5 drop-shadow">
                 About Me
               </h2>
             </div>
-
-            <p class="text-sm sm:text-base leading-relaxed text-sky-50 drop-shadow font-normal">
-              Multimedia Computing student at UiTM Shah Alam and a versatile builder who turns ideas into working software, from an internal exam management system built for FELDA's HR department to a machine-learning property price estimator deployed live on the web. I'm especially drawn to machine learning and data, with hands-on work in Python, scikit-learn, OpenCV and SQL, and I'm an MBOT Certified Data Analyst. Alongside that, I build across full-stack web (PHP, JavaScript, MySQL), Flutter mobile apps and Unity games. I'm open to software engineering, data analytics, machine learning or IT internships where I can ship real features, learn fast and find where I can grow the most.
-            </p>
           </div>
 
-          <!-- DIVERSE INTERESTS & CORE FOCUS GRID -->
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-3 shrink-0">
-            
-            <!-- Personal Interests & Hobbies Card -->
-            <div class="aqua-card-inner p-3.5 space-y-2">
-              <div class="flex items-center gap-2 border-b border-white/20 pb-1.5">
-                <span class="text-base"></span>
-                <h3 class="text-sm sm:text-base font-semibold text-white">Interests & Hobbies</h3>
-              </div>
-              <ul class="text-xs sm:text-sm text-sky-100 space-y-2 leading-relaxed">
-                <li class="flex items-start gap-2">
-                  <span class="text-sky-300 font-bold">•</span>
-                  <span><strong>Machine Learning &amp; Data Science:</strong> Training and deploying models on real data, like my Klang Valley property price estimator and Color Telemetry Studio.</span>
+          <!-- Bio with profile picture on the right -->
+          <div class="flow-root shrink-0 text-sm sm:text-base leading-relaxed text-sky-50 drop-shadow">
+            <div class="profile-pic">
+              <img src="icons/profile1.jpeg" alt="Muhammad Erfan Hakimi" />
+            </div>
+            <div class="space-y-3">
+              <p>Multimedia Computing student at UiTM Shah Alam and a developer who turns ideas into working software. I'm especially drawn to web development, machine learning, data analytics and game development with hands-on work in Python, scikit-learn, OpenCV, SQL and Unity. I'm also an MBOT Certified Data Analyst.</p>
+              <p>Alongside that, I build across full-stack web (PHP, JavaScript, MySQL), Flutter mobile apps and Unity games. I'm open to software engineering, web development, mobile development, machine learning or any CS related internships where I can ship real features, learn fast and find where I can grow the most.</p>
+            </div>
+          </div>
+
+          <!-- Interests & core focus -->
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4 shrink-0">
+
+            <div class="aqua-card-inner p-4">
+              <h3 class="text-base font-semibold text-white pb-2 mb-3 border-b border-white/20">Interests &amp; Hobbies</h3>
+              <ul class="space-y-3.5">
+                <li>
+                  <div class="text-sm sm:text-[15px] font-semibold text-white">Machine Learning &amp; Data Science</div>
+                  <div class="text-xs sm:text-sm leading-relaxed text-sky-100/90 mt-0.5">Training and deploying models on real data, like my Klang Valley property price estimator and Color Telemetry Studio.</div>
                 </li>
-                <li class="flex items-start gap-2">
-                  <span class="text-sky-300 font-bold">•</span>
-                  <span><strong>Basketball & Sports Analytics:</strong> Turning shooting stats and training data into insights, the idea behind my Hooper Buddy app.</span>
+                <li>
+                  <div class="text-sm sm:text-[15px] font-semibold text-white">Basketball & Sports Analytics</div>
+                  <div class="text-xs sm:text-sm leading-relaxed text-sky-100/90 mt-0.5">Turning shooting stats and training data into insights, the idea behind my Hooper Buddy app.</div>
                 </li>
-                <li class="flex items-start gap-2">
-                  <span class="text-sky-300 font-bold">•</span>
-                  <span><strong>Game Design & Interactive 3D:</strong> Building gameplay mechanics and 3D worlds in Unity and C#, including my final year educational game.</span>
+                <li>
+                  <div class="text-sm sm:text-[15px] font-semibold text-white">Game Design & Interactive 3D</div>
+                  <div class="text-xs sm:text-sm leading-relaxed text-sky-100/90 mt-0.5">Building gameplay mechanics and 3D worlds in Unity and C#, including my final year educational game.</div>
                 </li>
-                <li class="flex items-start gap-2">
-                  <span class="text-sky-300 font-bold">•</span>
-                  <span><strong>Browser Extension Building:</strong> Shipping small, fast Manifest V3 tools like VibeVault and Selective Storage Purger to fix everyday workflow pain points.</span>
+                <li>
+                  <div class="text-sm sm:text-[15px] font-semibold text-white">Browser Extension Building</div>
+                  <div class="text-xs sm:text-sm leading-relaxed text-sky-100/90 mt-0.5">Shipping small, fast Manifest V3 tools like VibeVault and Selective Storage Purger to fix everyday workflow pain points.</div>
                 </li>
-                <li class="flex items-start gap-2">
-                  <span class="text-sky-300 font-bold">•</span>
-                  <span><strong>UI/UX & Frutiger Aero Design:</strong> Designing glassy, readable, mobile-friendly interfaces, like this portfolio.</span>
+                <li>
+                  <div class="text-sm sm:text-[15px] font-semibold text-white">UI/UX & Frutiger Aero Design</div>
+                  <div class="text-xs sm:text-sm leading-relaxed text-sky-100/90 mt-0.5">Designing glassy, readable, mobile-friendly interfaces, like this portfolio.</div>
                 </li>
               </ul>
             </div>
 
-            <!-- Key Strengths & Core Values Card -->
-            <div class="aqua-card-inner p-3.5 space-y-2">
-              <div class="flex items-center gap-2 border-b border-white/20 pb-1.5">
-                <span class="text-base"></span>
-                <h3 class="text-sm sm:text-base font-semibold text-white">Core Focus & Strengths</h3>
-              </div>
-              <ul class="text-xs sm:text-sm text-sky-100 space-y-2 leading-relaxed">
-                <li class="flex items-start gap-2">
-                  <span class="text-sky-300 font-bold">•</span>
-                  <span><strong>End-to-End Builder:</strong> Takes ideas from concept to deployment across web, mobile and desktop.</span>
+            <div class="aqua-card-inner p-4">
+              <h3 class="text-base font-semibold text-white pb-2 mb-3 border-b border-white/20">Core Focus &amp; Strengths</h3>
+              <ul class="space-y-3.5">
+                <li>
+                  <div class="text-sm sm:text-[15px] font-semibold text-white">End-to-End Builder</div>
+                  <div class="text-xs sm:text-sm leading-relaxed text-sky-100/90 mt-0.5">Takes ideas from concept to deployment across web, mobile and desktop.</div>
                 </li>
-                <li class="flex items-start gap-2">
-                  <span class="text-sky-300 font-bold">•</span>
-                  <span><strong>Data-Driven Problem Solver:</strong> Cleans and analyses data with SQL, Python and analytics tools to support better decisions. MBOT Certified Data Analyst.</span>
+                <li>
+                  <div class="text-sm sm:text-[15px] font-semibold text-white">Data-Driven Problem Solver</div>
+                  <div class="text-xs sm:text-sm leading-relaxed text-sky-100/90 mt-0.5">Cleans and analyses data with SQL, Python and analytics tools to support better decisions. MBOT Certified Data Analyst.</div>
                 </li>
-                <li class="flex items-start gap-2">
-                  <span class="text-sky-300 font-bold">•</span>
-                  <span><strong>Fast Learner:</strong> Picks up new stacks quickly, from Flutter to FastAPI to OpenCV, each learned for a real project.</span>
+                <li>
+                  <div class="text-sm sm:text-[15px] font-semibold text-white">Fast Learner</div>
+                  <div class="text-xs sm:text-sm leading-relaxed text-sky-100/90 mt-0.5">Picks up new stacks quickly, from Flutter to FastAPI to OpenCV, each learned for a real project.</div>
                 </li>
-                <li class="flex items-start gap-2">
-                  <span class="text-sky-300 font-bold">•</span>
-                  <span><strong>Clear Communicator:</strong> Leads team presentations and documents system workflows so others can follow them.</span>
+                <li>
+                  <div class="text-sm sm:text-[15px] font-semibold text-white">Clear Communicator</div>
+                  <div class="text-xs sm:text-sm leading-relaxed text-sky-100/90 mt-0.5">Leads team presentations and documents system workflows so others can follow them.</div>
                 </li>
               </ul>
             </div>
 
-          </div>
-
-          <!-- COMPACT SCALED-DOWN PROFILE IMAGE SHOWCASE -->
-          <div class="space-y-1.5 shrink-0 pt-1">
-            <h3 class="text-xs sm:text-sm font-semibold text-sky-200 uppercase tracking-wider">Photo Showcase</h3>
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-4xl">
-              <!-- Image 1 -->
-              <div class="aqua-card-inner p-1.5 overflow-hidden rounded-xl h-64 sm:h-72 lg:h-80 border border-white/40 shadow-md">
-                <img 
-                  src="icons/profile1.jpeg" 
-                  alt="Profile Image 1" 
-                  class="w-full h-full object-cover rounded-lg transition-transform duration-300 hover:scale-[1.03]"
-                />
-              </div>
-
-              <!-- Image 2 -->
-              <div class="aqua-card-inner p-1.5 overflow-hidden rounded-xl h-64 sm:h-72 lg:h-80 border border-white/40 shadow-md">
-                <img 
-                  src="icons/profile3.jpeg" 
-                  alt="Workspace Image 2" 
-                  class="w-full h-full object-cover rounded-lg transition-transform duration-300 hover:scale-[1.03]"
-                />
-              </div>
-            </div>
           </div>
 
         </div>
 
-        <!-- TAB 2: WORKING EXPERIENCE -->
-        <div id="tab-experience" class="tab-pane hidden flex flex-col justify-between h-full space-y-2.5 min-h-0">
-          <div class="space-y-2 flex-1 overflow-hidden min-h-0">
-            <div class="border-b border-white/40 pb-1 shrink-0">
-              <span class="text-[10px] aero-heading-light text-sky-200 uppercase tracking-wide">Career // Work History</span>
-              <h2 class="aero-heading-light text-xl sm:text-2xl text-white mt-0.5 drop-shadow">
-                Working Experience
-              </h2>
-            </div>
+        <!-- TAB 2: EXPERIENCE & EDUCATION -->
+        <div id="tab-experience" class="tab-pane hidden flex flex-col h-full space-y-5 min-h-0">
+          <div class="border-b border-white/40 pb-1 shrink-0">
+            <span class="text-[10px] aero-heading-light text-sky-200 uppercase tracking-wide">Career // Qualification</span>
+            <h2 class="aero-heading-light text-xl sm:text-2xl text-white mt-0.5 drop-shadow">
+              Experience &amp; Education
+            </h2>
+          </div>
 
-            <div class="space-y-2 overflow-y-auto pr-1 h-[calc(100%-50px)] min-h-0">
-              <div class="aqua-card-inner p-3.5 space-y-1.5">
+          <div class="space-y-2 shrink-0">
+            <h3 class="text-xs sm:text-sm font-semibold text-sky-200 uppercase tracking-wider">Working Experience</h3>
+            <div class="aqua-card-inner p-3.5 space-y-1.5">
+
                 <div class="flex justify-between items-center">
+
                   <h3 class="font-semibold text-white text-xs sm:text-sm">IT Support Intern</h3>
+
                   <span class="text-[10px] text-sky-300 font-medium">October 2024 - March 2025</span>
+
                 </div>
+
                 <p class="text-[11px] text-sky-200 font-medium">Human Resource Department of FELDA, Kuala Lumpur</p>
+
                 <p class="text-[11px] sm:text-xs text-sky-100/90 leading-relaxed pt-1 space-y-1">
+
                   ● Proposed and developed an Exam Management System to streamline HR examination workflows replacing manual processes and accelerating candidate evaluation turnaround times. <br><br>
+
                   ● Structured HR datasets and candidate records using SQL and Microsoft Excel ensuring high data accuracy, integrity, and compliance with organizational standards<br><br>
+
                   ● Delivered IT support across administrative hardware and software applications, diagnosing network/system glitches and logging bug reports to maintain daily operational uptime. 
+
                 </p>
+
               </div>
+          </div>
+
+          <div class="space-y-2 shrink-0">
+            <h3 class="text-xs sm:text-sm font-semibold text-sky-200 uppercase tracking-wider">Education</h3>
+            <div class="aqua-card-inner p-3.5 space-y-1.5">
+
+              <h3 class="text-sm font-semibold text-white">Bachelor Degree in Computer Science (Hons.) Multimedia Computing</h3>
+
+              <span class="text-[10px] text-sky-300 font-medium">April 2025 - Current</span>
+
+              <p class="text-xs text-sky-300 font-medium">UiTM Shah Alam, Selangor</p>
+
+            </div>
+            <div class="aqua-card-inner p-3.5 space-y-1.5">
+
+              <h3 class="text-sm font-semibold text-white">Diploma in Computer Science</h3>
+
+              <span class="text-[10px] text-sky-300 font-medium">October 2022 - March 2025</span>
+
+              <p class="text-xs text-sky-300 font-medium">UiTM Cawangan Terengganu, Kampus Kuala Terengganu (Chendering)</p>
+
             </div>
           </div>
         </div>
@@ -606,30 +616,6 @@
           </div>
         </div>
 
-        <!-- TAB 4: EDUCATION -->
-        <div id="tab-education" class="tab-pane hidden flex flex-col justify-between h-full space-y-3 min-h-0">
-          <div class="space-y-2 shrink-0">
-            <div class="border-b border-white/40 pb-1">
-              <span class="text-[10px] aero-heading-light text-sky-200 uppercase tracking-wide">Education // Qualification</span>
-              <h2 class="aero-heading-light text-xl sm:text-2xl text-white mt-0.5 drop-shadow">
-                Academic Degree
-              </h2>
-            </div>
-
-            <div class="aqua-card-inner p-3.5 space-y-1.5">
-              <h3 class="text-sm font-semibold text-white">Bachelor Degree in Computer Science (Hons.) Multimedia Computing</h3>
-              <span class="text-[10px] text-sky-300 font-medium">April 2025 - Current</span>
-              <p class="text-xs text-sky-300 font-medium">UiTM Shah Alam, Selangor</p>
-            </div>
-
-            <div class="aqua-card-inner p-3.5 space-y-1.5">
-              <h3 class="text-sm font-semibold text-white">Diploma in Computer Science</h3>
-              <span class="text-[10px] text-sky-300 font-medium">October 2022 - March 2025</span>
-              <p class="text-xs text-sky-300 font-medium">UiTM Cawangan Terengganu, Kampus Kuala Terengganu (Chendering)</p>
-            </div>
-          </div>
-        </div>
-
         <!-- TAB 5: SKILLS (on each skill card set data-level to beginner | intermediate | advanced) -->
         <div id="tab-skills" class="tab-pane hidden flex flex-col justify-between h-full space-y-2.5 min-h-0">
           <div class="space-y-3 flex-1 overflow-y-auto pr-1 min-h-0">
@@ -667,10 +653,6 @@
                 <div class="aqua-card-inner p-2 skill-card" data-level="intermediate">
                   <div class="font-semibold text-white text-xs">Java</div>
                   <div class="text-[9px] text-sky-200 mt-0.5">OOP & Applications</div>
-                </div>
-                <div class="aqua-card-inner p-2 skill-card" data-level="intermediate">
-                  <div class="font-semibold text-white text-xs">JavaScript</div>
-                  <div class="text-[9px] text-sky-200 mt-0.5">Web Development</div>
                 </div>
                 <div class="aqua-card-inner p-2 skill-card" data-level="intermediate">
                   <div class="font-semibold text-white text-xs">PHP</div>
@@ -716,7 +698,7 @@
                   <div class="font-semibold text-white text-xs">Excel</div>
                   <div class="text-[9px] text-sky-200 mt-0.5">Data Cleaning</div>
                 </div>
-                <div class="aqua-card-inner p-2 skill-card" data-level="advanced">
+                <div class="aqua-card-inner p-2 skill-card" data-level="intermediate">
                   <div class="font-semibold text-white text-xs">scikit-learn</div>
                   <div class="text-[9px] text-sky-200 mt-0.5">Machine Learning</div>
                 </div>
@@ -824,7 +806,7 @@
               <span class="text-[9px] px-2 py-0.5 rounded-full bg-sky-500/30 border border-sky-300/50 text-sky-100">Click media to expand 🔍</span>
             </div>
             <p class="text-[11px] text-sky-100/90 leading-relaxed">
-              Hands-on technical work, extension demos, internal system demonstrations at FELDA, university project presentations, and training workshops.
+              Hands-on technical work, extension demos, internal system demonstrations at FELDA, university project presentations, training workshops, and inter-faculty sports events.
             </p>
           </div>
 
@@ -930,14 +912,15 @@
                 </div>
               </div>
 
-              <!-- Gallery Item: Empty placeholder (fill in later) -->
-              <div class="aqua-card-inner p-2 flex flex-col justify-between opacity-80">
-                <div class="w-full h-28 rounded-lg bg-slate-950/40 border border-dashed border-white/30 flex items-center justify-center text-sky-200/60 text-[10px]">
-                  Empty slot
+              <!-- Gallery Item: Inter-Faculty Sports (Sepak Takraw) -->
+              <div onclick="openLightbox('icons/sepaktakraw.png', 'Inter-Faculty Sports: Sepak Takraw', 'Taking part in the Inter-Faculty Sports event, playing sepak takraw.')" class="aqua-card-inner p-2 flex flex-col justify-between cursor-pointer hover:border-sky-300 transition-all group">
+                <div class="w-full h-28 rounded-lg overflow-hidden relative bg-slate-950/60 border border-white/20">
+                  <img src="icons/sepaktakraw.png" alt="Playing sepak takraw at the Inter-Faculty Sports event" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105" />
+                  <span class="absolute top-1.5 right-1.5 text-[8px] px-1.5 py-0.5 rounded bg-emerald-600/90 text-white font-bold border border-emerald-300">Sports</span>
                 </div>
                 <div class="mt-1.5 space-y-0.5">
-                  <div class="font-semibold text-white text-[11px] truncate">New highlight coming soon</div>
-                  <p class="text-[9.5px] text-sky-200 line-clamp-1">Add a photo or video here</p>
+                  <div class="font-semibold text-white text-[11px] truncate">Inter-Faculty Sports: Sepak Takraw</div>
+                  <p class="text-[9.5px] text-sky-200 line-clamp-1">Joining the Inter-Faculty Sports event</p>
                 </div>
               </div>
 
@@ -1077,7 +1060,7 @@
       panel.classList.remove('panel-closed');
 
       // Short sections shrink to fit their content (no empty space)
-      panel.classList.toggle('fit-content', ['education', 'experience', 'skills'].includes(tabId));
+      panel.classList.toggle('fit-content', ['home', 'experience', 'skills'].includes(tabId));
 
       // Mobile: keep the chosen pill centred in the sideways nav
       if (window.innerWidth < 1024) {
