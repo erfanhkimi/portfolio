@@ -165,6 +165,58 @@ header strong{flex:none}
 header nav{flex:1;min-width:0;justify-content:center}
 header nav a{flex:none}
 @media (max-width:1180px){header nav a img{display:none}}
+.pwrap{position:relative}
+.pnav{position:absolute;top:86px;z-index:3;width:42px;height:42px;padding:0;border-radius:50%;border:1px solid #fff;background:linear-gradient(180deg,#fff,#d6eefc);color:var(--ink);font:700 22px/1 'Nunito Sans',sans-serif;cursor:pointer;box-shadow:0 5px 16px rgba(5,40,80,.3),inset 0 1px 0 #fff;transition:transform .2s,box-shadow .2s,opacity .2s}
+.pnav:hover:not(:disabled){transform:scale(1.08);box-shadow:0 8px 20px rgba(30,150,240,.5),inset 0 1px 0 #fff}
+.pnav:disabled{opacity:.35;cursor:default}
+.pnav.l{left:4px}.pnav.r{right:4px}
+.pnav{top:61px}
+.proj{grid-template-columns:minmax(0,1fr)}
+.pwrap{min-width:0}
+
+/* Projects: centered icon strip + centered detail box (edge fade kept) */
+.plist{padding:34px 60px 40px}
+.plist::before,.plist::after{content:"";flex:1 0 0;min-width:0}
+#pdetail{width:100%;max-width:880px;margin:0 auto}
+body{overflow-x:clip}
+dialog{max-height:92vh;overflow:auto}
+
+/* Mobile */
+@media (max-width:860px){
+  section{scroll-margin-top:116px}
+  header .wrap{gap:6px 10px;padding:6px 12px;min-height:0}
+  header nav{order:3;flex:0 0 100%;width:100%;justify-content:flex-start;gap:2px;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+  header .themes{margin-left:auto}
+  header nav::-webkit-scrollbar{display:none}
+  nav a{padding:9px 12px;font-size:14px}
+  header .btn.sm{padding:8px 14px;font-size:14px}
+  .sw{width:34px;height:34px}
+  h2{font-size:28px;margin-bottom:18px}
+  .glass.wrap{margin:16px auto;padding:28px 22px;backdrop-filter:blur(10px) saturate(150%);-webkit-backdrop-filter:blur(10px) saturate(150%)}
+  .hero{gap:22px}
+  .hero p{font-size:17px}
+  .me img{width:160px;height:160px}
+  .actions .btn{flex:1 1 auto;text-align:center}
+  .shot{height:210px}
+  .plist{padding:30px 50px 36px;gap:14px}
+  .pnav{top:60px;width:36px;height:36px;font-size:19px}
+  #pdetail{padding:20px}
+  .gitem .m{height:130px}
+  dialog{padding:14px;border-radius:16px}
+  dialog .big{max-height:50vh}
+}
+@media (max-width:520px){
+  .glass.wrap{width:calc(100% - 20px);padding:24px 16px;border-radius:22px}
+  .hero h1{font-size:clamp(34px,10.5vw,44px)}
+  .pill{font-size:14px;padding:6px 14px}
+  .best,.grid3,.gal{gap:12px}
+  .skill{padding:12px 14px}
+  footer{padding:24px 0 40px}
+}
+@media (hover:none){
+  .pitem:hover{transform:none}.pitem[aria-current=true]:hover{transform:scale(1.3)}
+  .gitem:hover{transform:none}.btn:hover{transform:none}
+}
 </style>
 </head>
 <body>
@@ -175,7 +227,7 @@ header nav a{flex:none}
 <div class="orb" id="orb" aria-hidden="true"></div>
 <div class="prog" id="prog" aria-hidden="true"></div>
 <header><div class="wrap"><strong>Erfan Hakimi</strong>
-<nav aria-label="Main"><a href="#home"><img src="icons/home.png" alt="">Home</a><a href="#projects"><img src="icons/project.png" alt="">Projects</a><a href="#experience"><img src="icons/experience.png" alt="">Experience</a><a href="#skills"><img src="icons/skill.png" alt="">Skills</a><a href="#credentials"><img src="icons/credinal.png" alt="">Credentials</a><a href="#gallery"><img src="icons/gallery.png" alt="">Gallery</a><a href="#contact"><img src="icons/contact.png" alt="">Contact</a></nav><div class="themes" role="group" aria-label="Wave color theme"><button type="button" class="sw" data-t="blue" aria-label="PS4 blue" aria-pressed="true" style="background:linear-gradient(135deg,#021340,#1d78ea)"></button><button type="button" class="sw" data-t="sunset" aria-label="Sunset" aria-pressed="false" style="background:linear-gradient(135deg,#1a0b3a,#ff7a59)"></button><button type="button" class="sw" data-t="aurora" aria-label="Aurora" aria-pressed="false" style="background:linear-gradient(135deg,#021a1a,#2ee6a6)"></button></div><button type="button" class="btn sm" id="snd" aria-pressed="true" style="white-space:nowrap">Sound on</button></div></header>
+<nav aria-label="Main"><a href="#home"><img src="icons/home.png" alt="">Home</a><a href="#projects"><img src="icons/project.png" alt="">Projects</a><a href="#experience"><img src="icons/experience.png" alt="">Experience</a><a href="#skills"><img src="icons/skill.png" alt="">Skills</a><a href="#credentials"><img src="icons/credinal.png" alt="">Credentials</a><a href="#gallery"><img src="icons/gallery.png" alt="">Gallery</a><a href="#contact"><img src="icons/contact.png" alt="">Contact</a></nav><div class="themes" role="group" aria-label="Wave color theme"><button type="button" class="sw" data-t="blue" aria-label="PS4 blue" aria-pressed="true" style="background:linear-gradient(135deg,#021340,#1d78ea)"></button><button type="button" class="sw" data-t="sunset" aria-label="Sunset" aria-pressed="false" style="background:linear-gradient(135deg,#1a0b3a,#ff7a59)"></button><button type="button" class="sw" data-t="aurora" aria-label="Aurora" aria-pressed="false" style="background:linear-gradient(135deg,#021a1a,#2ee6a6)"></button></div><button type="button" class="btn sm" id="snd" aria-pressed="false" style="white-space:nowrap">Sound off</button></div></header>
 
 <main>
 <section id="home" class="wrap glass hero">
@@ -195,8 +247,8 @@ header nav a{flex:none}
 <section id="projects" class="wrap glass">
 <h2>Projects</h2>
 <div class="chips" id="filters" role="group" aria-label="Filter projects by type"></div>
-<p class="muted" style="margin:-4px 0 0;font-size:15px">Browse with the left and right arrow keys, swipe, or click an icon.</p>
-<div class="proj"><div class="plist" id="plist"></div><article class="card" id="pdetail" aria-live="polite"></article></div>
+<p class="muted" style="margin:-4px 0 0;font-size:15px">Use the arrow buttons or keys, swipe, or click an icon to browse.</p>
+<div class="proj"><div class="pwrap"><button type="button" class="pnav l" id="pprev" aria-label="Previous project">&#8249;</button><div class="plist" id="plist"></div><button type="button" class="pnav r" id="pnext" aria-label="Next project">&#8250;</button></div><article class="card" id="pdetail" aria-live="polite"></article></div>
 </section>
 
 <section id="experience" class="wrap glass">
@@ -273,13 +325,21 @@ function show(slug,push){
   <div class="tags">${p.tags.map(t=>`<span>${t}</span>`).join('')}</div>`;
   if(!reduce){const d=$('pdetail');d.classList.remove('swap');void d.offsetWidth;d.classList.add('swap');}
   if(push)history.replaceState(null,'','#projects/'+cur);
+  navState();
 }
+function visItems(){return [...document.querySelectorAll('.pitem')].filter(b=>!b.hidden);}
+function navState(){const v=visItems(),i=v.findIndex(b=>b.dataset.s===cur);
+  $('pprev').disabled=i<=0;$('pnext').disabled=i<0||i>=v.length-1;}
+function step1(d){const v=visItems(),i=v.findIndex(b=>b.dataset.s===cur),n=v[i+d];if(n)show(n.dataset.s,true);}
+$('pprev').addEventListener('click',()=>step1(-1));
+$('pnext').addEventListener('click',()=>step1(1));
 function filter(cat,btn){
   document.querySelectorAll('#filters .chip').forEach(b=>b.setAttribute('aria-pressed',b===btn?'true':'false'));
   let first=null;
   document.querySelectorAll('.pitem').forEach(b=>{const on=cat==='All'||b.dataset.c.split(',').includes(cat);b.hidden=!on;if(on&&!first)first=b.dataset.s;});
   const cb=document.querySelector(`.pitem[data-s="${cur}"]`);
   if(cb&&cb.hidden&&first)show(first,false);
+  navState();
 }
 ['All','ML','Web App','Mobile App','Game','Extension'].forEach((c,i)=>{const b=document.createElement('button');b.type='button';b.className='chip';b.textContent=c;b.setAttribute('aria-pressed',i===0?'true':'false');b.onclick=()=>filter(c,b);$('filters').appendChild(b);});
 $('plist').innerHTML=P.map(p=>`<button type="button" class="pitem" data-s="${p.s}" data-c="${p.c}"><img src="icons/${p.img}" alt=""><b>${p.t}</b></button>`).join('');
@@ -354,10 +414,17 @@ function step(){const mx=(S.px+30+S.cx*16)/2,my=(S.py+30+S.cy*12)/2;
     if(d.y<-.03||d.x<-.05||d.x>1.05){d.y=1.03;d.x=Math.random();d.vx=d.vy=0;}});
   for(let i=E.length-1;i>=0;i--){E[i].life-=.045;if(E[i].life<=0)E.splice(i,1);}}
 const orb=$('orb');
-function loop(){t+=.0035+S.vel*.012;S.vel*=.92;step();
-  S.cx+=(S.mx-S.cx)*.06;S.cy+=(S.my-S.cy)*.06;c.style.transform='translate('+(-S.cx*16)+'px,'+(-S.cy*12)+'px)';
-  S.ox+=(S.px-S.ox)*.12;S.oy+=(S.py-S.oy)*.12;orb.style.transform='translate('+S.ox+'px,'+S.oy+'px)';
-  draw();requestAnimationFrame(loop);}
+let last=0;
+const lite=matchMedia('(hover: none), (max-width: 860px)');
+function loop(ts){requestAnimationFrame(loop);
+  const gap=ts-last,minGap=lite.matches?33:14;
+  if(gap<minGap)return;
+  const n=Math.max(1,Math.min(3,Math.round(gap/16.7)));last=ts;
+  for(let i=0;i<n;i++){t+=.0035+S.vel*.012;S.vel*=.92;step();
+    S.cx+=(S.mx-S.cx)*.06;S.cy+=(S.my-S.cy)*.06;S.ox+=(S.px-S.ox)*.12;S.oy+=(S.py-S.oy)*.12;}
+  c.style.transform='translate('+(-S.cx*16)+'px,'+(-S.cy*12)+'px)';
+  orb.style.transform='translate('+S.ox+'px,'+S.oy+'px)';
+  draw();}
 const TH={blue:{A:[[2,19,64],[10,67,166],[29,120,234]],B:[[3,32,70],[10,98,160],[38,196,230]],rib:[150,210,255]},
  sunset:{A:[[26,8,58],[110,36,120],[255,122,89]],B:[[40,10,60],[170,50,100],[255,190,90]],rib:[255,205,190]},
  aurora:{A:[[2,26,30],[8,90,82],[46,230,166]],B:[[10,20,50],[30,120,140],[120,240,220]],rib:[170,255,230]}};
@@ -378,7 +445,7 @@ function fade(){const H=innerHeight;secs.forEach(el=>{const r=el.getBoundingClie
   const dy=(a<b?1:-1)*(1-o)*44;
   el.style.opacity=o.toFixed(3);el.style.transform='translateY('+dy.toFixed(1)+'px) scale('+(.96+.04*o).toFixed(3)+')';});}
 if(!reduce){addEventListener('scroll',fade,{passive:true});addEventListener('resize',fade);fade();}
-let snd=true;try{snd=localStorage.getItem('snd')!=='off';}catch(e){}
+let snd=false;try{snd=localStorage.getItem('snd')==='on';}catch(e){}
 let ac=null;
 function blip(f){if(!snd)return;try{ac=ac||new(window.AudioContext||window.webkitAudioContext)();const o=ac.createOscillator(),g=ac.createGain(),t0=ac.currentTime;
   o.type='sine';o.frequency.setValueAtTime(f,t0);o.frequency.exponentialRampToValueAtTime(f*1.5,t0+.09);
