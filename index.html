@@ -3,7 +3,29 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Erfan Hakimi's Portfolio</title>
+  <title>Erfan Hakimi | Multimedia Computing Student & Developer</title>
+  <meta name="description" content="Portfolio of Muhammad Erfan Hakimi, a Multimedia Computing student at UiTM Shah Alam building web apps, machine learning projects, mobile apps and Unity games. Open for software development and machine learning internships." />
+  <meta name="theme-color" content="#001e3c" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Erfan Hakimi | Multimedia Computing Student & Developer" />
+  <meta property="og:description" content="Web apps, machine learning, Flutter and Unity projects. Open for software development and machine learning internships." />
+  <meta name="twitter:card" content="summary" />
+  <!-- Once the site is hosted, add: <meta property="og:image" content="https://YOUR-DOMAIN/preview.png" /> and <meta property="og:url" ...> -->
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E💧%3C/text%3E%3C/svg%3E" />
+
+  <script>
+    // Lite mode is decided before first paint: a saved choice wins, otherwise follow reduced-motion / Data Saver
+    (function () {
+      var lite = false, saved = null;
+      try { saved = localStorage.getItem('portfolioLite'); } catch (e) {}
+      if (saved === 'on') lite = true;
+      else if (saved !== 'off') {
+        var c = navigator.connection || {};
+        lite = !!(window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches) || c.saveData === true;
+      }
+      if (lite) document.documentElement.classList.add('lite');
+    })();
+  </script>
 
   <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
@@ -24,6 +46,9 @@
         text-shadow: 0 1px 3px rgba(0, 15, 40, 0.9), 0 0 8px rgba(0, 10, 30, 0.6);
       }
     }
+
+    /* Visible keyboard focus */
+    :focus-visible { outline: 2px solid #bae6fd; outline-offset: 2px; }
 
     /* Custom Aqua Scrollbar Styling */
     ::-webkit-scrollbar {
@@ -90,7 +115,7 @@
 
     /* Project type filter chips */
     .filter-chip {
-      font-size: 10px; line-height: 1; padding: 5px 10px; border-radius: 999px;
+      font-size: 12px; line-height: 1; padding: 6px 11px; border-radius: 999px;
       border: 1px solid rgba(255, 255, 255, 0.35); background: rgba(255, 255, 255, 0.08);
       color: #ffffff; cursor: pointer; white-space: nowrap;
       transition: background 0.25s ease, border-color 0.25s ease, transform 0.25s ease;
@@ -100,6 +125,92 @@
       background: linear-gradient(180deg, rgba(255, 255, 255, 0.9) 0%, rgba(120, 210, 255, 0.6) 100%);
       border-color: #ffffff; color: #002244; font-weight: 600; text-shadow: none;
     }
+
+    /* About Me: selectable chips with a detail panel (hover, tap or arrow keys) */
+    .about-chip {
+      display: inline-flex; align-items: center; gap: 6px;
+      font-size: 13px; line-height: 1.1; padding: 7px 12px; border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, 0.35); background: rgba(255, 255, 255, 0.08);
+      color: #ffffff; cursor: pointer; white-space: nowrap;
+      transition: background 0.25s ease, border-color 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
+    }
+    .about-chip-icon { width: 20px; height: 20px; object-fit: contain; flex: none; filter: drop-shadow(0 1px 2px rgba(0, 20, 60, 0.55)); }
+    .about-chip:hover { background: rgba(255, 255, 255, 0.22); border-color: rgba(255, 255, 255, 0.8); transform: translateY(-1px); }
+    .about-chip[aria-selected="true"] {
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.9) 0%, rgba(120, 210, 255, 0.6) 100%);
+      border-color: #ffffff; color: #002244; font-weight: 600; text-shadow: none;
+      box-shadow: inset 0 1px 0 #fff, 0 4px 14px rgba(0, 150, 255, 0.5);
+    }
+    .about-panel:not([hidden]) { animation: aboutIn 0.28s ease both; }
+    @keyframes aboutIn { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: none; } }
+    @media (prefers-reduced-motion: reduce) {
+      .about-panel:not([hidden]) { animation: none; }
+      .about-chip:hover { transform: none; }
+    }
+    #main-panel { scroll-margin-top: 84px; }
+
+    /* Aero gel button: glossy aqua with the classic split highlight */
+    .aero-btn {
+      position: relative; display: inline-flex; align-items: center; justify-content: center; gap: 6px;
+      padding: 9px 18px; border-radius: 12px; overflow: hidden; cursor: pointer;
+      font-size: 13.5px; font-weight: 600; line-height: 1.2; color: #ffffff; text-decoration: none;
+      text-shadow: 0 1px 2px rgba(0, 30, 80, 0.85);
+      background: linear-gradient(180deg, #8adbff 0%, #2fa6f0 47%, #0b79d2 53%, #1db0f5 100%);
+      border: 1px solid rgba(255, 255, 255, 0.85);
+      box-shadow: 0 5px 16px rgba(0, 140, 255, 0.45), inset 0 1px 0 rgba(255, 255, 255, 0.9), inset 0 -2px 5px rgba(0, 50, 120, 0.4);
+      transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s cubic-bezier(0.16, 1, 0.3, 1), filter 0.25s ease;
+    }
+    .aero-btn::before {
+      content: ""; position: absolute; top: 0; left: 0; right: 0; height: 50%; pointer-events: none;
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.6) 0%, rgba(255, 255, 255, 0.08) 100%);
+      border-radius: 11px 11px 40% 40% / 11px 11px 9px 9px;
+    }
+    .aero-btn > span { position: relative; }
+    .aero-btn:hover { transform: translateY(-2px); filter: brightness(1.1); box-shadow: 0 8px 22px rgba(0, 160, 255, 0.6), inset 0 1px 0 #fff, inset 0 -2px 5px rgba(0, 50, 120, 0.4); }
+    .aero-btn:active { transform: translateY(1px); filter: brightness(0.96); box-shadow: 0 2px 8px rgba(0, 140, 255, 0.4), inset 0 2px 5px rgba(0, 50, 120, 0.5); }
+    .aero-btn--sm { padding: 6px 13px; font-size: 12.5px; border-radius: 10px; }
+    .aero-btn--sm::before { border-radius: 9px 9px 40% 40% / 9px 9px 7px 7px; }
+
+    .aero-btn > img { position: relative; flex: none; }
+
+    /* Green gel (install / positive actions) */
+    .aero-btn--green {
+      background: linear-gradient(180deg, #86e8b5 0%, #22b176 47%, #0a8454 53%, #1cbb82 100%);
+      box-shadow: 0 5px 16px rgba(16, 185, 129, 0.45), inset 0 1px 0 rgba(255, 255, 255, 0.9), inset 0 -2px 5px rgba(0, 70, 40, 0.4);
+    }
+    .aero-btn--green:hover { box-shadow: 0 8px 22px rgba(16, 200, 140, 0.6), inset 0 1px 0 #fff, inset 0 -2px 5px rgba(0, 70, 40, 0.4); }
+
+    /* Light gel: frosted white, keeps dark logos readable (social links) */
+    .aero-btn--light {
+      color: #002244; text-shadow: 0 1px 0 rgba(255, 255, 255, 0.85);
+      background: linear-gradient(180deg, #ffffff 0%, #e4f5ff 46%, #b7e2fa 54%, #e0f4ff 100%);
+      border: 1px solid #ffffff;
+      box-shadow: 0 5px 16px rgba(0, 10, 30, 0.45), 0 0 14px rgba(120, 210, 255, 0.35), inset 0 1px 0 #fff, inset 0 -2px 5px rgba(60, 140, 200, 0.35);
+    }
+    .aero-btn--light::before { background: linear-gradient(180deg, rgba(255, 255, 255, 0.95) 0%, rgba(255, 255, 255, 0.2) 100%); }
+    .aero-btn--light:hover { filter: none; box-shadow: 0 8px 22px rgba(0, 10, 30, 0.5), 0 0 22px rgba(130, 220, 255, 0.7), inset 0 1px 0 #fff, inset 0 -2px 5px rgba(60, 140, 200, 0.35); }
+
+    /* Square icon button (modal close) */
+    .aero-btn--icon { width: 34px; height: 34px; padding: 0; border-radius: 10px; font-size: 15px; }
+    .aero-btn--icon::before { border-radius: 9px 9px 40% 40% / 9px 9px 7px 7px; }
+
+    /* Dark glass variant, same family as the "Open for internships" pill */
+    .aero-btn--glass {
+      background: linear-gradient(180deg, rgba(0, 35, 75, 0.72) 0%, rgba(0, 20, 50, 0.88) 100%);
+      border: 1.5px solid rgba(255, 255, 255, 0.6);
+      box-shadow: 0 5px 16px rgba(0, 10, 30, 0.55), 0 0 16px rgba(0, 160, 255, 0.3), inset 0 1px 1px rgba(255, 255, 255, 0.6);
+    }
+    .aero-btn--glass:hover { box-shadow: 0 8px 22px rgba(0, 10, 30, 0.6), 0 0 24px rgba(0, 190, 255, 0.55), inset 0 1px 1px rgba(255, 255, 255, 0.8); }
+
+    @media (prefers-reduced-motion: reduce) {
+      .aero-btn:hover, .aero-btn:active { transform: none; }
+    }
+
+    /* Lite mode: no video, no blur, no animation */
+    html.lite .aqua-glass-panel, html.lite .open-bar, html.lite #lightbox-modal, html.lite #contact-modal {
+      -webkit-backdrop-filter: none !important; backdrop-filter: none !important;
+    }
+    html.lite *, html.lite *::before, html.lite *::after { animation: none !important; transition-duration: 0.01ms !important; }
 
     /* Welcome message shown on the first click */
     #welcome-toast {
@@ -176,17 +287,6 @@
     #main-panel.fit-content .tab-pane { height: auto !important; }
     #main-panel.fit-content [class*="h-[calc"] { height: auto !important; }
 
-    /* Capability level: signal bars + status */
-    .sig { display: inline-flex; align-items: flex-end; gap: 2px; height: 16px; }
-    .sig i { display: block; width: 4px; border-radius: 2px; background: rgba(255,255,255,0.25); }
-    .sig i:nth-child(1) { height: 6px; } .sig i:nth-child(2) { height: 11px; } .sig i:nth-child(3) { height: 16px; }
-    .sig.lv1 i:nth-child(-n+1) { background: #fcd34d; box-shadow: 0 0 6px rgba(252,211,77,.8); }
-    .sig.lv2 i:nth-child(-n+2) { background: #7dd3fc; box-shadow: 0 0 6px rgba(125,211,252,.8); }
-    .sig.lv3 i { background: #6ee7b7; box-shadow: 0 0 6px rgba(110,231,183,.8); }
-    .skill-level-row { display: flex; align-items: center; gap: 8px; margin-top: 8px; }
-    .skill-level { font-size: 10px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; }
-    .lvl-beg { color: #fcd34d; } .lvl-int { color: #7dd3fc; } .lvl-adv { color: #6ee7b7; }
-
     /* "Open for internship" bar under the name */
     .open-bar {
       position: relative; display: inline-flex; align-items: center; gap: 10px; margin-top: 6px;
@@ -217,18 +317,8 @@
 </head>
 <body class="min-h-screen overflow-y-auto lg:h-screen lg:overflow-hidden p-2 sm:p-3 lg:p-3.5 relative flex flex-col justify-between">
 
-  <!-- LOOPING BACKGROUND VIDEO -->
-  <video 
-  autoplay 
-  loop 
-  muted 
-  playsinline 
-  preload="auto"
-  poster="backgroundposter.png" 
-  class="fixed inset-0 w-full h-full object-cover -z-20">
-  <source src="background.webm" type="video/webm" />
-  <source src="background.mp4" type="video/mp4" />
-</video>
+  <!-- LOOPING BACKGROUND VIDEO (added by script so lite-mode visitors never download it) -->
+  <video id="bg-video" muted loop playsinline preload="none" poster="backgroundposter.png" aria-hidden="true" class="fixed inset-0 w-full h-full object-cover -z-20"></video>
 
   <!-- Glass Tint Overlay -->
   <div class="fixed inset-0 bg-sky-950/15 pointer-events-none -z-10"></div>
@@ -241,10 +331,10 @@
       <h1 class="aero-heading-light text-2xl sm:text-4xl lg:text-4xl text-white drop-shadow-[0_2px_10px_rgba(0,30,80,0.8)]">
         MUHAMMAD ERFAN HAKIMI BIN MOHD EZUWAN 
       </h1>
-      <p class="text-[10px] sm:text-xs font-normal tracking-widest text-sky-100 uppercase drop-shadow">
+      <p class="text-xs sm:text-xs font-normal tracking-widest text-sky-100 uppercase drop-shadow">
         Bachelor of Computer Science (Hons) Multimedia Computing Student
       </p>
-      <div class="open-bar" role="status"><span class="open-dot" aria-hidden="true"></span><span>Open for IT Internship Opportunities</span></div>
+      <div class="open-bar" role="status"><span class="open-dot" aria-hidden="true"></span><span>Open for Software Dev &amp; ML Internships</span></div>
     </header>
 
     <!-- MAIN INTERACTIVE SPLIT CONTAINER -->
@@ -258,49 +348,49 @@
           <div class="space-y-2">
             <div class="text-xs font-semibold text-sky-100 uppercase tracking-wider px-2 pb-1.5 border-b border-white/40 hidden lg:flex items-center justify-between">
               <span>Navigation</span>
-              <span class="text-[10px] text-sky-200">[System Menu]</span>
+              <span class="text-xs text-sky-200">[System Menu]</span>
             </div>
 
             <nav class="nav-scroll flex lg:block gap-1.5 lg:gap-0 lg:space-y-1 overflow-x-auto lg:overflow-visible">
-              <div onclick="openTab('home', this)" class="aqua-nav-btn active" data-title="Home & Bio" data-icon="icons/home.png">
-                <img src="icons/home.png" class="w-6 h-6 drop-shadow-md" />
+              <div role="button" tabindex="0" onclick="openTab('home', this)" class="aqua-nav-btn active" aria-current="true" data-title="Home & Bio" data-icon="icons/home.png">
+                <img alt="" src="icons/home.png" class="w-6 h-6 drop-shadow-md" />
                 <span>Home & Bio</span>
               </div>
 
-              <div onclick="openTab('projects', this)" class="aqua-nav-btn" data-title="Projects" data-icon="icons/project.png">
-                <img src="icons/project.png" class="w-6 h-6 drop-shadow-md" />
+              <div role="button" tabindex="0" onclick="openTab('projects', this)" class="aqua-nav-btn" data-title="Projects" data-icon="icons/project.png">
+                <img alt="" src="icons/project.png" class="w-6 h-6 drop-shadow-md" />
                 <span>Projects</span>
               </div>
 
-              <div onclick="openTab('experience', this)" class="aqua-nav-btn" data-title="Experience &amp; Education" data-icon="icons/experience.png">
-                <img src="icons/experience.png" class="w-6 h-6 drop-shadow-md" />
+              <div role="button" tabindex="0" onclick="openTab('experience', this)" class="aqua-nav-btn" data-title="Experience &amp; Education" data-icon="icons/experience.png">
+                <img alt="" src="icons/experience.png" class="w-6 h-6 drop-shadow-md" />
                 <span>Experience &amp; Education</span>
               </div>
 
-              <div onclick="openTab('skills', this)" class="aqua-nav-btn" data-title="Capabilities" data-icon="icons/skill.png">
-                <img src="icons/skill.png" class="w-6 h-6 drop-shadow-md" />
+              <div role="button" tabindex="0" onclick="openTab('skills', this)" class="aqua-nav-btn" data-title="Capabilities" data-icon="icons/skill.png">
+                <img alt="" src="icons/skill.png" class="w-6 h-6 drop-shadow-md" />
                 <span>Capabilities</span>
               </div>
 
-              <div onclick="openTab('certs', this)" class="aqua-nav-btn" data-title="Credentials" data-icon="icons/credinal.png">
-                <img src="icons/credinal.png" class="w-6 h-6 drop-shadow-md" />
+              <div role="button" tabindex="0" onclick="openTab('certs', this)" class="aqua-nav-btn" data-title="Credentials" data-icon="icons/credinal.png">
+                <img alt="" src="icons/credinal.png" class="w-6 h-6 drop-shadow-md" />
                 <span>Credentials</span>
               </div>
 
-              <div onclick="openTab('gallery', this)" class="aqua-nav-btn" data-title="Activity Gallery" data-icon="icons/gallery.png">
-                <img src="icons/gallery.png" class="w-6 h-6 drop-shadow-md" />
+              <div role="button" tabindex="0" onclick="openTab('gallery', this)" class="aqua-nav-btn" data-title="Activity Gallery" data-icon="icons/gallery.png">
+                <img alt="" src="icons/gallery.png" class="w-6 h-6 drop-shadow-md" />
                 <span>Activity Gallery</span>
               </div>
 
               <!-- CONTACT ME BUTTON -->
-              <div onclick="openContactModal()" class="aqua-nav-btn cursor-pointer">
-                <img src="icons/contact.png" class="w-6 h-6 drop-shadow-md" />
+              <div role="button" tabindex="0" onclick="openContactModal()" class="aqua-nav-btn cursor-pointer">
+                <img alt="" src="icons/contact.png" class="w-6 h-6 drop-shadow-md" />
                 <span>Contact Me</span>
               </div>
 
               <!-- VIEW RESUME NAV BUTTON -->
               <a href="resume.pdf" target="_blank" class="aqua-nav-btn !bg-gradient-to-r !from-sky-500/40 !to-blue-600/40 border-sky-200/60 hover:!from-sky-400/60 hover:!to-blue-500/60 lg:mt-2 font-semibold shadow-[0_0_12px_rgba(0,180,255,0.3)]">
-                <img src="icons/resume.png" class="w-6 h-6 drop-shadow-md" />
+                <img alt="" src="icons/resume.png" class="w-6 h-6 drop-shadow-md" />
                 <span>View Resume (PDF)</span>
               </a>
             </nav>
@@ -309,33 +399,33 @@
           <!-- SIDEBAR FOOTER: SLOGAN, SOCIAL LINKS & TRADEMARK -->
           <div class="hidden lg:block pt-2.5 border-t border-white/40 space-y-2 shrink-0">
             <div class="text-center space-y-0.5">
-              <p class="text-[11px] font-semibold text-white drop-shadow flex items-center justify-center gap-1">
+              <p class="text-xs font-semibold text-white drop-shadow flex items-center justify-center gap-1">
                 <span>Let's Build Something Great Together</span>
               </p>
-              <p class="text-[9.5px] text-sky-200/90 font-normal">
-                Open for IT Internship Opportunities
+              <p class="text-[11px] text-sky-200/90 font-normal">
+                Open for Software Development &amp; ML Internships
               </p>
             </div>
 
             <!-- Social Link Buttons -->
             <div class="flex gap-1.5">
-              <a href="https://www.linkedin.com/in/erfanhakimi/" target="_blank" class="flex-1 py-1.5 px-2 rounded-xl bg-white/80 hover:bg-white text-slate-900 font-semibold text-[11px] shadow-md transition-all flex items-center justify-center gap-1">
-                <img src="https://img.icons8.com/color/48/linkedin.png" class="w-3.5 h-3.5" />
+              <a href="https://www.linkedin.com/in/erfanhakimi/" target="_blank" class="aero-btn aero-btn--light aero-btn--sm flex-1">
+                <img alt="" src="https://img.icons8.com/color/48/linkedin.png" class="w-4 h-4" />
                 <span>LinkedIn</span>
               </a>
-              <a href="https://github.com/erfanhkimi" target="_blank" class="flex-1 py-1.5 px-2 rounded-xl bg-white/80 hover:bg-white text-slate-900 font-semibold text-[11px] shadow-md transition-all flex items-center justify-center gap-1">
-                <img src="icons/github.png" class="w-3.5 h-3.5" />
+              <a href="https://github.com/erfanhkimi" target="_blank" class="aero-btn aero-btn--light aero-btn--sm flex-1">
+                <img alt="" src="icons/github.png" class="w-4 h-4" />
                 <span>GitHub</span>
               </a>
-              <a href="mailto:erfanhakimi04@gmail.com" class="flex-1 py-1.5 px-2 rounded-xl bg-white/80 hover:bg-white text-slate-900 font-semibold text-[11px] shadow-md transition-all flex items-center justify-center gap-1">
-                <img src="icons/gmail.webp" class="w-3.5 h-3.5" />
+              <a href="mailto:erfanhakimi04@gmail.com" class="aero-btn aero-btn--light aero-btn--sm flex-1">
+                <img alt="" src="icons/gmail.webp" class="w-4 h-4" />
                 <span>Gmail</span>
               </a>
             </div>
 
             <!-- Trademark & Copyright Line -->
             <div class="text-center pt-1 border-t border-white/10">
-              <p class="text-[8.5px] text-sky-200/70 tracking-widest uppercase font-medium">
+              <p class="text-[11px] text-sky-200/70 tracking-widest uppercase font-medium">
                 © 2026 Erfan Hakimi ™ · All Rights Reserved
               </p>
             </div>
@@ -365,61 +455,94 @@
               <img src="icons/profile1.jpeg" alt="Muhammad Erfan Hakimi" />
             </div>
             <div class="space-y-3">
-              <p>Multimedia Computing student at UiTM Shah Alam and a developer who turns ideas into working software. I'm especially drawn to web development, machine learning, data analytics and game development with hands-on work in Python, scikit-learn, OpenCV, SQL and Unity. I'm also an MBOT Certified Data Analyst.</p>
-              <p>Alongside that, I build across full-stack web (PHP, JavaScript, MySQL), Flutter mobile apps and Unity games. I'm open to software engineering, web development, mobile development, machine learning or any CS related internships where I can ship real features, learn fast and find where I can grow the most.</p>
+              <p>I'm a final-year Computer Science (Hons.) Multimedia Computing student at UiTM Shah Alam, looking for a software development or machine learning internship.</p>
+              <p>I've built a deployed price-prediction model with scikit-learn and FastAPI, a Flutter mobile app, PHP web systems and Unity games, and I previously interned in IT support at FELDA's HR department. I'm looking for a team where I can work on real features and learn from experienced developers.</p>
             </div>
           </div>
 
-          <!-- Interests & core focus -->
+          <!-- Quick actions -->
+          <div class="flex flex-wrap gap-2 shrink-0">
+            <button type="button" onclick="jumpTo('projects')" class="aero-btn"><span>View my projects</span></button>
+            <a href="resume.pdf" target="_blank" class="aero-btn aero-btn--glass"><span>Open resume (PDF)</span></a>
+          </div>
+
+          <!-- Interests & core focus: hover, tap or use the arrow keys to explore -->
           <div class="grid grid-cols-1 md:grid-cols-2 gap-4 shrink-0">
 
-            <div class="aqua-card-inner p-4">
-              <h3 class="text-base font-semibold text-white pb-2 mb-3 border-b border-white/20">Interests &amp; Hobbies</h3>
-              <ul class="space-y-3.5">
-                <li>
-                  <div class="text-sm sm:text-[15px] font-semibold text-white">Machine Learning &amp; Data Science</div>
-                  <div class="text-xs sm:text-sm leading-relaxed text-sky-100/90 mt-0.5">Training and deploying models on real data, like my Klang Valley property price estimator and Color Telemetry Studio.</div>
-                </li>
-                <li>
-                  <div class="text-sm sm:text-[15px] font-semibold text-white">Basketball & Sports Analytics</div>
-                  <div class="text-xs sm:text-sm leading-relaxed text-sky-100/90 mt-0.5">Turning shooting stats and training data into insights, the idea behind my Hooper Buddy app.</div>
-                </li>
-                <li>
-                  <div class="text-sm sm:text-[15px] font-semibold text-white">Game Design & Interactive 3D</div>
-                  <div class="text-xs sm:text-sm leading-relaxed text-sky-100/90 mt-0.5">Building gameplay mechanics and 3D worlds in Unity and C#, including my final year educational game.</div>
-                </li>
-                <li>
-                  <div class="text-sm sm:text-[15px] font-semibold text-white">Browser Extension Building</div>
-                  <div class="text-xs sm:text-sm leading-relaxed text-sky-100/90 mt-0.5">Shipping small, fast Manifest V3 tools like VibeVault and Selective Storage Purger to fix everyday workflow pain points.</div>
-                </li>
-                <li>
-                  <div class="text-sm sm:text-[15px] font-semibold text-white">UI/UX & Frutiger Aero Design</div>
-                  <div class="text-xs sm:text-sm leading-relaxed text-sky-100/90 mt-0.5">Designing glassy, readable, mobile-friendly interfaces, like this portfolio.</div>
-                </li>
-              </ul>
+        <div class="aqua-card-inner p-4" data-explorer>
+          <div class="flex items-baseline justify-between gap-2 pb-2 mb-3 border-b border-white/20">
+            <h3 id="int-heading" class="text-base font-semibold text-white">Interests &amp; Hobbies</h3>
+            <span class="text-xs text-sky-300/90">Hover or tap to explore</span>
+          </div>
+          <div class="flex flex-wrap gap-1.5" role="tablist" aria-labelledby="int-heading">
+            <button type="button" role="tab" id="int-tab-0" aria-selected="true" aria-controls="int-panel-0" tabindex="0" class="about-chip"><img src="icons/brain.png" alt="" class="about-chip-icon" /><span>ML &amp; Data</span></button>
+            <button type="button" role="tab" id="int-tab-1" aria-selected="false" aria-controls="int-panel-1" tabindex="-1" class="about-chip"><img src="icons/basketball.png" alt="" class="about-chip-icon" /><span>Basketball</span></button>
+            <button type="button" role="tab" id="int-tab-2" aria-selected="false" aria-controls="int-panel-2" tabindex="-1" class="about-chip"><img src="icons/gamedesign.png" alt="" class="about-chip-icon" /><span>Game Design</span></button>
+            <button type="button" role="tab" id="int-tab-3" aria-selected="false" aria-controls="int-panel-3" tabindex="-1" class="about-chip"><img src="icons/extention.png" alt="" class="about-chip-icon" /><span>Extensions</span></button>
+            <button type="button" role="tab" id="int-tab-4" aria-selected="false" aria-controls="int-panel-4" tabindex="-1" class="about-chip"><img src="icons/ui.png" alt="" class="about-chip-icon" /><span>UI/UX</span></button>
+          </div>
+          <div class="mt-3 rounded-xl border border-white/20 bg-slate-950/30 p-3 sm:p-3.5 sm:min-h-[9.5rem]">
+            <div role="tabpanel" id="int-panel-0" aria-labelledby="int-tab-0" class="about-panel">
+              <h4 class="text-[15px] sm:text-base font-semibold text-white">Machine Learning &amp; Data Science</h4>
+              <p class="text-sm leading-relaxed text-sky-100/90 mt-1">Training and deploying models on real data, like my Klang Valley property price estimator and Color Telemetry Studio.</p>
+              <div class="flex flex-wrap gap-1.5 mt-3"><button type="button" onclick="jumpToProject(8)" class="aero-btn aero-btn--sm"><span>Property Price Estimator</span></button><button type="button" onclick="jumpToProject(4)" class="aero-btn aero-btn--sm"><span>Color Telemetry Studio</span></button></div>
             </div>
+            <div role="tabpanel" id="int-panel-1" aria-labelledby="int-tab-1" class="about-panel" hidden>
+              <h4 class="text-[15px] sm:text-base font-semibold text-white">Basketball &amp; Sports Analytics</h4>
+              <p class="text-sm leading-relaxed text-sky-100/90 mt-1">Turning shooting stats and training data into insights, the idea behind my Hooper Buddy app.</p>
+              <div class="flex flex-wrap gap-1.5 mt-3"><button type="button" onclick="jumpToProject(3)" class="aero-btn aero-btn--sm"><span>Hooper Buddy</span></button></div>
+            </div>
+            <div role="tabpanel" id="int-panel-2" aria-labelledby="int-tab-2" class="about-panel" hidden>
+              <h4 class="text-[15px] sm:text-base font-semibold text-white">Game Design &amp; Interactive 3D</h4>
+              <p class="text-sm leading-relaxed text-sky-100/90 mt-1">Building gameplay mechanics and 3D worlds in Unity and C#, including my final year educational game.</p>
+              <div class="flex flex-wrap gap-1.5 mt-3"><button type="button" onclick="jumpToProject(0)" class="aero-btn aero-btn--sm"><span>Data Visualization Game</span></button><button type="button" onclick="jumpToProject(6)" class="aero-btn aero-btn--sm"><span>Office Chair Grand Prix</span></button></div>
+            </div>
+            <div role="tabpanel" id="int-panel-3" aria-labelledby="int-tab-3" class="about-panel" hidden>
+              <h4 class="text-[15px] sm:text-base font-semibold text-white">Browser Extension Building</h4>
+              <p class="text-sm leading-relaxed text-sky-100/90 mt-1">Shipping small, fast Manifest V3 tools like VibeVault and Selective Storage Purger to fix everyday workflow pain points.</p>
+              <div class="flex flex-wrap gap-1.5 mt-3"><button type="button" onclick="jumpToProject(2)" class="aero-btn aero-btn--sm"><span>VibeVault</span></button><button type="button" onclick="jumpToProject(1)" class="aero-btn aero-btn--sm"><span>Storage Purger</span></button></div>
+            </div>
+            <div role="tabpanel" id="int-panel-4" aria-labelledby="int-tab-4" class="about-panel" hidden>
+              <h4 class="text-[15px] sm:text-base font-semibold text-white">UI/UX &amp; Frutiger Aero Design</h4>
+              <p class="text-sm leading-relaxed text-sky-100/90 mt-1">Designing glassy, readable, mobile-friendly interfaces, like this portfolio.</p>
+            </div>
+          </div>
+        </div>
 
-            <div class="aqua-card-inner p-4">
-              <h3 class="text-base font-semibold text-white pb-2 mb-3 border-b border-white/20">Core Focus &amp; Strengths</h3>
-              <ul class="space-y-3.5">
-                <li>
-                  <div class="text-sm sm:text-[15px] font-semibold text-white">End-to-End Builder</div>
-                  <div class="text-xs sm:text-sm leading-relaxed text-sky-100/90 mt-0.5">Takes ideas from concept to deployment across web, mobile and desktop.</div>
-                </li>
-                <li>
-                  <div class="text-sm sm:text-[15px] font-semibold text-white">Data-Driven Problem Solver</div>
-                  <div class="text-xs sm:text-sm leading-relaxed text-sky-100/90 mt-0.5">Cleans and analyses data with SQL, Python and analytics tools to support better decisions. MBOT Certified Data Analyst.</div>
-                </li>
-                <li>
-                  <div class="text-sm sm:text-[15px] font-semibold text-white">Fast Learner</div>
-                  <div class="text-xs sm:text-sm leading-relaxed text-sky-100/90 mt-0.5">Picks up new stacks quickly, from Flutter to FastAPI to OpenCV, each learned for a real project.</div>
-                </li>
-                <li>
-                  <div class="text-sm sm:text-[15px] font-semibold text-white">Clear Communicator</div>
-                  <div class="text-xs sm:text-sm leading-relaxed text-sky-100/90 mt-0.5">Leads team presentations and documents system workflows so others can follow them.</div>
-                </li>
-              </ul>
+        <div class="aqua-card-inner p-4" data-explorer>
+          <div class="flex items-baseline justify-between gap-2 pb-2 mb-3 border-b border-white/20">
+            <h3 id="core-heading" class="text-base font-semibold text-white">Core Focus &amp; Strengths</h3>
+            <span class="text-xs text-sky-300/90">Hover or tap to explore</span>
+          </div>
+          <div class="flex flex-wrap gap-1.5" role="tablist" aria-labelledby="core-heading">
+            <button type="button" role="tab" id="core-tab-0" aria-selected="true" aria-controls="core-panel-0" tabindex="0" class="about-chip"><img src="icons/tool.webp" alt="" class="about-chip-icon" /><span>End-to-End Builder</span></button>
+            <button type="button" role="tab" id="core-tab-1" aria-selected="false" aria-controls="core-panel-1" tabindex="-1" class="about-chip"><span aria-hidden="true">📊</span><span>Data-Driven</span></button>
+            <button type="button" role="tab" id="core-tab-2" aria-selected="false" aria-controls="core-panel-2" tabindex="-1" class="about-chip"><span aria-hidden="true">⚡</span><span>Fast Learner</span></button>
+            <button type="button" role="tab" id="core-tab-3" aria-selected="false" aria-controls="core-panel-3" tabindex="-1" class="about-chip"><span aria-hidden="true">🗣️</span><span>Communicator</span></button>
+          </div>
+          <div class="mt-3 rounded-xl border border-white/20 bg-slate-950/30 p-3 sm:p-3.5 sm:min-h-[9.5rem]">
+            <div role="tabpanel" id="core-panel-0" aria-labelledby="core-tab-0" class="about-panel">
+              <h4 class="text-[15px] sm:text-base font-semibold text-white">End-to-End Builder</h4>
+              <p class="text-sm leading-relaxed text-sky-100/90 mt-1">Takes ideas from concept to a working, deployed product. The Property Price Estimator runs live on Render, and Hooper Buddy has a downloadable release on GitHub.</p>
+              <div class="flex flex-wrap gap-1.5 mt-3"><button type="button" onclick="jumpToProject(8)" class="aero-btn aero-btn--sm"><span>Property Price Estimator</span></button><button type="button" onclick="jumpToProject(3)" class="aero-btn aero-btn--sm"><span>Hooper Buddy</span></button></div>
             </div>
+            <div role="tabpanel" id="core-panel-1" aria-labelledby="core-tab-1" class="about-panel" hidden>
+              <h4 class="text-[15px] sm:text-base font-semibold text-white">Data-Driven Problem Solver</h4>
+              <p class="text-sm leading-relaxed text-sky-100/90 mt-1">Cleans and analyses data with SQL, Python and analytics tools to support better decisions. MBOT Certified Data Analyst.</p>
+              <div class="flex flex-wrap gap-1.5 mt-3"><button type="button" onclick="jumpToCert(0)" class="aero-btn aero-btn--sm"><span>See the certificate</span></button><button type="button" onclick="jumpToProject(4)" class="aero-btn aero-btn--sm"><span>Color Telemetry Studio</span></button></div>
+            </div>
+            <div role="tabpanel" id="core-panel-2" aria-labelledby="core-tab-2" class="about-panel" hidden>
+              <h4 class="text-[15px] sm:text-base font-semibold text-white">Fast Learner</h4>
+              <p class="text-sm leading-relaxed text-sky-100/90 mt-1">Picks up new stacks quickly, from Flutter to FastAPI to OpenCV, each learned for a real project.</p>
+              <div class="flex flex-wrap gap-1.5 mt-3"><button type="button" onclick="jumpTo('skills')" class="aero-btn aero-btn--sm"><span>See where each skill was used</span></button></div>
+            </div>
+            <div role="tabpanel" id="core-panel-3" aria-labelledby="core-tab-3" class="about-panel" hidden>
+              <h4 class="text-[15px] sm:text-base font-semibold text-white">Clear Communicator</h4>
+              <p class="text-sm leading-relaxed text-sky-100/90 mt-1">Leads team presentations and documents system workflows so others can follow them.</p>
+              <div class="flex flex-wrap gap-1.5 mt-3"><button type="button" onclick="jumpTo('gallery')" class="aero-btn aero-btn--sm"><span>See the activity gallery</span></button></div>
+            </div>
+          </div>
+        </div>
 
           </div>
 
@@ -428,7 +551,7 @@
         <!-- TAB 2: EXPERIENCE & EDUCATION -->
         <div id="tab-experience" class="tab-pane hidden flex flex-col h-full space-y-5 min-h-0">
           <div class="border-b border-white/40 pb-1 shrink-0">
-            <span class="text-[10px] aero-heading-light text-sky-200 uppercase tracking-wide">Career // Qualification</span>
+            <span class="text-xs aero-heading-light text-sky-200 uppercase tracking-wide">Career // Qualification</span>
             <h2 class="aero-heading-light text-xl sm:text-2xl text-white mt-0.5 drop-shadow">
               Experience &amp; Education
             </h2>
@@ -442,15 +565,15 @@
 
                   <h3 class="font-semibold text-white text-xs sm:text-sm">IT Support Intern</h3>
 
-                  <span class="text-[10px] text-sky-300 font-medium">October 2024 - March 2025</span>
+                  <span class="text-xs text-sky-300 font-medium">October 2024 - March 2025</span>
 
                 </div>
 
-                <p class="text-[11px] text-sky-200 font-medium">Human Resource Department of FELDA, Kuala Lumpur</p>
+                <p class="text-xs text-sky-200 font-medium">Human Resource Department of FELDA, Kuala Lumpur</p>
 
-                <p class="text-[11px] sm:text-xs text-sky-100/90 leading-relaxed pt-1 space-y-1">
+                <p class="text-xs sm:text-sm text-sky-100/90 leading-relaxed pt-1 space-y-1">
 
-                  ● Proposed and developed an Exam Management System to streamline HR examination workflows replacing manual processes and accelerating candidate evaluation turnaround times. <br><br>
+                  ● Proposed and developed an Exam Management System prototype to streamline HR examination workflows replacing manual processes and accelerating candidate evaluation turnaround times. <br><br>
 
                   ● Structured HR datasets and candidate records using SQL and Microsoft Excel ensuring high data accuracy, integrity, and compliance with organizational standards<br><br>
 
@@ -467,7 +590,7 @@
 
               <h3 class="text-sm font-semibold text-white">Bachelor Degree in Computer Science (Hons.) Multimedia Computing</h3>
 
-              <span class="text-[10px] text-sky-300 font-medium">April 2025 - Current</span>
+              <span class="text-xs text-sky-300 font-medium">April 2025 - Current</span>
 
               <p class="text-xs text-sky-300 font-medium">UiTM Shah Alam, Selangor</p>
 
@@ -476,7 +599,7 @@
 
               <h3 class="text-sm font-semibold text-white">Diploma in Computer Science</h3>
 
-              <span class="text-[10px] text-sky-300 font-medium">October 2022 - March 2025</span>
+              <span class="text-xs text-sky-300 font-medium">October 2022 - March 2025</span>
 
               <p class="text-xs text-sky-300 font-medium">UiTM Cawangan Terengganu, Kampus Kuala Terengganu (Chendering)</p>
 
@@ -487,7 +610,7 @@
         <!-- TAB 3: PROJECTS (SCROLLABLE SHOWCASE BOX WITH BIGGER PREVIEW) -->
         <div id="tab-projects" class="tab-pane hidden flex flex-col justify-between h-full space-y-2.5 min-h-0">
           <div class="border-b border-white/40 pb-1 shrink-0">
-            <span class="text-[10px] aero-heading-light text-sky-200 uppercase tracking-wide">Projects // Interactive Showcase</span>
+            <span class="text-xs aero-heading-light text-sky-200 uppercase tracking-wide">Projects // Interactive Showcase</span>
             <h2 class="aero-heading-light text-xl text-white drop-shadow">
               Selected Works
             </h2>
@@ -497,9 +620,9 @@
             
             <!-- Left Side Selector Menu Box -->
             <div class="sm:col-span-4 lg:col-span-3 aqua-card-inner p-2.5 flex flex-col h-full overflow-hidden min-h-0 bg-slate-950/40 border border-white/30 rounded-xl shadow-inner">
-              <div class="text-[10px] font-semibold text-sky-200 uppercase tracking-wider pb-1.5 mb-2 border-b border-white/20 flex items-center justify-between shrink-0">
+              <div class="text-xs font-semibold text-sky-200 uppercase tracking-wider pb-1.5 mb-2 border-b border-white/20 flex items-center justify-between shrink-0">
                 <span>Project List</span>
-                <span class="text-[9px] text-sky-300/80">Scroll ↕</span>
+                <span class="text-[11px] text-sky-300/80">Scroll ↕</span>
               </div>
 
               <!-- Project type filters -->
@@ -511,64 +634,64 @@
                 <button type="button" class="filter-chip" aria-pressed="false" onclick="filterProjects('Game', this)">Game</button>
                 <button type="button" class="filter-chip" aria-pressed="false" onclick="filterProjects('Extension', this)">Extension</button>
               </div>
-              <p id="proj-count" class="text-[9px] text-sky-300/80 mb-1.5 shrink-0">9 projects</p>
+              <p id="proj-count" class="text-[11px] text-sky-300/80 mb-1.5 shrink-0">9 projects</p>
 
               <div id="proj-list" class="space-y-2 overflow-y-auto flex-1 pr-1 min-h-0">
                 <!-- Index 8: Klang Valley Property Price Estimator -->
-                <div data-idx="8" data-cats="ML,Web App" onclick="selectProject(8, this)" class="proj-menu-item aqua-card-inner p-2.5 cursor-pointer hover:bg-white/20 transition-all border-l-4 border-sky-300">
+                <div role="button" tabindex="0" data-idx="8" data-cats="ML,Web App" onclick="selectProject(8, this)" class="proj-menu-item aqua-card-inner p-2.5 cursor-pointer hover:bg-white/20 transition-all border-l-4 border-sky-300">
                   <div class="font-semibold text-white text-xs">Klang Valley Property Price Estimator</div>
-                  <div class="text-[9.5px] text-sky-200 mt-1">Python · scikit-learn · FastAPI</div>
+                  <div class="text-[11px] text-sky-200 mt-1">Python · scikit-learn · FastAPI</div>
                 </div>
 
                 <!-- Index 0 -->
-                <div data-idx="0" data-cats="Game" onclick="selectProject(0, this)" class="proj-menu-item aqua-card-inner p-2.5 cursor-pointer hover:bg-white/20 transition-all border-l-4 border-transparent">
+                <div role="button" tabindex="0" data-idx="0" data-cats="Game" onclick="selectProject(0, this)" class="proj-menu-item aqua-card-inner p-2.5 cursor-pointer hover:bg-white/20 transition-all border-l-4 border-transparent">
                   <div class="flex items-center justify-between gap-1">
                     <div class="font-semibold text-white text-xs">Data Visualization Educational Game</div>
-                    <span class="text-[8px] px-1.5 py-0.5 rounded-full bg-amber-500 text-white font-bold shrink-0 animate-pulse border border-amber-300/80 shadow-[0_0_8px_rgba(245,158,11,0.8)]">Final Year Project</span>
+                    <span class="text-[11px] px-1.5 py-0.5 rounded-full bg-amber-500 text-white font-bold shrink-0 animate-pulse border border-amber-300/80 shadow-[0_0_8px_rgba(245,158,11,0.8)]">Final Year Project</span>
                   </div>
-                  <div class="text-[9.5px] text-sky-200 mt-1">C# · Unity</div>
+                  <div class="text-[11px] text-sky-200 mt-1">C# · Unity</div>
                 </div>
 
                 <!-- Index 1: Selective Storage Purger -->
-                <div data-idx="1" data-cats="Extension" onclick="selectProject(1, this)" class="proj-menu-item aqua-card-inner p-2.5 cursor-pointer hover:bg-white/20 transition-all border-l-4 border-transparent">
+                <div role="button" tabindex="0" data-idx="1" data-cats="Extension" onclick="selectProject(1, this)" class="proj-menu-item aqua-card-inner p-2.5 cursor-pointer hover:bg-white/20 transition-all border-l-4 border-transparent">
                   <div class="font-semibold text-white text-xs">Selective Storage Purger</div>
-                  <div class="text-[9.5px] text-sky-200 mt-1">JavaScript · Manifest V3</div>
+                  <div class="text-[11px] text-sky-200 mt-1">JavaScript · Manifest V3</div>
                 </div>
 
                 <!-- Index 2: VibeVault -->
-                <div data-idx="2" data-cats="Extension" onclick="selectProject(2, this)" class="proj-menu-item aqua-card-inner p-2.5 cursor-pointer hover:bg-white/20 transition-all border-l-4 border-transparent">
+                <div role="button" tabindex="0" data-idx="2" data-cats="Extension" onclick="selectProject(2, this)" class="proj-menu-item aqua-card-inner p-2.5 cursor-pointer hover:bg-white/20 transition-all border-l-4 border-transparent">
                   <div class="font-semibold text-white text-xs">VibeVault: Context Bookmarker</div>
-                  <div class="text-[9.5px] text-sky-200 mt-1">JavaScript · HTML/CSS · Manifest V3</div>
+                  <div class="text-[11px] text-sky-200 mt-1">JavaScript · HTML/CSS · Manifest V3</div>
                 </div>
 
                 <!-- Index 3 -->
-                <div data-idx="3" data-cats="Mobile App" onclick="selectProject(3, this)" class="proj-menu-item aqua-card-inner p-2.5 cursor-pointer hover:bg-white/20 transition-all border-l-4 border-transparent">
+                <div role="button" tabindex="0" data-idx="3" data-cats="Mobile App" onclick="selectProject(3, this)" class="proj-menu-item aqua-card-inner p-2.5 cursor-pointer hover:bg-white/20 transition-all border-l-4 border-transparent">
                   <div class="font-semibold text-white text-xs">Hooper Buddy: Basketball Drill App</div>
-                  <div class="text-[9.5px] text-sky-200 mt-1">Flutter · Dart · SQLite</div>
+                  <div class="text-[11px] text-sky-200 mt-1">Flutter · Dart · SQLite</div>
                 </div>
 
                 <!-- Index 4 -->
-                <div data-idx="4" data-cats="ML,Web App" onclick="selectProject(4, this)" class="proj-menu-item aqua-card-inner p-2.5 cursor-pointer hover:bg-white/20 transition-all border-l-4 border-transparent">
+                <div role="button" tabindex="0" data-idx="4" data-cats="ML,Web App" onclick="selectProject(4, this)" class="proj-menu-item aqua-card-inner p-2.5 cursor-pointer hover:bg-white/20 transition-all border-l-4 border-transparent">
                   <div class="font-semibold text-white text-xs">Color Telemetry & Analytics Studio</div>
-                  <div class="text-[9.5px] text-sky-200 mt-1">OpenCV · Streamlit</div>
+                  <div class="text-[11px] text-sky-200 mt-1">OpenCV · Streamlit</div>
                 </div>
 
                 <!-- Index 5 -->
-                <div data-idx="5" data-cats="Web App" onclick="selectProject(5, this)" class="proj-menu-item aqua-card-inner p-2.5 cursor-pointer hover:bg-white/20 transition-all border-l-4 border-transparent">
+                <div role="button" tabindex="0" data-idx="5" data-cats="Web App" onclick="selectProject(5, this)" class="proj-menu-item aqua-card-inner p-2.5 cursor-pointer hover:bg-white/20 transition-all border-l-4 border-transparent">
                   <div class="font-semibold text-white text-xs">Planora: Smart Study Planner</div>
-                  <div class="text-[9.5px] text-sky-200 mt-1">PHP · JavaScript · MySQL</div>
+                  <div class="text-[11px] text-sky-200 mt-1">PHP · JavaScript · MySQL</div>
                 </div>
 
                 <!-- Index 6 -->
-                <div data-idx="6" data-cats="Game" onclick="selectProject(6, this)" class="proj-menu-item aqua-card-inner p-2.5 cursor-pointer hover:bg-white/20 transition-all border-l-4 border-transparent">
+                <div role="button" tabindex="0" data-idx="6" data-cats="Game" onclick="selectProject(6, this)" class="proj-menu-item aqua-card-inner p-2.5 cursor-pointer hover:bg-white/20 transition-all border-l-4 border-transparent">
                   <div class="font-semibold text-white text-xs">Office Chair Grand Prix: Unity Game</div>
-                  <div class="text-[9.5px] text-sky-200 mt-1">C# · Unity</div>
+                  <div class="text-[11px] text-sky-200 mt-1">C# · Unity</div>
                 </div>
 
                 <!-- Index 7 -->
-                <div data-idx="7" data-cats="Web App" onclick="selectProject(7, this)" class="proj-menu-item aqua-card-inner p-2.5 cursor-pointer hover:bg-white/20 transition-all border-l-4 border-transparent">
-                  <div class="font-semibold text-white text-xs">FELDA HR Exam Management System</div>
-                  <div class="text-[9.5px] text-sky-200 mt-1">PHP · HTML · CSS · MySQL</div>
+                <div role="button" tabindex="0" data-idx="7" data-cats="Web App" onclick="selectProject(7, this)" class="proj-menu-item aqua-card-inner p-2.5 cursor-pointer hover:bg-white/20 transition-all border-l-4 border-transparent">
+                  <div class="font-semibold text-white text-xs">FELDA HR Exam Management System (Prototype)</div>
+                  <div class="text-[11px] text-sky-200 mt-1">PHP · HTML · CSS · MySQL</div>
                 </div>
               </div>
             </div>
@@ -585,7 +708,7 @@
                     alt="Project Preview" 
                     class="w-full h-full object-contain object-center rounded transition-all duration-300" 
                   />
-                  <span id="proj-detail-badge" class="absolute top-3 right-3 text-[9px] px-2.5 py-1 rounded-full font-bold shadow-lg text-white border border-amber-300 bg-gradient-to-r from-amber-500 to-orange-500 animate-pulse shadow-[0_0_12px_rgba(245,158,11,0.9)]">
+                  <span id="proj-detail-badge" class="absolute top-3 right-3 text-[11px] px-2.5 py-1 rounded-full font-bold shadow-lg text-white border border-amber-300 bg-gradient-to-r from-amber-500 to-orange-500 animate-pulse shadow-[0_0_12px_rgba(245,158,11,0.9)]">
                     🚧 In Progress
                   </span>
                 </div>
@@ -596,10 +719,13 @@
 
                 <!-- Scrollable Description Box -->
                 <div class="aqua-card-inner p-3 border border-white/30 bg-slate-950/40 rounded-xl shadow-inner">
-                  <p id="proj-detail-desc" class="text-[11.5px] sm:text-xs text-sky-100 leading-relaxed">
+                  <p id="proj-detail-desc" class="text-sm text-sky-100 leading-relaxed">
                     An interactive 3D open-world educational game implementing C# scripting to teach data visualization principles.
                   </p>
                 </div>
+
+                <!-- Case-study lines (Problem / What I built / Result / My role); hidden when empty -->
+                <dl id="proj-detail-case" class="hidden grid grid-cols-1 sm:grid-cols-2 gap-x-4 gap-y-3 aqua-card-inner p-3 border border-white/30 bg-slate-950/40 rounded-xl shadow-inner"></dl>
               </div>
 
               <!-- Footer with Links and Tech Tags -->
@@ -616,111 +742,125 @@
           </div>
         </div>
 
-        <!-- TAB 5: SKILLS (on each skill card set data-level to beginner | intermediate | advanced) -->
+        <!-- TAB 5: SKILLS (each skill names the projects that actually use it) -->
         <div id="tab-skills" class="tab-pane hidden flex flex-col justify-between h-full space-y-2.5 min-h-0">
-          <div class="space-y-3 flex-1 overflow-y-auto pr-1 min-h-0">
-            
-            <!-- Programming Languages Section -->
+          <div class="space-y-4 flex-1 overflow-y-auto pr-1 min-h-0">
+
             <div>
               <div class="border-b border-white/40 pb-1 mb-2">
-                <span class="text-[10px] aero-heading-light text-sky-200 uppercase tracking-wide">Capabilities // Tech Stack</span>
+                <span class="text-xs aero-heading-light text-sky-200 uppercase tracking-wide">Capabilities // Tech Stack</span>
                 <h2 class="aero-heading-light text-lg sm:text-xl text-white mt-0.5 drop-shadow">
-                  Programming Languages
+                  Languages
                 </h2>
               </div>
-
-              <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-2 text-xs">
-                <div class="aqua-card-inner p-2 skill-card" data-level="intermediate">
-                  <div class="font-semibold text-white text-xs">Dart</div>
-                  <div class="text-[9px] text-sky-200 mt-0.5">Mobile & Flutter</div>
+              <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2">
+                <div class="aqua-card-inner p-2.5 skill-card">
+                  <div class="font-semibold text-white text-sm">Python</div>
+                  <div class="text-xs text-sky-200 mt-0.5 leading-snug">Property Price Estimator, Color Telemetry Studio</div>
                 </div>
-                <div class="aqua-card-inner p-2 skill-card" data-level="advanced">
-                  <div class="font-semibold text-white text-xs">Python</div>
-                  <div class="text-[9px] text-sky-200 mt-0.5">Data & Automation</div>
+                <div class="aqua-card-inner p-2.5 skill-card">
+                  <div class="font-semibold text-white text-sm">C#</div>
+                  <div class="text-xs text-sky-200 mt-0.5 leading-snug">Data Visualization Game, Office Chair Grand Prix</div>
                 </div>
-                <div class="aqua-card-inner p-2 skill-card" data-level="advanced">
-                  <div class="font-semibold text-white text-xs">C#</div>
-                  <div class="text-[9px] text-sky-200 mt-0.5">Unity Game Dev</div>
+                <div class="aqua-card-inner p-2.5 skill-card">
+                  <div class="font-semibold text-white text-sm">Dart</div>
+                  <div class="text-xs text-sky-200 mt-0.5 leading-snug">Hooper Buddy</div>
                 </div>
-                <div class="aqua-card-inner p-2 skill-card" data-level="beginner">
-                  <div class="font-semibold text-white text-xs">C++</div>
-                  <div class="text-[9px] text-sky-200 mt-0.5">Systems & Performance</div>
+                <div class="aqua-card-inner p-2.5 skill-card">
+                  <div class="font-semibold text-white text-sm">JavaScript</div>
+                  <div class="text-xs text-sky-200 mt-0.5 leading-snug">Planora, Storage Purger, VibeVault</div>
                 </div>
-                <div class="aqua-card-inner p-2 skill-card" data-level="intermediate">
-                  <div class="font-semibold text-white text-xs">JavaScript</div>
-                  <div class="text-[9px] text-sky-200 mt-0.5">Web Interactivity</div>
+                <div class="aqua-card-inner p-2.5 skill-card">
+                  <div class="font-semibold text-white text-sm">PHP</div>
+                  <div class="text-xs text-sky-200 mt-0.5 leading-snug">Planora, FELDA HR Exam System</div>
                 </div>
-                <div class="aqua-card-inner p-2 skill-card" data-level="intermediate">
-                  <div class="font-semibold text-white text-xs">Java</div>
-                  <div class="text-[9px] text-sky-200 mt-0.5">OOP & Applications</div>
+                <div class="aqua-card-inner p-2.5 skill-card">
+                  <div class="font-semibold text-white text-sm">SQL</div>
+                  <div class="text-xs text-sky-200 mt-0.5 leading-snug">FELDA HR Exam System, Planora, Hooper Buddy</div>
                 </div>
-                <div class="aqua-card-inner p-2 skill-card" data-level="intermediate">
-                  <div class="font-semibold text-white text-xs">PHP</div>
-                  <div class="text-[9px] text-sky-200 mt-0.5">Web Systems</div>
-                </div>
-                <div class="aqua-card-inner p-2 skill-card" data-level="intermediate">
-                  <div class="font-semibold text-white text-xs">SQL</div>
-                  <div class="text-[9px] text-sky-200 mt-0.5">Database Queries</div>
-                </div>
-                <div class="aqua-card-inner p-2 skill-card" data-level="advanced">
-                  <div class="font-semibold text-white text-xs">HTML/CSS</div>
-                  <div class="text-[9px] text-sky-200 mt-0.5">Web Development And Styling</div>
+                <div class="aqua-card-inner p-2.5 skill-card">
+                  <div class="font-semibold text-white text-sm">HTML/CSS</div>
+                  <div class="text-xs text-sky-200 mt-0.5 leading-snug">FELDA HR Exam System, VibeVault, this portfolio</div>
                 </div>
               </div>
             </div>
 
-            <!-- Tools & Technologies Section -->
             <div>
               <div class="border-b border-white/40 pb-1 mb-2">
                 <h2 class="aero-heading-light text-lg sm:text-xl text-white mt-0.5 drop-shadow">
-                  Tools & Technologies
+                  Tools &amp; Technologies
                 </h2>
               </div>
+              <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2">
+                <div class="aqua-card-inner p-2.5 skill-card">
+                  <div class="font-semibold text-white text-sm">Unity</div>
+                  <div class="text-xs text-sky-200 mt-0.5 leading-snug">Data Visualization Game, Office Chair Grand Prix</div>
+                </div>
+                <div class="aqua-card-inner p-2.5 skill-card">
+                  <div class="font-semibold text-white text-sm">Flutter</div>
+                  <div class="text-xs text-sky-200 mt-0.5 leading-snug">Hooper Buddy</div>
+                </div>
+                <div class="aqua-card-inner p-2.5 skill-card">
+                  <div class="font-semibold text-white text-sm">FastAPI</div>
+                  <div class="text-xs text-sky-200 mt-0.5 leading-snug">Property Price Estimator</div>
+                </div>
+                <div class="aqua-card-inner p-2.5 skill-card">
+                  <div class="font-semibold text-white text-sm">scikit-learn</div>
+                  <div class="text-xs text-sky-200 mt-0.5 leading-snug">Property Price Estimator</div>
+                </div>
+                <div class="aqua-card-inner p-2.5 skill-card">
+                  <div class="font-semibold text-white text-sm">pandas</div>
+                  <div class="text-xs text-sky-200 mt-0.5 leading-snug">Property Price Estimator</div>
+                </div>
+                <div class="aqua-card-inner p-2.5 skill-card">
+                  <div class="font-semibold text-white text-sm">OpenCV</div>
+                  <div class="text-xs text-sky-200 mt-0.5 leading-snug">Color Telemetry Studio</div>
+                </div>
+                <div class="aqua-card-inner p-2.5 skill-card">
+                  <div class="font-semibold text-white text-sm">Streamlit</div>
+                  <div class="text-xs text-sky-200 mt-0.5 leading-snug">Color Telemetry Studio</div>
+                </div>
+                <div class="aqua-card-inner p-2.5 skill-card">
+                  <div class="font-semibold text-white text-sm">MySQL</div>
+                  <div class="text-xs text-sky-200 mt-0.5 leading-snug">Planora, FELDA HR Exam System</div>
+                </div>
+                <div class="aqua-card-inner p-2.5 skill-card">
+                  <div class="font-semibold text-white text-sm">SQLite</div>
+                  <div class="text-xs text-sky-200 mt-0.5 leading-snug">Hooper Buddy</div>
+                </div>
+                <div class="aqua-card-inner p-2.5 skill-card">
+                  <div class="font-semibold text-white text-sm">Excel</div>
+                  <div class="text-xs text-sky-200 mt-0.5 leading-snug">FELDA HR datasets (internship)</div>
+                </div>
+                <div class="aqua-card-inner p-2.5 skill-card">
+                  <div class="font-semibold text-white text-sm">Git &amp; GitHub</div>
+                  <div class="text-xs text-sky-200 mt-0.5 leading-snug">Public repos for most projects</div>
+                </div>
+                <div class="aqua-card-inner p-2.5 skill-card">
+                  <div class="font-semibold text-white text-sm">Render &amp; Streamlit Cloud</div>
+                  <div class="text-xs text-sky-200 mt-0.5 leading-snug">Live deployments of the Property Estimator and Color Telemetry</div>
+                </div>
+                <div class="aqua-card-inner p-2.5 skill-card">
+                  <div class="font-semibold text-white text-sm">Tailwind CSS</div>
+                  <div class="text-xs text-sky-200 mt-0.5 leading-snug">This portfolio</div>
+                </div>
+              </div>
+            </div>
 
-              <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-2 text-xs">
-                <div class="aqua-card-inner p-2 skill-card" data-level="advanced">
-                  <div class="font-semibold text-white text-xs">Unity</div>
-                  <div class="text-[9px] text-sky-200 mt-0.5">Game Engine</div>
+            <div>
+              <div class="border-b border-white/40 pb-1 mb-2">
+                <h2 class="aero-heading-light text-lg sm:text-xl text-white mt-0.5 drop-shadow">
+                  Also Familiar With
+                </h2>
+              </div>
+              <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2">
+                <div class="aqua-card-inner p-2.5 skill-card">
+                  <div class="font-semibold text-white text-sm">Java</div>
+                  <div class="text-xs text-sky-200 mt-0.5 leading-snug">From my studies; not in a portfolio project yet</div>
                 </div>
-                <div class="aqua-card-inner p-2 skill-card" data-level="intermediate">
-                  <div class="font-semibold text-white text-xs">Flutter</div>
-                  <div class="text-[9px] text-sky-200 mt-0.5">Cross-Platform UI</div>
-                </div>
-                <div class="aqua-card-inner p-2 skill-card" data-level="intermediate">
-                  <div class="font-semibold text-white text-xs">SQLite</div>
-                  <div class="text-[9px] text-sky-200 mt-0.5">Local Storage</div>
-                </div>
-                <div class="aqua-card-inner p-2 skill-card" data-level="intermediate">
-                  <div class="font-semibold text-white text-xs">Streamlit</div>
-                  <div class="text-[9px] text-sky-200 mt-0.5">Data Visuals</div>
-                </div>
-                <div class="aqua-card-inner p-2 skill-card" data-level="intermediate">
-                  <div class="font-semibold text-white text-xs">Excel</div>
-                  <div class="text-[9px] text-sky-200 mt-0.5">Data Cleaning</div>
-                </div>
-                <div class="aqua-card-inner p-2 skill-card" data-level="intermediate">
-                  <div class="font-semibold text-white text-xs">scikit-learn</div>
-                  <div class="text-[9px] text-sky-200 mt-0.5">Machine Learning</div>
-                </div>
-                <div class="aqua-card-inner p-2 skill-card" data-level="beginner">
-                  <div class="font-semibold text-white text-xs">OpenCV</div>
-                  <div class="text-[9px] text-sky-200 mt-0.5">Computer Vision</div>
-                </div>
-                <div class="aqua-card-inner p-2 skill-card" data-level="intermediate">
-                  <div class="font-semibold text-white text-xs">MySQL</div>
-                  <div class="text-[9px] text-sky-200 mt-0.5">Relational DB</div>
-                </div>
-                <div class="aqua-card-inner p-2 skill-card" data-level="intermediate">
-                  <div class="font-semibold text-white text-xs">Git</div>
-                  <div class="text-[9px] text-sky-200 mt-0.5">Version Control</div>
-                </div>
-                <div class="aqua-card-inner p-2 skill-card" data-level="intermediate">
-                  <div class="font-semibold text-white text-xs">pandas</div>
-                  <div class="text-[9px] text-sky-200 mt-0.5">Data Wrangling</div>
-                </div>
-                <div class="aqua-card-inner p-2 skill-card" data-level="intermediate">
-                  <div class="font-semibold text-white text-xs">Tailwind CSS</div>
-                  <div class="text-[9px] text-sky-200 mt-0.5">CSS Framework</div>
+                <div class="aqua-card-inner p-2.5 skill-card">
+                  <div class="font-semibold text-white text-sm">C++</div>
+                  <div class="text-xs text-sky-200 mt-0.5 leading-snug">From my studies; not in a portfolio project yet</div>
                 </div>
               </div>
             </div>
@@ -732,7 +872,7 @@
         <div id="tab-certs" class="tab-pane hidden flex flex-col justify-between h-full space-y-3 min-h-0">
           <div class="space-y-2 flex-1 flex flex-col min-h-0 overflow-hidden">
             <div class="border-b border-white/40 pb-1 shrink-0">
-              <span class="text-[10px] aero-heading-light text-sky-200 uppercase tracking-wide">Credentials // Certifications</span>
+              <span class="text-xs aero-heading-light text-sky-200 uppercase tracking-wide">Credentials // Certifications</span>
               <h2 class="aero-heading-light text-xl sm:text-2xl text-white mt-0.5 drop-shadow">
                 Verified Badges & Certificates
               </h2>
@@ -741,36 +881,36 @@
             <div class="grid grid-cols-1 sm:grid-cols-12 gap-3 flex-1 min-h-0 items-stretch overflow-hidden">
               <!-- Certs Selector List -->
               <div class="sm:col-span-6 space-y-2 overflow-y-auto pr-1">
-                <div onmouseenter="showCertPreview(0)" onclick="showCertPreview(0)" class="cert-item aqua-card-inner p-3 cursor-pointer hover:bg-white/20 transition-all border-l-4 border-sky-300">
+                <div role="button" tabindex="0" onmouseenter="showCertPreview(0)" onclick="showCertPreview(0)" class="cert-item aqua-card-inner p-3 cursor-pointer hover:bg-white/20 transition-all border-l-4 border-sky-300">
                   <div class="font-semibold text-white text-xs">AntsBees Certified Data Analyst (CDA)</div>
-                  <div class="text-sky-300 font-medium text-[9px]">MBOT Certified · Credsverse Verified</div>
-                  <div class="text-[9px] text-sky-200/80 mt-1 flex items-center gap-1">
-                    <span>🔍 Hover to preview certificate</span>
+                  <div class="text-sky-300 font-medium text-[11px]">MBOT Certified · Credsverse Verified</div>
+                  <div class="text-[11px] text-sky-200/80 mt-1 flex items-center gap-1">
+                    <span>🔍 Hover or tap to preview certificate</span>
                   </div>
                 </div>
 
-                <div onmouseenter="showCertPreview(1)" onclick="showCertPreview(1)" class="cert-item aqua-card-inner p-3 cursor-pointer hover:bg-white/20 transition-all border-l-4 border-transparent">
+                <div role="button" tabindex="0" onmouseenter="showCertPreview(1)" onclick="showCertPreview(1)" class="cert-item aqua-card-inner p-3 cursor-pointer hover:bg-white/20 transition-all border-l-4 border-transparent">
                   <div class="font-semibold text-white text-xs">Machine Learning with R</div>
-                  <div class="text-sky-300 font-medium text-[9px]">CognitiveClassAI · Jun 2026</div>
-                  <div class="text-[9px] text-sky-200/80 mt-1 flex items-center gap-1">
-                    <span>🔍 Hover to preview certificate</span>
+                  <div class="text-sky-300 font-medium text-[11px]">CognitiveClassAI · Jun 2026</div>
+                  <div class="text-[11px] text-sky-200/80 mt-1 flex items-center gap-1">
+                    <span>🔍 Hover or tap to preview certificate</span>
                   </div>
                 </div>
 
-                <div onmouseenter="showCertPreview(2)" onclick="showCertPreview(2)" class="cert-item aqua-card-inner p-3 cursor-pointer hover:bg-white/20 transition-all border-l-4 border-transparent">
+                <div role="button" tabindex="0" onmouseenter="showCertPreview(2)" onclick="showCertPreview(2)" class="cert-item aqua-card-inner p-3 cursor-pointer hover:bg-white/20 transition-all border-l-4 border-transparent">
                   <div class="font-semibold text-white text-xs">Build A Computer Vision App with Azure Cognitive Services</div>
-                  <div class="text-sky-300 font-medium text-[9px]">Coursera</div>
-                  <div class="text-[9px] text-sky-200/80 mt-1 flex items-center gap-1">
-                    <span>🔍 Hover to preview certificate</span>
+                  <div class="text-sky-300 font-medium text-[11px]">Coursera</div>
+                  <div class="text-[11px] text-sky-200/80 mt-1 flex items-center gap-1">
+                    <span>🔍 Hover or tap to preview certificate</span>
                   </div>
                 </div>
               </div>
 
               <!-- Live Hover Preview Box -->
               <div class="sm:col-span-6 aqua-card-inner p-2.5 flex flex-col justify-between h-full overflow-hidden relative">
-                <div class="text-[10px] text-sky-200 font-medium mb-1 border-b border-white/20 pb-1 flex justify-between items-center shrink-0">
+                <div class="text-xs text-sky-200 font-medium mb-1 border-b border-white/20 pb-1 flex justify-between items-center shrink-0">
                   <span>Certificate Preview</span>
-                  <span id="cert-preview-status" class="text-[9px] text-emerald-300">✓ Verified</span>
+                  <span id="cert-preview-status" class="text-[11px] text-emerald-300">✓ Verified</span>
                 </div>
                 
                 <a id="cert-preview-link" href="https://credsverse.com/credentials/026b3cb3-efc3-459d-8e25-b876daf0b0d8?preview=1" target="_blank" class="flex-1 block relative overflow-hidden rounded-lg border border-white/30 group bg-slate-950/50 min-h-0">
@@ -785,7 +925,7 @@
                   </div>
                 </a>
                 
-                <p id="cert-preview-title" class="text-[10px] text-center text-sky-100 font-semibold mt-1.5 shrink-0">
+                <p id="cert-preview-title" class="text-xs text-center text-sky-100 font-semibold mt-1.5 shrink-0">
                   AntsBees Certified Data Analyst (CDA)
                 </p>
               </div>
@@ -798,14 +938,14 @@
           <div class="space-y-1.5 shrink-0">
             <div class="border-b border-white/40 pb-1 flex items-center justify-between">
               <div>
-                <span class="text-[10px] aero-heading-light text-sky-200 uppercase tracking-wide">Highlights // Visual Record</span>
+                <span class="text-xs aero-heading-light text-sky-200 uppercase tracking-wide">Highlights // Visual Record</span>
                 <h2 class="aero-heading-light text-xl sm:text-2xl text-white mt-0.5 drop-shadow">
                   Activity Gallery
                 </h2>
               </div>
-              <span class="text-[9px] px-2 py-0.5 rounded-full bg-sky-500/30 border border-sky-300/50 text-sky-100">Click media to expand 🔍</span>
+              <span class="text-[11px] px-2 py-0.5 rounded-full bg-sky-500/30 border border-sky-300/50 text-sky-100">Click media to expand 🔍</span>
             </div>
-            <p class="text-[11px] text-sky-100/90 leading-relaxed">
+            <p class="text-xs text-sky-100/90 leading-relaxed">
               Hands-on technical work, extension demos, internal system demonstrations at FELDA, university project presentations, training workshops, and inter-faculty sports events.
             </p>
           </div>
@@ -815,112 +955,112 @@
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-2.5 pb-2">
               
               <!-- Gallery Item: Selective Storage Purger Demo Video -->
-              <div onclick="openLightbox('purger.mp4', 'Selective LocalStorage Purger Demo', 'Demonstration of key filtering, wildcard searching, and surgical localStorage wiping in Chrome Manifest V3.', true)" class="aqua-card-inner p-2 flex flex-col justify-between cursor-pointer hover:border-sky-300 transition-all group">
+              <div role="button" tabindex="0" onclick="openLightbox('purger.mp4', 'Selective LocalStorage Purger Demo', 'Demonstration of key filtering, wildcard searching, and surgical localStorage wiping in Chrome Manifest V3.', true)" class="aqua-card-inner p-2 flex flex-col justify-between cursor-pointer hover:border-sky-300 transition-all group">
                 <div class="w-full h-28 rounded-lg overflow-hidden relative bg-slate-950/60 border border-white/20">
                   <video src="purger.mp4" muted loop playsinline class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105 pointer-events-none"></video>
-                  <span class="absolute top-1.5 right-1.5 text-[8px] px-1.5 py-0.5 rounded bg-purple-600/90 text-white font-bold border border-purple-300">Extension Demo</span>
-                  <span class="absolute bottom-1.5 right-1.5 text-[9px] bg-black/70 px-1.5 py-0.5 rounded text-sky-200 font-medium">▶ Play Video</span>
+                  <span class="absolute top-1.5 right-1.5 text-[11px] px-1.5 py-0.5 rounded bg-purple-600/90 text-white font-bold border border-purple-300">Extension Demo</span>
+                  <span class="absolute bottom-1.5 right-1.5 text-[11px] bg-black/70 px-1.5 py-0.5 rounded text-sky-200 font-medium">▶ Play Video</span>
                 </div>
                 <div class="mt-1.5 space-y-0.5">
-                  <div class="font-semibold text-white text-[11px] truncate">Selective Storage Purger Demo</div>
-                  <p class="text-[9.5px] text-sky-200 line-clamp-1">Manifest V3 key wiping showcase</p>
+                  <div class="font-semibold text-white text-xs truncate">Selective Storage Purger Demo</div>
+                  <p class="text-[11px] text-sky-200 line-clamp-1">Manifest V3 key wiping showcase</p>
                 </div>
               </div>
 
               <!-- Gallery Item: VibeVault Extension Demo Video -->
-              <div onclick="openLightbox('vibevault.mp4', 'VibeVault Extension Demo', 'Demonstration of quick capture popup, right-click text selection notes, and full-tab dark-mode dashboard.', true)" class="aqua-card-inner p-2 flex flex-col justify-between cursor-pointer hover:border-sky-300 transition-all group">
+              <div role="button" tabindex="0" onclick="openLightbox('vibevault.mp4', 'VibeVault Extension Demo', 'Demonstration of quick capture popup, right-click text selection notes, and full-tab dark-mode dashboard.', true)" class="aqua-card-inner p-2 flex flex-col justify-between cursor-pointer hover:border-sky-300 transition-all group">
                 <div class="w-full h-28 rounded-lg overflow-hidden relative bg-slate-950/60 border border-white/20">
                   <video src="vibevault.mp4" muted loop playsinline class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105 pointer-events-none"></video>
-                  <span class="absolute top-1.5 right-1.5 text-[8px] px-1.5 py-0.5 rounded bg-purple-600/90 text-white font-bold border border-purple-300">Extension Demo</span>
-                  <span class="absolute bottom-1.5 right-1.5 text-[9px] bg-black/70 px-1.5 py-0.5 rounded text-sky-200 font-medium">▶ Play Video</span>
+                  <span class="absolute top-1.5 right-1.5 text-[11px] px-1.5 py-0.5 rounded bg-purple-600/90 text-white font-bold border border-purple-300">Extension Demo</span>
+                  <span class="absolute bottom-1.5 right-1.5 text-[11px] bg-black/70 px-1.5 py-0.5 rounded text-sky-200 font-medium">▶ Play Video</span>
                 </div>
                 <div class="mt-1.5 space-y-0.5">
-                  <div class="font-semibold text-white text-[11px] truncate">VibeVault Extension Demo</div>
-                  <p class="text-[9.5px] text-sky-200 line-clamp-1">Context bookmarking & dashboard walk-through</p>
+                  <div class="font-semibold text-white text-xs truncate">VibeVault Extension Demo</div>
+                  <p class="text-[11px] text-sky-200 line-clamp-1">Context bookmarking & dashboard walk-through</p>
                 </div>
               </div>
 
               <!-- Gallery Item 1 -->
-              <div onclick="openLightbox('icons/systemdev.jpg', 'FELDA HR Exam System Development', 'Developing the web-based Exam Management System proposal to FELDA HR Department stakeholders.')" class="aqua-card-inner p-2 flex flex-col justify-between cursor-pointer hover:border-sky-300 transition-all group">
+              <div role="button" tabindex="0" onclick="openLightbox('icons/systemdev.jpg', 'FELDA HR Exam System Development', 'Developing the web-based Exam Management System prototype to FELDA HR Department stakeholders.')" class="aqua-card-inner p-2 flex flex-col justify-between cursor-pointer hover:border-sky-300 transition-all group">
                 <div class="w-full h-28 rounded-lg overflow-hidden relative bg-slate-950/60 border border-white/20">
                   <img src="icons/systemdev.jpg" alt="FELDA HR Exam System Development" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105" />
-                  <span class="absolute top-1.5 right-1.5 text-[8px] px-1.5 py-0.5 rounded bg-sky-600/90 text-white font-bold border border-sky-300">FELDA Internship</span>
+                  <span class="absolute top-1.5 right-1.5 text-[11px] px-1.5 py-0.5 rounded bg-sky-600/90 text-white font-bold border border-sky-300">FELDA Internship</span>
                 </div>
                 <div class="mt-1.5 space-y-0.5">
-                  <div class="font-semibold text-white text-[11px] truncate">FELDA HR Exam System Development</div>
-                  <p class="text-[9.5px] text-sky-200 line-clamp-1">System proposal & workflow demo</p>
+                  <div class="font-semibold text-white text-xs truncate">FELDA HR Exam System Prototype</div>
+                  <p class="text-[11px] text-sky-200 line-clamp-1">System proposal & workflow demo</p>
                 </div>
               </div>
 
               <!-- Gallery Item 2 -->
-              <div onclick="openLightbox('icons/meeting.jpg', 'Timekeeper of annual meetings', 'Assist in organizing and managing annual meetings during internship.')" class="aqua-card-inner p-2 flex flex-col justify-between cursor-pointer hover:border-sky-300 transition-all group">
+              <div role="button" tabindex="0" onclick="openLightbox('icons/meeting.jpg', 'Timekeeper of annual meetings', 'Assist in organizing and managing annual meetings during internship.')" class="aqua-card-inner p-2 flex flex-col justify-between cursor-pointer hover:border-sky-300 transition-all group">
                 <div class="w-full h-28 rounded-lg overflow-hidden relative bg-slate-950/60 border border-white/20">
                   <img src="icons/meeting.jpg" alt="Timekeeper of annual meetings" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105" />
-                  <span class="absolute top-1.5 right-1.5 text-[8px] px-1.5 py-0.5 rounded bg-sky-600/90 text-white font-bold border border-sky-300">FELDA Internship</span>
+                  <span class="absolute top-1.5 right-1.5 text-[11px] px-1.5 py-0.5 rounded bg-sky-600/90 text-white font-bold border border-sky-300">FELDA Internship</span>
                 </div>
                 <div class="mt-1.5 space-y-0.5">
-                  <div class="font-semibold text-white text-[11px] truncate">Timekeeper of annual meetings</div>
-                  <p class="text-[9.5px] text-sky-200 line-clamp-1">Assisting in organizing and managing annual meetings</p>
+                  <div class="font-semibold text-white text-xs truncate">Timekeeper of annual meetings</div>
+                  <p class="text-[11px] text-sky-200 line-clamp-1">Assisting in organizing and managing annual meetings</p>
                 </div>
               </div>
 
               <!-- Gallery Item 3 -->
-              <div onclick="openLightbox('icons/profile2.jpeg', 'Group presentation leader', 'Leading a group presentation on the development of a Web3GL game.')" class="aqua-card-inner p-2 flex flex-col justify-between cursor-pointer hover:border-sky-300 transition-all group">
+              <div role="button" tabindex="0" onclick="openLightbox('icons/profile2.jpeg', 'Group presentation leader', 'Leading a group presentation on the development of a Web3GL game.')" class="aqua-card-inner p-2 flex flex-col justify-between cursor-pointer hover:border-sky-300 transition-all group">
                 <div class="w-full h-28 rounded-lg overflow-hidden relative bg-slate-950/60 border border-white/20">
                   <img src="icons/profile2.jpeg" alt="Group presentation leader" class="w-full h-full object-contain p-1 transition-transform duration-300 group-hover:scale-105" />
-                  <span class="absolute top-1.5 right-1.5 text-[8px] px-1.5 py-0.5 rounded bg-amber-500/90 text-white font-bold border border-amber-300">UiTM Project</span>
+                  <span class="absolute top-1.5 right-1.5 text-[11px] px-1.5 py-0.5 rounded bg-amber-500/90 text-white font-bold border border-amber-300">UiTM Project</span>
                 </div>
                 <div class="mt-1.5 space-y-0.5">
-                  <div class="font-semibold text-white text-[11px] truncate">Lead in presentations</div>
-                  <p class="text-[9.5px] text-sky-200 line-clamp-1">Representative of group in projects</p>
+                  <div class="font-semibold text-white text-xs truncate">Lead in presentations</div>
+                  <p class="text-[11px] text-sky-200 line-clamp-1">Representative of group in projects</p>
                 </div>
               </div>
 
               <!-- Gallery Item 4 -->
-              <div onclick="openLightbox('icons/buddy.jpeg', 'Hooper Buddy App Development', 'Building cross-platform shooting analytics and offline relational SQLite database logging in Flutter.')" class="aqua-card-inner p-2 flex flex-col justify-between cursor-pointer hover:border-sky-300 transition-all group">
+              <div role="button" tabindex="0" onclick="openLightbox('icons/buddy.jpeg', 'Hooper Buddy App Development', 'Building cross-platform shooting analytics and offline relational SQLite database logging in Flutter.')" class="aqua-card-inner p-2 flex flex-col justify-between cursor-pointer hover:border-sky-300 transition-all group">
                 <div class="w-full h-28 rounded-lg overflow-hidden relative bg-slate-950/60 border border-white/20">
                   <img src="icons/buddy.jpeg" alt="Hooper Buddy Mobile App" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105" />
-                  <span class="absolute top-1.5 right-1.5 text-[8px] px-1.5 py-0.5 rounded bg-emerald-600/90 text-white font-bold border border-emerald-300">Mobile Dev</span>
+                  <span class="absolute top-1.5 right-1.5 text-[11px] px-1.5 py-0.5 rounded bg-emerald-600/90 text-white font-bold border border-emerald-300">Mobile Dev</span>
                 </div>
                 <div class="mt-1.5 space-y-0.5">
-                  <div class="font-semibold text-white text-[11px] truncate">Hooper Buddy Training App</div>
-                  <p class="text-[9.5px] text-sky-200 line-clamp-1">Flutter & Dart UI testing</p>
+                  <div class="font-semibold text-white text-xs truncate">Hooper Buddy Training App</div>
+                  <p class="text-[11px] text-sky-200 line-clamp-1">Flutter & Dart UI testing</p>
                 </div>
               </div>
 
               <!-- Gallery Item 5 -->
-              <div onclick="openLightbox('icons/mm.png', 'Color Telemetry Analytics Studio', 'Video frame downsampling and real-time color palette extraction built with OpenCV and Streamlit.')" class="aqua-card-inner p-2 flex flex-col justify-between cursor-pointer hover:border-sky-300 transition-all group">
+              <div role="button" tabindex="0" onclick="openLightbox('icons/mm.png', 'Color Telemetry Analytics Studio', 'Video frame downsampling and real-time color palette extraction built with OpenCV and Streamlit.')" class="aqua-card-inner p-2 flex flex-col justify-between cursor-pointer hover:border-sky-300 transition-all group">
                 <div class="w-full h-28 rounded-lg overflow-hidden relative bg-slate-950/60 border border-white/20">
                   <img src="icons/mm.png" alt="Color Telemetry OpenCV App" class="w-full h-full object-contain p-1 transition-transform duration-300 group-hover:scale-105" />
-                  <span class="absolute top-1.5 right-1.5 text-[8px] px-1.5 py-0.5 rounded bg-indigo-600/90 text-white font-bold border border-indigo-300">Data Analytics</span>
+                  <span class="absolute top-1.5 right-1.5 text-[11px] px-1.5 py-0.5 rounded bg-indigo-600/90 text-white font-bold border border-indigo-300">Data Analytics</span>
                 </div>
                 <div class="mt-1.5 space-y-0.5">
-                  <div class="font-semibold text-white text-[11px] truncate">Color Telemetry Studio</div>
-                  <p class="text-[9.5px] text-sky-200 line-clamp-1">OpenCV K-Means Clustering</p>
+                  <div class="font-semibold text-white text-xs truncate">Color Telemetry Studio</div>
+                  <p class="text-[11px] text-sky-200 line-clamp-1">OpenCV K-Means Clustering</p>
                 </div>
               </div>
 
               <!-- Gallery Item 6 -->
-              <div onclick="openLightbox('icons/cda.png', 'MBOT Certified Data Analyst Class', 'Sneak peek of CDA class that i joined during semester break.')" class="aqua-card-inner p-2 flex flex-col justify-between cursor-pointer hover:border-sky-300 transition-all group">
+              <div role="button" tabindex="0" onclick="openLightbox('icons/cda.png', 'MBOT Certified Data Analyst Class', 'Sneak peek of CDA class that i joined during semester break.')" class="aqua-card-inner p-2 flex flex-col justify-between cursor-pointer hover:border-sky-300 transition-all group">
                 <div class="w-full h-28 rounded-lg overflow-hidden relative bg-slate-950/60 border border-white/20">
                   <img src="icons/cda.png" alt="MBOT Certified Data Analyst Class" class="w-full h-full object-contain p-1 transition-transform duration-300 group-hover:scale-105" />
-                  <span class="absolute top-1.5 right-1.5 text-[8px] px-1.5 py-0.5 rounded bg-purple-600/90 text-white font-bold border border-purple-300">Credential</span>
+                  <span class="absolute top-1.5 right-1.5 text-[11px] px-1.5 py-0.5 rounded bg-purple-600/90 text-white font-bold border border-purple-300">Credential</span>
                 </div>
                 <div class="mt-1.5 space-y-0.5">
-                  <div class="font-semibold text-white text-[11px] truncate">MBOT Certified Data Analyst Class</div>
-                  <p class="text-[9.5px] text-sky-200 line-clamp-1">Snapshot of dashboard creation during class</p>
+                  <div class="font-semibold text-white text-xs truncate">MBOT Certified Data Analyst Class</div>
+                  <p class="text-[11px] text-sky-200 line-clamp-1">Snapshot of dashboard creation during class</p>
                 </div>
               </div>
 
               <!-- Gallery Item: Inter-Faculty Sports (Sepak Takraw) -->
-              <div onclick="openLightbox('icons/sepaktakraw.png', 'Inter-Faculty Sports: Sepak Takraw', 'Taking part in the Inter-Faculty Sports event, playing sepak takraw.')" class="aqua-card-inner p-2 flex flex-col justify-between cursor-pointer hover:border-sky-300 transition-all group">
+              <div role="button" tabindex="0" onclick="openLightbox('icons/sepaktakraw.png', 'Inter-Faculty Sports: Sepak Takraw', 'Taking part in the Inter-Faculty Sports event, playing sepak takraw.')" class="aqua-card-inner p-2 flex flex-col justify-between cursor-pointer hover:border-sky-300 transition-all group">
                 <div class="w-full h-28 rounded-lg overflow-hidden relative bg-slate-950/60 border border-white/20">
                   <img src="icons/sepaktakraw.png" alt="Playing sepak takraw at the Inter-Faculty Sports event" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105" />
-                  <span class="absolute top-1.5 right-1.5 text-[8px] px-1.5 py-0.5 rounded bg-emerald-600/90 text-white font-bold border border-emerald-300">Sports</span>
+                  <span class="absolute top-1.5 right-1.5 text-[11px] px-1.5 py-0.5 rounded bg-emerald-600/90 text-white font-bold border border-emerald-300">Sports</span>
                 </div>
                 <div class="mt-1.5 space-y-0.5">
-                  <div class="font-semibold text-white text-[11px] truncate">Inter-Faculty Sports: Sepak Takraw</div>
-                  <p class="text-[9.5px] text-sky-200 line-clamp-1">Joining the Inter-Faculty Sports event</p>
+                  <div class="font-semibold text-white text-xs truncate">Inter-Faculty Sports: Sepak Takraw</div>
+                  <p class="text-[11px] text-sky-200 line-clamp-1">Joining the Inter-Faculty Sports event</p>
                 </div>
               </div>
 
@@ -931,33 +1071,33 @@
       </main>
       <div class="lg:hidden aqua-glass-panel p-3"><div class="space-y-2 shrink-0">
             <div class="text-center space-y-0.5">
-              <p class="text-[11px] font-semibold text-white drop-shadow flex items-center justify-center gap-1">
+              <p class="text-xs font-semibold text-white drop-shadow flex items-center justify-center gap-1">
                 <span>Let's Build Something Great Together</span>
               </p>
-              <p class="text-[9.5px] text-sky-200/90 font-normal">
-                Open for IT Internship Opportunities
+              <p class="text-[11px] text-sky-200/90 font-normal">
+                Open for Software Development &amp; ML Internships
               </p>
             </div>
 
             <!-- Social Link Buttons -->
             <div class="flex gap-1.5">
-              <a href="https://www.linkedin.com/in/erfanhakimi/" target="_blank" class="flex-1 py-1.5 px-2 rounded-xl bg-white/80 hover:bg-white text-slate-900 font-semibold text-[11px] shadow-md transition-all flex items-center justify-center gap-1">
-                <img src="https://img.icons8.com/color/48/linkedin.png" class="w-3.5 h-3.5" />
+              <a href="https://www.linkedin.com/in/erfanhakimi/" target="_blank" class="aero-btn aero-btn--light aero-btn--sm flex-1">
+                <img alt="" src="https://img.icons8.com/color/48/linkedin.png" class="w-4 h-4" />
                 <span>LinkedIn</span>
               </a>
-              <a href="https://github.com/erfanhkimi" target="_blank" class="flex-1 py-1.5 px-2 rounded-xl bg-white/80 hover:bg-white text-slate-900 font-semibold text-[11px] shadow-md transition-all flex items-center justify-center gap-1">
-                <img src="icons/github.png" class="w-3.5 h-3.5" />
+              <a href="https://github.com/erfanhkimi" target="_blank" class="aero-btn aero-btn--light aero-btn--sm flex-1">
+                <img alt="" src="icons/github.png" class="w-4 h-4" />
                 <span>GitHub</span>
               </a>
-              <a href="mailto:erfanhakimi04@gmail.com" class="flex-1 py-1.5 px-2 rounded-xl bg-white/80 hover:bg-white text-slate-900 font-semibold text-[11px] shadow-md transition-all flex items-center justify-center gap-1">
-                <img src="icons/gmail.webp" class="w-3.5 h-3.5" />
+              <a href="mailto:erfanhakimi04@gmail.com" class="aero-btn aero-btn--light aero-btn--sm flex-1">
+                <img alt="" src="icons/gmail.webp" class="w-4 h-4" />
                 <span>Gmail</span>
               </a>
             </div>
 
             <!-- Trademark & Copyright Line -->
             <div class="text-center pt-1 border-t border-white/10">
-              <p class="text-[8.5px] text-sky-200/70 tracking-widest uppercase font-medium">
+              <p class="text-[11px] text-sky-200/70 tracking-widest uppercase font-medium">
                 © 2026 Erfan Hakimi ™ · All Rights Reserved
               </p>
             </div>
@@ -969,11 +1109,11 @@
   </div>
 
   <!-- LIGHTBOX PREVIEW MODAL -->
-  <div id="lightbox-modal" class="fixed inset-0 bg-slate-950/80 backdrop-blur-md z-50 hidden flex items-center justify-center p-4">
+  <div id="lightbox-modal" role="dialog" aria-modal="true" aria-labelledby="lightbox-title" class="fixed inset-0 bg-slate-950/80 backdrop-blur-md z-50 hidden flex items-center justify-center p-4">
     <div class="aqua-glass-panel max-w-xl w-full p-4 space-y-3 relative overflow-hidden border border-white/40 shadow-2xl">
       <div class="flex items-center justify-between border-b border-white/30 pb-2">
         <h3 id="lightbox-title" class="font-semibold text-white text-sm">Media Preview</h3>
-        <button onclick="closeLightbox()" class="text-sky-200 hover:text-white font-bold text-lg px-2 rounded-lg bg-white/10 hover:bg-white/20 transition-all">✕</button>
+        <button id="lightbox-close" type="button" aria-label="Close preview" onclick="closeLightbox()" class="aero-btn aero-btn--glass aero-btn--icon"><span>✕</span></button>
       </div>
 
       <div class="w-full h-64 sm:h-80 rounded-lg overflow-hidden bg-slate-950/70 border border-white/20 flex items-center justify-center p-1">
@@ -988,16 +1128,16 @@
   </div>
 
   <!-- INTERACTIVE CONTACT FORM MODAL -->
-  <div id="contact-modal" class="fixed inset-0 bg-slate-950/80 backdrop-blur-md z-50 hidden flex items-center justify-center p-4">
+  <div id="contact-modal" role="dialog" aria-modal="true" aria-labelledby="contact-title" class="fixed inset-0 bg-slate-950/80 backdrop-blur-md z-50 hidden flex items-center justify-center p-4">
     <div class="aqua-glass-panel max-w-lg w-full p-5 space-y-4 relative overflow-hidden border border-white/40 shadow-2xl">
       <div class="flex items-center justify-between border-b border-white/30 pb-2">
         <div class="flex items-center gap-2">
           <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-sky-200" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
             <path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
           </svg>
-          <h3 class="font-semibold text-white text-base">Get In Touch</h3>
+          <h3 id="contact-title" class="font-semibold text-white text-base">Get In Touch</h3>
         </div>
-        <button onclick="closeContactModal()" class="text-sky-200 hover:text-white font-bold text-lg px-2 rounded-lg bg-white/10 hover:bg-white/20 transition-all">✕</button>
+        <button id="contact-close" type="button" aria-label="Close contact form" onclick="closeContactModal()" class="aero-btn aero-btn--glass aero-btn--icon"><span>✕</span></button>
       </div>
 
       <p class="text-xs text-sky-100/90 leading-relaxed">
@@ -1006,24 +1146,24 @@
 
       <form id="contact-form" onsubmit="handleContactSubmit(event)" class="space-y-3">
         <div>
-          <label class="block text-[10px] uppercase font-semibold tracking-wider text-sky-200 mb-1">Your Name</label>
-          <input type="text" name="name" required placeholder="John Doe" class="w-full px-3 py-2 rounded-xl bg-slate-950/50 border border-white/30 text-xs text-white placeholder-sky-200/50 focus:outline-none focus:border-sky-300 focus:ring-1 focus:ring-sky-300 transition-all" />
+          <label for="cf-name" class="block text-xs uppercase font-semibold tracking-wider text-sky-200 mb-1">Your Name</label>
+          <input type="text" id="cf-name" autocomplete="name" name="name" required placeholder="John Doe" class="w-full px-3 py-2 rounded-xl bg-slate-950/50 border border-white/30 text-xs text-white placeholder-sky-200/50 focus:outline-none focus:border-sky-300 focus:ring-1 focus:ring-sky-300 transition-all" />
         </div>
 
         <div>
-          <label class="block text-[10px] uppercase font-semibold tracking-wider text-sky-200 mb-1">Your Email</label>
-          <input type="email" name="email" required placeholder="john@example.com" class="w-full px-3 py-2 rounded-xl bg-slate-950/50 border border-white/30 text-xs text-white placeholder-sky-200/50 focus:outline-none focus:border-sky-300 focus:ring-1 focus:ring-sky-300 transition-all" />
+          <label for="cf-email" class="block text-xs uppercase font-semibold tracking-wider text-sky-200 mb-1">Your Email</label>
+          <input type="email" id="cf-email" autocomplete="email" name="email" required placeholder="john@example.com" class="w-full px-3 py-2 rounded-xl bg-slate-950/50 border border-white/30 text-xs text-white placeholder-sky-200/50 focus:outline-none focus:border-sky-300 focus:ring-1 focus:ring-sky-300 transition-all" />
         </div>
 
         <div>
-          <label class="block text-[10px] uppercase font-semibold tracking-wider text-sky-200 mb-1">Message</label>
-          <textarea name="message" rows="3" required placeholder="Hi Erfan..." class="w-full px-3 py-2 rounded-xl bg-slate-950/50 border border-white/30 text-xs text-white placeholder-sky-200/50 focus:outline-none focus:border-sky-300 focus:ring-1 focus:ring-sky-300 transition-all resize-none"></textarea>
+          <label for="cf-message" class="block text-xs uppercase font-semibold tracking-wider text-sky-200 mb-1">Message</label>
+          <textarea id="cf-message" name="message" rows="3" required placeholder="Hi Erfan..." class="w-full px-3 py-2 rounded-xl bg-slate-950/50 border border-white/30 text-xs text-white placeholder-sky-200/50 focus:outline-none focus:border-sky-300 focus:ring-1 focus:ring-sky-300 transition-all resize-none"></textarea>
         </div>
 
         <div class="pt-1 flex items-center justify-between gap-2">
-        <span id="contact-status" class="text-[10px] text-emerald-300 hidden font-medium">✓ Message sent successfully!</span>
-          <button type="submit" class="ml-auto px-4 py-2 rounded-xl bg-gradient-to-r from-sky-500 to-blue-600 hover:from-sky-400 hover:to-blue-500 text-white font-semibold text-xs border border-white/40 shadow-md transition-all flex items-center gap-1.5">
-            <span>Send Message </span>
+        <span id="contact-status" class="text-xs text-emerald-300 hidden font-medium">✓ Message sent successfully!</span>
+          <button type="submit" class="aero-btn ml-auto">
+            <span>Send Message</span>
           </button>
         </div>
       </form>
@@ -1040,6 +1180,8 @@
 
   <!-- SOUND ON/OFF TOGGLE -->
   <button id="sound-toggle" type="button" class="fixed bottom-4 right-4 z-40 w-10 h-10 rounded-full aqua-card-inner text-base flex items-center justify-center hover:bg-white/20 transition-all" aria-label="Mute sounds">🔊</button>
+  <!-- LITE MODE TOGGLE -->
+  <button id="lite-toggle" type="button" aria-pressed="false" aria-label="Switch to lite mode" title="Lite mode: pauses the background video and turns off blur and animations" class="fixed bottom-4 right-16 z-40 w-10 h-10 rounded-full aqua-card-inner text-base flex items-center justify-center hover:bg-white/20 transition-all"><span id="lite-icon" aria-hidden="true">🎞️</span></button>
 
   <script>
     // Open a section (clicking the open section again closes the box)
@@ -1048,12 +1190,15 @@
 
       if (clickedBtn.classList.contains('active') && !panel.classList.contains('panel-closed')) {
         clickedBtn.classList.remove('active');
+        clickedBtn.removeAttribute('aria-current');
         panel.classList.add('panel-closed');
+        setHash('');
         return;
       }
 
-      document.querySelectorAll('.aqua-nav-btn').forEach(btn => btn.classList.remove('active'));
+      document.querySelectorAll('.aqua-nav-btn').forEach(btn => { btn.classList.remove('active'); btn.removeAttribute('aria-current'); });
       clickedBtn.classList.add('active');
+      clickedBtn.setAttribute('aria-current', 'true');
 
       document.querySelectorAll('.tab-pane').forEach(pane => pane.classList.add('hidden'));
       document.getElementById('tab-' + tabId).classList.remove('hidden');
@@ -1061,6 +1206,7 @@
 
       // Short sections shrink to fit their content (no empty space)
       panel.classList.toggle('fit-content', ['home', 'experience', 'skills'].includes(tabId));
+      setHash(slugForTab(tabId));
 
       // Mobile: keep the chosen pill centred in the sideways nav
       if (window.innerWidth < 1024) {
@@ -1068,17 +1214,10 @@
       }
     }
 
-    // Capability levels -> signal bars + status label
-    const SKILL_LEVELS = { beginner: [1, 'Beginner', 'lvl-beg'], intermediate: [2, 'Intermediate', 'lvl-int'], advanced: [3, 'Advanced', 'lvl-adv'] };
-    document.querySelectorAll('.skill-card').forEach(card => {
-      const [n, label, cls] = SKILL_LEVELS[card.dataset.level] || SKILL_LEVELS.beginner;
-      card.insertAdjacentHTML('beforeend',
-        `<div class="skill-level-row"><span class="sig lv${n}" role="img" aria-label="${label}"><i></i><i></i><i></i></span><span class="skill-level ${cls}">${label}</span></div>`);
-    });
-
     // Projects Array ordered with Selective Storage Purger and VibeVault directly under Data Viz Game
     const projectList = [
       {
+        slug: "data-viz-game",
         title: "Data Visualization Educational Game",
         desc: "An interactive 3D open-world educational game implementing C# scripting to teach data visualization principles.",
         img: "icons/datavid.png",
@@ -1090,6 +1229,7 @@
         install: ""
       },
       {
+        slug: "storage-purger",
         title: "Selective LocalStorage Purger",
         desc: "A lightweight, zero-bloat Manifest V3 browser extension for developers to inspect, filter, and surgically purge localStorage and sessionStorage keys without destroying authentication cookies or resetting user sessions.",
         img: "icons/purger.png",
@@ -1101,6 +1241,7 @@
         install: ""
       },
       {
+        slug: "vibevault",
         title: "VibeVault: Context Bookmarker Extension",
         desc: "A minimalist, local-first Chrome extension for visual context bookmarking. Save webpages and highlighted text alongside personal notes and tags with chrome.storage.local persistence.",
         img: "icons/vibevault.png",
@@ -1112,6 +1253,7 @@
         install: ""
       },
       {
+        slug: "hooper-buddy",
         title: "Hooper Buddy: Cross-Platform Basketball Drill Mobile App",
         desc: "A cross-platform mobile basketball training app using Flutter and Dart featuring offline relational storage (sqflite) for workout logging and dynamic shooting analytics via fl_chart.",
         img: "icons/hooperbuddy.jpeg",
@@ -1123,6 +1265,7 @@
         install: "https://github.com/erfanhkimi/hooper_buddy/releases/tag/v1.0.0"
       },
       {
+        slug: "color-telemetry",
         title: "Color Telemetry & Visual Analytics Studio",
         desc: "An automated video analytics web platform using OpenCV downsampling and K-Means clustering to extract frame-by-frame color palettes, lighting trends, and time-series visual metrics.",
         img: "icons/multi.png",
@@ -1134,6 +1277,7 @@
         install: ""
       },
       {
+        slug: "planora",
         title: "Planora: Smart Study Planner",
         desc: "Web-based smart study scheduler designed to help students plan, organize, and track their study schedules efficiently. Generates a personalized study timetable based on user inputs.",
         img: "icons/planora.png",
@@ -1145,6 +1289,7 @@
         install: ""
       },
       {
+        slug: "office-chair-grand-prix",
         title: "Office Chair Grand Prix: Unity Racing Game",
         desc: "A humorous casual racing game developed in Unity where players navigate office chairs through tracks filled with obstacles. Combines speed and precision to dodge hazards.",
         img: "icons/Officechair.png",
@@ -1156,7 +1301,8 @@
         install: ""
       },
       {
-        title: "FELDA HR Exam Management System",
+        slug: "felda-exam-system",
+        title: "FELDA HR Exam Management System (Prototype)",
         desc: "Developed an internal web-based exam management system for FELDA's HR department to streamline the process of creating, scheduling, and evaluating employee exams.",
         img: "icons/exammgt.png",
         tags: ["PHP", "HTML","CSS", "MySQL"],
@@ -1167,6 +1313,7 @@
         install: ""
       },
       {
+        slug: "property-estimator",
         title: "Klang Valley Property Price Estimator",
         desc: "A supervised machine-learning web app that estimates property price per sq ft from township, tenure and property type using 2025 Malaysian transaction data. Compares a linear regression baseline against a random forest, served through a FastAPI REST API and deployed on Render.",
         img: "icons/klangvalley.png",
@@ -1214,34 +1361,63 @@
       clickedItem.classList.add('border-sky-300');
 
       const p = projectList[idx];
+      currentProjectIdx = idx;
       document.getElementById('proj-detail-title').innerText = p.title;
       document.getElementById('proj-detail-desc').innerText = p.desc;
-      document.getElementById('proj-detail-img').src = p.img;
+      const projImg = document.getElementById('proj-detail-img');
+      projImg.src = p.img;
+      projImg.alt = p.title + ' preview';
 
       // Status Badge Update
       const badgeEl = document.getElementById('proj-detail-badge');
       badgeEl.innerText = p.badge;
-      badgeEl.className = `absolute top-3 right-3 text-[9px] px-2.5 py-1 rounded-full font-bold shadow-md border ${p.badgeColor}`;
+      badgeEl.className = `absolute top-3 right-3 text-[11px] px-2.5 py-1 rounded-full font-bold shadow-md border ${p.badgeColor}`;
 
       // Links update
       const linksContainer = document.getElementById('proj-detail-links');
       let linksHTML = '';
 
       if (p.github) {
-        linksHTML += `<a href="${p.github}" target="_blank" class="text-xs px-3 py-1.5 rounded-lg bg-slate-900/90 hover:bg-black text-white font-semibold border border-white/30 flex items-center gap-1.5 shadow-md transition-all"><span>📦 GitHub Repo</span></a>`;
+        linksHTML += `<a href="${p.github}" target="_blank" class="aero-btn aero-btn--glass aero-btn--sm"><span>📦 GitHub Repo</span></a>`;
       }
       if (p.live) {
-        linksHTML += `<a href="${p.live}" target="_blank" class="text-xs px-3 py-1.5 rounded-lg bg-sky-600/90 hover:bg-sky-500 text-white font-semibold border border-white/30 flex items-center gap-1.5 shadow-md transition-all"><span>🌐 Live Website</span></a>`;
+        linksHTML += `<a href="${p.live}" target="_blank" class="aero-btn aero-btn--sm"><span>🌐 Live Website</span></a>`;
       }
       if (p.install) {
-        linksHTML += `<a href="${p.install}" target="_blank" class="text-xs px-3 py-1.5 rounded-lg bg-emerald-600/90 hover:bg-emerald-500 text-white font-semibold border border-white/30 flex items-center gap-1.5 shadow-md transition-all"><span>⚡ Install App</span></a>`;
+        linksHTML += `<a href="${p.install}" target="_blank" class="aero-btn aero-btn--green aero-btn--sm"><span>⚡ Install App</span></a>`;
       }
+
+      linksHTML += `<button type="button" onclick="copyProjectLink(this)" class="aero-btn aero-btn--glass aero-btn--sm"><span>🔗 Copy link</span></button>`;
 
       linksContainer.innerHTML = linksHTML;
 
       // Tags update
       const tagsContainer = document.getElementById('proj-detail-tags');
-      tagsContainer.innerHTML = p.tags.map(t => `<span class="text-[8px] px-1.5 py-0.5 rounded bg-white/20 text-white font-normal">${t}</span>`).join('');
+      tagsContainer.innerHTML = p.tags.map(t => `<span class="text-[11px] px-1.5 py-0.5 rounded bg-white/20 text-white font-normal">${t}</span>`).join('');
+
+      // Case-study lines (only the ones that are filled in)
+      const caseBox = document.getElementById('proj-detail-case');
+      const cs = caseStudies[p.slug] || {};
+      caseBox.textContent = '';
+      [['Problem', cs.problem], ['What I built', cs.built], ['Result', cs.result], ['My role', cs.role]].forEach(([label, text]) => {
+        if (!text || !text.trim()) return;
+        const wrap = document.createElement('div');
+        const dt = document.createElement('dt');
+        dt.className = 'text-xs font-semibold text-sky-200';
+        dt.textContent = label;
+        const dd = document.createElement('dd');
+        dd.className = 'text-sm text-sky-100 leading-relaxed mt-1';
+        dd.textContent = text;
+        wrap.append(dt, dd);
+        caseBox.appendChild(wrap);
+      });
+      caseBox.classList.toggle('hidden', !caseBox.children.length);
+
+      // Keep the address bar in step with the project being viewed
+      if (!document.getElementById('tab-projects').classList.contains('hidden') &&
+          !document.getElementById('main-panel').classList.contains('panel-closed')) {
+        setHash('projects/' + p.slug, location.hash === '#projects');
+      }
     }
 
     // Certifications hover functionality
@@ -1265,7 +1441,9 @@
 
     function showCertPreview(idx) {
       const c = certList[idx];
-      document.getElementById('cert-preview-img').src = c.img;
+      const certImg = document.getElementById('cert-preview-img');
+      certImg.src = c.img;
+      certImg.alt = c.title + ' certificate';
       document.getElementById('cert-preview-link').href = c.url;
       document.getElementById('cert-preview-title').innerText = c.title;
 
@@ -1294,12 +1472,15 @@
         vidEl.pause();
         vidEl.classList.add('hidden');
         imgEl.src = mediaSrc;
+        imgEl.alt = title;
         imgEl.classList.remove('hidden');
       }
 
       document.getElementById('lightbox-title').innerText = title;
       document.getElementById('lightbox-desc').innerText = desc;
+      lastFocus = document.activeElement;
       document.getElementById('lightbox-modal').classList.remove('hidden');
+      document.getElementById('lightbox-close').focus();
     }
 
     function closeLightbox() {
@@ -1307,15 +1488,22 @@
       vidEl.pause();
       vidEl.src = "";
       document.getElementById('lightbox-modal').classList.add('hidden');
+      if (lastFocus) lastFocus.focus();
     }
 
     // Contact modal functionality
+    // Remembers what had focus so it can be restored when a modal closes
+    let lastFocus = null;
+
     function openContactModal() {
+      lastFocus = document.activeElement;
       document.getElementById('contact-modal').classList.remove('hidden');
+      document.getElementById('cf-name').focus();
     }
 
     function closeContactModal() {
       document.getElementById('contact-modal').classList.add('hidden');
+      if (lastFocus) lastFocus.focus();
     }
 
     async function handleContactSubmit(e) {
@@ -1356,6 +1544,32 @@
       }
     }
 
+    // Keyboard support: Enter/Space activate role="button" divs, Escape closes modals, Tab stays inside an open modal
+    document.addEventListener('keydown', e => {
+      const openModal = Array.from(document.querySelectorAll('#lightbox-modal, #contact-modal'))
+        .find(m => !m.classList.contains('hidden'));
+
+      if (e.key === 'Escape' && openModal) {
+        if (openModal.id === 'lightbox-modal') closeLightbox(); else closeContactModal();
+        return;
+      }
+
+      if (e.key === 'Tab' && openModal) {
+        const focusable = Array.from(openModal.querySelectorAll('button, input, textarea, a[href], video[controls]'))
+          .filter(el => el.offsetParent !== null);
+        if (!focusable.length) return;
+        const first = focusable[0], last = focusable[focusable.length - 1];
+        if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+        else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+        return;
+      }
+
+      if ((e.key === 'Enter' || e.key === ' ') && e.target.matches && e.target.matches('div[role="button"]')) {
+        e.preventDefault();
+        e.target.click();
+      }
+    });
+
     // Close modals on clicking backdrop
     document.getElementById('lightbox-modal').addEventListener('click', function(e) {
       if (e.target === this) closeLightbox();
@@ -1368,8 +1582,8 @@
     // ===== Sound effects (generated with the Web Audio API, no audio files needed) =====
     let audioCtx = null;
     let audioUnlocked = false;   // browsers only allow sound after a click or key press
-    let soundOn = true;
-    try { soundOn = localStorage.getItem('portfolioSound') !== 'off'; } catch (e) {}
+    let soundOn = false;   // off by default; the visitor opts in with the speaker button
+    try { soundOn = localStorage.getItem('portfolioSound') === 'on'; } catch (e) {}
     const canHover = window.matchMedia('(hover: hover)').matches;
     const SOUND_TARGETS = '.aqua-nav-btn, .proj-menu-item, .cert-item, .cursor-pointer, button, a[href]';
 
@@ -1471,8 +1685,191 @@
     });
     renderSoundBtn();
 
+    // ===== Jump links from the About Me section to other tabs and projects =====
+    function showTab(tabId) {
+      const btn = document.querySelector(`.aqua-nav-btn[onclick*="'${tabId}'"]`);
+      const panel = document.getElementById('main-panel');
+      if (!btn) return;
+      if (btn.classList.contains('active') && !panel.classList.contains('panel-closed')) return;
+      btn.classList.remove('active');   // openTab() closes a tab that is already active, so reset it first
+      openTab(tabId, btn);
+    }
+
+    function jumpTo(tabId) {
+      showTab(tabId);
+      if (window.innerWidth < 1024) document.getElementById('main-panel').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+
+    function jumpToProject(idx) {
+      jumpTo('projects');
+      filterProjects('All', document.querySelector('#proj-filters .filter-chip'));
+      const item = document.querySelector(`.proj-menu-item[data-idx="${idx}"]`);
+      if (!item) return;
+      selectProject(idx, item);
+      item.scrollIntoView({ block: 'nearest' });
+    }
+
+    function jumpToCert(idx) {
+      jumpTo('certs');
+      showCertPreview(idx);
+    }
+
+    // ===== About Me explorers: hover (with a short delay), tap, or arrow keys switch the open item =====
+    function initExplorer(root) {
+      const tabs = Array.from(root.querySelectorAll('[role="tab"]'));
+      const panels = tabs.map(t => document.getElementById(t.getAttribute('aria-controls')));
+      const hoverOK = window.matchMedia('(hover: hover)').matches;
+      let timer = null;
+
+      function select(i, focus) {
+        tabs.forEach((t, j) => {
+          const on = i === j;
+          t.setAttribute('aria-selected', on ? 'true' : 'false');
+          t.tabIndex = on ? 0 : -1;
+          panels[j].hidden = !on;
+        });
+        if (focus) tabs[i].focus();
+      }
+
+      tabs.forEach((t, i) => {
+        t.addEventListener('click', () => { clearTimeout(timer); select(i); });
+        t.addEventListener('mouseenter', () => {
+          if (!hoverOK) return;
+          clearTimeout(timer);
+          timer = setTimeout(() => select(i), 120);   // small delay so sweeping the mouse across does not flicker
+        });
+        t.addEventListener('mouseleave', () => clearTimeout(timer));
+        t.addEventListener('keydown', e => {
+          const step = { ArrowRight: 1, ArrowDown: 1, ArrowLeft: -1, ArrowUp: -1 }[e.key];
+          if (step) { e.preventDefault(); select((i + step + tabs.length) % tabs.length, true); }
+          else if (e.key === 'Home') { e.preventDefault(); select(0, true); }
+          else if (e.key === 'End') { e.preventDefault(); select(tabs.length - 1, true); }
+        });
+      });
+    }
+    document.querySelectorAll('[data-explorer]').forEach(initExplorer);
+
+    // ===== Real URLs: #projects, #projects/vibevault ... (Back/Forward and shared links work) =====
+    const TAB_SLUGS = { home: 'home', projects: 'projects', experience: 'experience', skills: 'skills', credentials: 'certs', gallery: 'gallery' };
+    const slugForTab = id => Object.keys(TAB_SLUGS).find(k => TAB_SLUGS[k] === id) || id;
+    let routing = false;          // true while the URL is being read, so we never write it back
+    let currentProjectIdx = 8;
+
+    function setHash(h, replace) {
+      if (routing) return;
+      const target = h ? '#' + h : '';
+      if ((location.hash || '') === target) return;
+      try {
+        history[replace ? 'replaceState' : 'pushState'](null, '', location.pathname + location.search + target);
+      } catch (e) {
+        location.hash = h;        // some browsers refuse pushState on file:// pages
+      }
+    }
+
+    function route() {
+      let raw = '';
+      try { raw = decodeURIComponent((location.hash || '').replace(/^#\/?/, '')); } catch (e) { return; }
+      const [tabSlug, sub] = raw.split('/');
+      const tabId = raw ? TAB_SLUGS[tabSlug] : 'home';
+      if (!tabId) return;
+      routing = true;
+      try {
+        showTab(tabId);
+        if (tabId === 'projects' && sub) {
+          const idx = projectList.findIndex(p => p.slug === sub);
+          const item = document.querySelector(`.proj-menu-item[data-idx="${idx}"]`);
+          if (idx >= 0 && item) {
+            filterProjects('All', document.querySelector('#proj-filters .filter-chip'));
+            selectProject(idx, item);
+            item.scrollIntoView({ block: 'nearest' });
+          }
+        }
+      } finally {
+        routing = false;
+      }
+    }
+    window.addEventListener('hashchange', route);
+
+    // ===== Case-study lines shown under each project (empty lines stay hidden) =====
+    const caseStudies = {
+      'property-estimator':      { problem: 'Price per sq ft swings a lot between townships, tenures and property types, so it’s hard to tell if a listing is fairly priced.', built: 'Compared a linear regression baseline against a 2025 Malaysian transaction data, and served the model through a FastAPI REST API deployed on Render', result: 'Deployed a working web application that generates property price estimates from user-selected property characteristics', role: 'An individual side project' },
+      'data-viz-game':           { problem: 'Static learning material sometimes make students bored of learning. Especially Data Visualization where it needs deep knowledge of analysing and visualizing datas', built: 'An open-world Data Viz game for Undergraduate students for learning. Also with rule based inference engine approach on the game engine', result: 'The game is still in progress as it is my Final Year Project Case', role: 'An individual project' },
+      'storage-purger':          { problem: 'Clearing browser storage completely can remove useful website data when users only want to reset specific application settings or cached state', built: 'Built a Chrome extension that lets users selectively clear chosen localStorage and sessionStorage keys through a popup, keyboard shortcut, and presets', result: 'Created a browser utility for targeted storage cleanup without requiring users to clear all site data or cookies', role: 'An individual side project' },
+      'vibevault':               { problem: 'Saving useful online resources without remembering why they were saved makes it difficult to find and reuse information later', built: 'Developed a local-first Chrome extension that saves page titles, URLs, highlighted text, tags, and personal notes, with a dashboard for organizing bookmarks by category', result: 'Built a working bookmarking tool that stores saved resources locally without requiring user accounts or a remote server', role: 'An individual side project' },
+      'hooper-buddy':            { problem: 'Basketball players need a convenient way to structure training drills, manage practice sessions, and review their training progress.', built: 'Built a mobile training application featuring a drill builder, workout timers, audio and haptic feedback, training history, and performance analytics.', result: 'Developed an application that brings drill planning, timed practice, and training-history tracking into one mobile experience.', role: 'An individual side project' },
+      'color-telemetry':         { problem: 'Identifying dominant colors and understanding the distribution of colors within an image can be difficult to do consistently through manual inspection.', built: 'Developed an image-analysis application using OpenCV and K-Means clustering to extract and analyze dominant colors from image data.', result: 'Created an interactive computer vision application for exploring image color distributions through an accessible web interface.', role: 'An individual side project' },
+      'planora':                 { problem: 'Students need a structured way to organize their study activities and keep track of academic tasks and schedules', built: 'Developed a web-based study-planning system using PHP, JavaScript, and MySQL to support organizing study-related information', result: 'Created a web application demonstrating the integration of a browser-based interface, server-side PHP logic, and a relational database', role: 'Lead Developer of a Group Project' },
+      'office-chair-grand-prix': { problem: 'Game development requires translating a creative concept into an interactive experience with playable mechanics and a coherent game environment.', built: 'Developed an office-chair-themed game in Unity, using C# to implement its gameplay and interactive behaviour', result: 'Created a Unity game project demonstrating practical experience with game-engine workflows and interactive development', role: 'Game Logic Developer of a Group Project' },
+      'felda-exam-system': {
+        problem: 'HR examinations were handled manually, which slowed down candidate evaluation.',
+        built: 'Proposed and developed a prototype of web-based examination-management system to support administrative workflows for physical examinations, including booking, candidate management, and results tracking.',
+        result: 'Developed a system proposal and workflow demonstration for managing examination-related HR information through a centralised web interface.',
+        role: 'IT Support Intern'
+      }
+    };
+
+    // ===== Copy a project's link =====
+    function legacyCopy(text) {
+      const ta = document.createElement('textarea');
+      ta.value = text;
+      ta.setAttribute('readonly', '');
+      ta.style.position = 'fixed';
+      ta.style.opacity = '0';
+      document.body.appendChild(ta);
+      ta.select();
+      let ok = false;
+      try { ok = document.execCommand('copy'); } catch (e) {}
+      document.body.removeChild(ta);
+      return ok;
+    }
+
+    function copyProjectLink(btn) {
+      const url = location.href.split('#')[0] + '#projects/' + projectList[currentProjectIdx].slug;
+      const label = btn.querySelector('span');
+      const original = label.textContent;
+      const show = text => { label.textContent = text; setTimeout(() => { label.textContent = original; }, 1600); };
+      const fallback = () => show(legacyCopy(url) ? 'Link copied ✓' : 'Copy failed');
+      if (navigator.clipboard && window.isSecureContext) {
+        navigator.clipboard.writeText(url).then(() => show('Link copied ✓'), fallback);
+      } else {
+        fallback();
+      }
+    }
+
+    // ===== Background video + lite mode =====
+    const bgVideo = document.getElementById('bg-video');
+    function startBgVideo() {
+      if (!bgVideo) return;
+      if (!bgVideo.querySelector('source')) {
+        [['background.webm', 'video/webm'], ['background.mp4', 'video/mp4']].forEach(([src, type]) => {
+          const el = document.createElement('source');
+          el.src = src;
+          el.type = type;
+          bgVideo.appendChild(el);
+        });
+        bgVideo.load();
+      }
+      const p = bgVideo.play();
+      if (p && p.catch) p.catch(() => {});
+    }
+
+    const liteBtn = document.getElementById('lite-toggle');
+    function setLite(on, save) {
+      document.documentElement.classList.toggle('lite', on);
+      if (on) { if (bgVideo) bgVideo.pause(); } else { startBgVideo(); }
+      liteBtn.setAttribute('aria-pressed', on ? 'true' : 'false');
+      liteBtn.setAttribute('aria-label', on ? 'Switch to full effects' : 'Switch to lite mode');
+      document.getElementById('lite-icon').textContent = on ? '🍃' : '🎞️';
+      if (save) { try { localStorage.setItem('portfolioLite', on ? 'on' : 'off'); } catch (e) {} }
+    }
+    liteBtn.addEventListener('click', () => setLite(!document.documentElement.classList.contains('lite'), true));
+    setLite(document.documentElement.classList.contains('lite'), false);
+
     // Initialize default project view
     selectProject(8, document.querySelector('.proj-menu-item'));
+
+    // Open whatever the address bar asks for (a shared #projects/... link, for example)
+    route();
   </script>
 
 </body>
