@@ -234,8 +234,8 @@ dialog{max-height:92vh;overflow:auto}
 <div>
 <span class="pill">Open for software dev and ML internships</span>
 <h1>I build web apps, ML models and games.</h1>
-<p>I’m a final-year Computer Science (Hons.) Multimedia Computing student at UiTM Shah Alam.</p>
-<p>I’ve built a deployed price-prediction model with scikit-learn and FastAPI, a Flutter mobile app, PHP web systems and Unity games, and I previously interned in IT support at FELDA’s HR department. I’m looking for a team where I can work on real features and learn from experienced developers.</p>
+<p>I’m a final-year Multimedia Computing student at UiTM Shah Alam. My team placed 3rd at the Hacktoberfest Mini Hackathon, where I built the frontend and tested the results of an AI tool that helps ASEAN startups find funding.</p>
+<p>I’ve shipped a price-prediction model with scikit-learn and FastAPI, a Flutter mobile app, PHP web systems and Unity games. During my IT support internship at FELDA’s HR department, I prototyped an exam management system to replace a manual process. I’m looking for a software development or ML internship where I can ship real features and learn from experienced developers.</p>
 <div class="actions"><a class="btn primary" href="#projects">View my projects</a><a class="btn" href="resume.pdf" target="_blank" rel="noopener">Open resume (PDF)</a></div>
 </div>
 <div class="card me"><img src="icons/profile1.jpeg" alt="Muhammad Erfan Hakimi"><div><h3>Muhammad Erfan Hakimi</h3><span class="muted">Multimedia Computing, UiTM Shah Alam</span></div>
@@ -264,10 +264,10 @@ dialog{max-height:92vh;overflow:auto}
 
 <section id="skills" class="wrap glass"><h2>Skills</h2><div id="skillbox"></div></section>
 
-<section id="credentials" class="wrap glass"><h2>Credentials</h2><div class="grid3" id="certs"></div></section>
+<section id="credentials" class="wrap glass"><h2>Credentials and awards</h2><div class="grid3" id="certs"></div></section>
 <section id="gallery" class="wrap glass"><h2>Gallery</h2><p class="muted" style="margin:-8px 0 20px">Demos, internship moments and class activities. Select one to enlarge it.</p><div class="gal" id="gal"></div></section>
 </main>
-<dialog id="dlg" aria-labelledby="dtitle"><header><h3 id="dtitle"></h3><button type="button" class="btn sm" id="dclose">Close</button></header><div id="dmedia"></div><p class="muted" id="ddesc" style="margin:12px 0 0"></p></dialog>
+<dialog id="dlg" aria-labelledby="dtitle"><header><h3 id="dtitle"></h3><button type="button" class="btn sm" id="dclose">Close</button></header><div id="dmedia"></div><p class="muted" id="ddesc" style="margin:12px 0 0"></p><div class="actions" id="dlinks"></div></dialog>
 
 <footer id="contact"><div class="wrap glass">
 <h2>Let’s talk</h2>
@@ -282,6 +282,10 @@ const P=[
 d:'A supervised machine-learning web app that estimates property price per sq ft from township, tenure and property type using 2025 Malaysian transaction data. Compares a linear regression baseline against a random forest, served through a FastAPI REST API and deployed on Render.',
 p:'Price per sq ft varies a lot between townships, tenures and property types, so it is hard to tell if a listing is fairly priced.',r:'A working web application that generates price estimates from user-selected property characteristics.',ro:'Individual side project',
 gh:'https://github.com/erfanhkimi/klang-valley-property-price-estimator-2025-data',live:'https://klang-valley-property-price-estimator.onrender.com/'},
+{s:'asean-funding-finder',t:'ASEANconnect: AI Funding Matcher',c:['Web App'],img:'asean-finder.png',tags:['React','TypeScript','Tailwind CSS','Gemma 4','Ollama Cloud'],status:'3rd place · Hacktoberfest Mini Hackathon',
+d:'An AI platform that helps ASEAN startups find funding and check whether they qualify. Gemma 4, running on Ollama Cloud, reads each programme’s official page and extracts the requirements with exact quotes. Fixed rules then compare them with the startup’s profile, and anything unclear is marked for review. Startups also get AI-generated explanations of what is missing, with suggestions to improve.',
+p:'Funding requirements are long and hard to read, so startups spend hours working out which opportunities actually fit them.',r:'Placed 3rd at the Hacktoberfest Mini Hackathon and won $500 in AI credits, with a working demo built within the event time limit.',ro:'Frontend developer and QA tester, team of four (DevOps, frontend, backend, AI)',
+gh:'https://github.com/rekthackathon/HACKTOBERFEST',live:'https://startupgateway.vercel.app/'},
 {s:'data-viz-game',t:'Data Visualization Educational Game',c:['Game'],img:'datavid.png',tags:['C#','Unity'],status:'In progress · Final Year Project',
 d:'An interactive 3D open-world educational game implementing C# scripting to teach data visualization principles, with a rule-based inference engine in the game engine.',
 p:'Static learning material can bore students, especially for data visualization, which needs deep skill in analysing and visualizing data.',r:'Still in progress as my Final Year Project.',ro:'Individual project'},
@@ -310,7 +314,7 @@ p:'HR examinations were handled manually, which slowed down candidate evaluation
 const SK=[['Languages',[['Python','Property Price Estimator, Color Telemetry'],['C#','Data Visualization Game, Office Chair Grand Prix'],['Dart','Hooper Buddy'],['JavaScript','Planora, Storage Purger, VibeVault'],['PHP','Planora, FELDA HR Exam System'],['SQL','FELDA HR Exam System, Planora, Hooper Buddy'],['HTML/CSS','FELDA HR Exam System, VibeVault, this portfolio']]],
 ['Tools and technologies',[['Unity','Data Visualization Game, Office Chair Grand Prix'],['Flutter','Hooper Buddy'],['FastAPI','Property Price Estimator'],['scikit-learn','Property Price Estimator'],['pandas','Property Price Estimator'],['OpenCV','Color Telemetry'],['Streamlit','Color Telemetry'],['MySQL','Planora, FELDA HR Exam System'],['SQLite','Hooper Buddy'],['Excel','FELDA HR datasets (internship)'],['Git and GitHub','Public repos for most projects'],['Render and Streamlit Cloud','Live deployments of two projects']]],
 ['Also familiar with',[['Java','From my studies, not in a portfolio project yet'],['C++','From my studies, not in a portfolio project yet']]]];
-const CE=[['AntsBees Certified Data Analyst (CDA)','MBOT Certified, Credsverse verified','https://credsverse.com/credentials/026b3cb3-efc3-459d-8e25-b876daf0b0d8?preview=1'],['Machine Learning with R','CognitiveClassAI, June 2026','https://courses.cognitiveclass.ai/certificates/b6c1b38786f945f297dc9424de3dc648'],['Build a Computer Vision App with Azure Cognitive Services','Coursera','https://www.coursera.org/account/accomplishments/verify/EJ5Q3TXTML7S']];
+const CE=[['3rd place, Hacktoberfest Mini Hackathon','Organised by Cradle Fund, krackeddevs, TalentLabs and Major League Hacking. Team prize: $500 in AI credits for ASEANconnect.','https://lnkd.in/p/gBGzKsJU','Read the post'],['AntsBees Certified Data Analyst (CDA)','MBOT Certified, Credsverse verified','https://credsverse.com/credentials/026b3cb3-efc3-459d-8e25-b876daf0b0d8?preview=1'],['Machine Learning with R','CognitiveClassAI, June 2026','https://courses.cognitiveclass.ai/certificates/b6c1b38786f945f297dc9424de3dc648'],['Build a Computer Vision App with Azure Cognitive Services','Coursera','https://www.coursera.org/account/accomplishments/verify/EJ5Q3TXTML7S']];
 const $=id=>document.getElementById(id);
 const link=(h,l,c)=>h?`<a class="btn sm ${c||''}" href="${h}" target="_blank" rel="noopener">${l}</a>`:'';
 let cur='property-estimator';
@@ -349,8 +353,12 @@ $('plist').addEventListener('keydown',e=>{if(e.key!=='ArrowLeft'&&e.key!=='Arrow
 $('plist').addEventListener('click',e=>{const b=e.target.closest('.pitem');if(b)show(b.dataset.s,true);});
 document.querySelector('[data-go]').addEventListener('click',e=>{show(e.currentTarget.dataset.go,true);});
 $('skillbox').innerHTML=SK.map(([g,a])=>`<h3 class="group">${g}</h3><div class="grid3">${a.map(([n,u])=>`<div class="skill"><b>${n}</b><span>${u}</span></div>`).join('')}</div>`).join('');
-$('certs').innerHTML=CE.map(([t,i,u])=>`<a class="card" href="${u}" target="_blank" rel="noopener" style="text-decoration:none;color:inherit"><h3>${t}</h3><span class="muted">${i}</span><div style="margin-top:10px;font-weight:700;color:var(--blue)">View certificate</div></a>`).join('');
+$('certs').innerHTML=CE.map(([t,i,u,l])=>`<a class="card" href="${u}" target="_blank" rel="noopener" style="text-decoration:none;color:inherit${l?';grid-column:1/-1':''}"><h3>${t}</h3><span class="muted">${i}</span><div style="margin-top:10px;font-weight:700;color:var(--blue)">${l||'View certificate'}</div></a>`).join('');
+const HFB='data:image/svg+xml;utf8,'+encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300"><defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#021340"/><stop offset="1" stop-color="#1d78ea"/></linearGradient></defs><rect width="400" height="300" fill="url(#g)"/><text x="200" y="140" text-anchor="middle" font-family="Segoe UI,Arial,sans-serif" font-size="54" font-weight="700" fill="#fff">3rd place</text><text x="200" y="185" text-anchor="middle" font-family="Segoe UI,Arial,sans-serif" font-size="22" fill="#cfe3ff">Hacktoberfest Mini Hackathon</text></svg>');
 const G=[
+['icons/hackathon1.jpg','ASEANconnect','Our team of four placed 3rd at the Hacktoberfest Mini Hackathon and won $500 in AI credits. ASEANconnect is an AI platform that helps ASEAN startups find funding and check their eligibility. I built the frontend and tested the results.','3rd place and $500 in AI credits','Hackathon','i',[['Live demo','https://startupgateway.vercel.app/'],['Source on GitHub','https://github.com/rekthackathon/HACKTOBERFEST'],['Read the post','https://lnkd.in/p/gBGzKsJU']]],
+['icons/hackathon2.jpg','Building ASEANconnect','Working on the project during the Hacktoberfest Mini Hackathon.','Coding during the event','Hackathon','i'],
+['icons/hackathon3.jpg','Hackathon participants','Group photo with the other participants of the Hacktoberfest Mini Hackathon.','Group photo at the venue','Hackathon','i'],
 ['purger.mp4','Selective LocalStorage Purger demo','Key filtering, wildcard searching and targeted localStorage wiping in Chrome Manifest V3.','Manifest V3 key wiping showcase','Extension demo','v'],
 ['vibevault.mp4','VibeVault extension demo','Quick capture popup, right-click text selection notes and the full-tab dashboard.','Context bookmarking and dashboard walk-through','Extension demo','v'],
 ['icons/systemdev.jpg','FELDA HR Exam System development','Presenting the web-based Exam Management System prototype to FELDA HR Department stakeholders.','System proposal and workflow demo','FELDA internship','i'],
@@ -360,15 +368,16 @@ const G=[
 ['icons/mm.png','Color Telemetry Analytics Studio','Video frame downsampling and real-time color palette extraction with OpenCV and Streamlit.','OpenCV K-Means clustering','Project','c'],
 ['icons/cda.png','MBOT Certified Data Analyst class','A peek at the CDA class I joined during semester break.','Dashboard creation during class','Learning','c'],
 ['icons/sepaktakraw.png','Inter-Faculty Sports: Sepak Takraw','Taking part in the Inter-Faculty Sports event, playing sepak takraw.','Inter-Faculty Sports event','Activity','i']];
-$('gal').innerHTML=G.map((g,i)=>`<button type="button" class="gitem" data-i="${i}">${g[5]==='v'?`<video class="m" src="${g[0]}#t=0.1" muted playsinline preload="metadata" aria-hidden="true"></video>`:`<img class="m ${g[5]==='c'?'c':''}" src="${g[0]}" alt="" loading="lazy">`}<div><span class="gtag">${g[4]}</span><b>${g[1]}</b><span>${g[3]}</span></div></button>`).join('');
+$('gal').innerHTML=G.map((g,i)=>`<button type="button" class="gitem" data-i="${i}">${g[5]==='v'?`<video class="m" src="${g[0]}#t=0.1" muted playsinline preload="metadata" aria-hidden="true"></video>`:`<img class="m ${g[5]==='c'?'c':''}" src="${g[0]}" alt="" loading="lazy" onerror="this.onerror=null;this.src=HFB">`}<div><span class="gtag">${g[4]}</span><b>${g[1]}</b><span>${g[3]}</span></div></button>`).join('');
 const dlg=$('dlg');
 $('gal').addEventListener('click',e=>{const b=e.target.closest('.gitem');if(!b)return;const g=G[b.dataset.i];
   $('dtitle').textContent=g[1];$('ddesc').textContent=g[2];
-  $('dmedia').innerHTML=g[5]==='v'?`<video class="big" src="${g[0]}" controls autoplay playsinline></video>`:`<img class="big" src="${g[0]}" alt="${g[1]}">`;
+  $('dlinks').innerHTML=(g[6]||[]).map(([l,u],k)=>`<a class="btn sm${k?'':' primary'}" href="${u}" target="_blank" rel="noopener">${l}</a>`).join('');
+  $('dmedia').innerHTML=g[5]==='v'?`<video class="big" src="${g[0]}" controls autoplay playsinline></video>`:`<img class="big" src="${g[0]}" alt="${g[1]}" onerror="this.onerror=null;this.src=HFB">`;
   dlg.showModal();});
 $('dclose').onclick=()=>dlg.close();
 dlg.addEventListener('click',e=>{if(e.target===dlg)dlg.close();});
-dlg.addEventListener('close',()=>{$('dmedia').innerHTML='';});
+dlg.addEventListener('close',()=>{$('dmedia').innerHTML='';$('dlinks').innerHTML='';});
 const S={moved:false,mx:0,my:0,px:innerWidth/2,py:innerHeight/3,ox:innerWidth/2,oy:innerHeight/3,cx:0,cy:0,sp:0,vel:0};
 const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
 addEventListener('pointermove',e=>{S.moved=true;S.px=e.clientX;S.py=e.clientY;S.mx=e.clientX/innerWidth*2-1;S.my=e.clientY/innerHeight*2-1;
@@ -468,6 +477,7 @@ $('best-grid').innerHTML=BEST.map(([sl,line])=>{const p=P.find(x=>x.s===sl);
   addEventListener('keydown',key);$('bootskip').addEventListener('click',end);$('bootskip').focus();setTimeout(end,2900);})();
 function route(){const m=location.hash.match(/^#projects\/(.+)$/);if(m){filter('All',document.querySelector('#filters .chip'));show(decodeURIComponent(m[1]),false);$('projects').scrollIntoView();}}
 addEventListener('hashchange',route);
+document.addEventListener('error',e=>{const t=e.target;if(t.tagName==='IMG'&&t.src.includes('asean-finder'))t.style.display='none';},true);
 show(cur,false);route();
 </script>
 </body>
